@@ -24,7 +24,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
   byte* p = (byte*)malloc(length);
   // Copy the payload to the new buffer
   memcpy(p,payload,length);
-  Serial.println("tu vieja");
+  Serial.println("Mensaje Recibido");
   // Free the memory
   free(p);
 }
