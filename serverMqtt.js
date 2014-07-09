@@ -63,22 +63,31 @@ var mqttclient = mqtt.createClient(mqttport, mqttbroker);
 // Reduce socket.io debug output
 io.set('log level', 0)
 
-// Subscribe to topic
+// Configuracion de respuestas de Socket.io. desde la web para el controlador
 io.sockets.on('connection', function (socket) {
     socket.on('subscribe', function (data) {
         mqttclient.subscribe(data.topic);
     });
+    socket.on('controlador', function (data) {
+        publicarEnArduino(data);
+    });
 });
 
 // Push the message to socket.io
+function publicarEnArduino(data){
+    mqttclient.publish(data.topic , data.payload);
+}
+// FIN WEB-CONTROLADOR SOCKET.IO
+
+// Mensajes para la web desde arduino
 mqttclient.on('message', function(topic, payload) {
     io.sockets.emit('mqtt',
         {'topic'  : topic,
-         'payload' : payload
+@@ -78,7 +86,7 @@ mqttclient.on('message', function(topic, payload) {
         }
     );
 });
-
+//FIN MENSAJES PARA LA CONTROLADOR-WEB.
 
 
 
