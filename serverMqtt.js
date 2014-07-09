@@ -73,7 +73,6 @@ io.sockets.on('connection', function (socket) {
     });
 });
 
-// Push the message to socket.io
 function publicarEnArduino(data){
     mqttclient.publish(data.topic , data.payload);
 }
@@ -83,7 +82,7 @@ function publicarEnArduino(data){
 mqttclient.on('message', function(topic, payload) {
     io.sockets.emit('mqtt',
         {'topic'  : topic,
-@@ -78,7 +86,7 @@ mqttclient.on('message', function(topic, payload) {
+         'payload' : payload
         }
     );
 });
