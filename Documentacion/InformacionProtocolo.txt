@@ -1,0 +1,33 @@
+Tipos de mensajes desde el server: 
+
+Pedir que tiene arduino para ofrecer.
+{
+comand: 'exposeServices'
+}
+Informarle acciones a realizar.
+{
+comand: 'action',
+type: 'seccion',
+data: otro JSON dependiendo el type.
+}
+
+Tipos de mensajes desde arduino:
+
+Informar cambio de estado.
+{
+comand: 'refresh',
+type: 'seccion',
+data: otro json dependiendo el type. 
+}
+Informar que tiene arduino para ofrecer.
+{
+type: 'information'.
+secciones: [],//cantidad variable que se va a utilizar para buscar en el json la info necesaria.
+iluminacion: []//distintos ids/nombres de las luces que arduino va  saber usar.
+sensores: []//distintos ids/nombres de los sensores que arduino va  saber usar.
+climitizacion: []//distintos ids/nombres de los climatizadores que arduino va  saber usar.
+seguridad: []//distintos ids/nombres de los dispositivos de seguridad() que arduino va  saber usar.
+}
+
+//Secciones:
+iluminacion,sensores,climitizacion,seguridad, etc.
