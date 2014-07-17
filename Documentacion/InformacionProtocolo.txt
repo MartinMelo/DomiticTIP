@@ -6,9 +6,9 @@ comand: 'exposeServices'
 }
 Informarle acciones a realizar.
 {
-comand: 'action',
-type: 'seccion',
-data: otro JSON dependiendo el type.
+comand: 'accion',
+destino: 'seccion',
+datos: otro JSON dependiendo el type.
 }
 
 Tipos de mensajes desde arduino:
