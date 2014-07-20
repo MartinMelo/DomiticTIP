@@ -28,7 +28,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
   
   //Manejo el pedido recibido.
   String comando = hashTable.getString("comando");
-  if(comando == "exposeServices"){
+  if(comando == "exponerServicios"){
      exponerServicios();
   }
   if(comando == "accion"){
@@ -47,27 +47,24 @@ void setup()
 {
   Serial.begin(9600);
   Ethernet.begin(mac, ip);
-  suscribirse();
+  configurarPlaca();
+}
+//Configuro los pines.
+void configurarPlaca(){
   pinMode(22, OUTPUT);
   pinMode(24, OUTPUT);
   pinMode(26, OUTPUT);
 }
-
 void loop()
 {
   client.loop();
-  client.connect("arduinoClient");
-  suscribirse();
+  if(!client.connected()){
+    client.connect("arduino");
+    suscribirse();
+  }
 }
 //Envio todo el estado completo del microcontrolador.
 void refresh(){
-  client.publish("home/front/door", "true");
-    delay(1000);
-  client.publish("home/front/window", "true");
-    delay(1000);
-  client.publish("home/back/door", "true");
-    delay(1000);
-  client.publish("home/back/window", "true");
 }
 
 //me suscribo.
@@ -76,7 +73,10 @@ void suscribirse(){
 }
 //Expone todo lo que tiene el microcontrolador.
 void exponerServicios(){
+  char servicios[] = "{tipos: [luz, sensor], luz: [l1,l2,l3] , sensor: [s1,s2,s3] }";
+  client.publish("discover", servicios); 
 }
+
 //Realiza la accion pedida.
 void realizarAccion(JsonHashTable hashTable){
   String destino = hashTable.getString("destino");

@@ -57,14 +57,14 @@ function actualizarTemperatura(posicion){
     };
     socket.emit('controlador' , JSON.stringify(mensaje));
 }
-function actualizarTodo(){
+function pedirExponerServicios(){
     var socket = io.connect('http://localhost:3000');
     var topico = 'arduino';
     var mensaje = {
         topic: topico,
         payload:{
-            comando: 'actualizar'
+            comando: 'exponerServicios'
         }
     };
-    socket.emit('controlador' , JSON.stringify(mensaje));
+    socket.emit('controlador', JSON.stringify(mensaje));
 }

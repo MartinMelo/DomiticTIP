@@ -83,11 +83,20 @@ function publicarEnArduino(data){
 
 // Mensajes para la web desde arduino
 mqttclient.on('message', function(topic, payload) {
-    io.sockets.emit('mqtt',
-        {'topic'  : topic,
-            'payload' : payload
-        }
-    );
+    if(topic == "discover"){
+        io.sockets.emit('discover',
+            {'topic': topic,
+                'payload': payload
+            }
+        );
+    }
+    if(topic.indexOf("home/")>=0) {
+        io.sockets.emit('mqtt',
+            {'topic': topic,
+                'payload': payload
+            }
+        );
+    }
 });
 //FIN MENSAJES PARA LA CONTROLADOR-WEB.
 

@@ -30,6 +30,9 @@
         var basementTemp = new Array();
         var socket = io.connect('http://localhost:3000');
         socket.on('connect', function () {
+            socket.on('discover', function (msg) {
+                $('#servicios').text(msg.payload);
+            });
             socket.on('mqtt', function (msg) {
                 var message = msg.topic.split('/');
                 var area = message[1];
@@ -143,6 +146,7 @@
                 }
             });
             socket.emit('subscribe', {topic : 'home/#'});
+            socket.emit('subscribe', {topic : 'discover'});
         });
 
 
@@ -153,7 +157,9 @@
 <body>
 <div id="wrap">
     <div class="container">
-        <div class="page-header"><h1><b>Home conditions</b></h1></div>
+        <div class="page-header">
+            <h1><b>Home conditions</b></h1>
+        </div>
 
         <div class="panel panel-default">
             <div class="panel-body">
@@ -191,12 +197,12 @@
         </div>
         <div class="panel panel-default">
             <div class="panel-body">
-                <b>Latest MQTT message:  </b> <small id="message">no message recieved</small>
+                <b>Latest MQTT message:  </b> <small id="message">no message recieved</small><br>
+                <b>Servicios:  </b> <small id="servicios">Sin servicios</small>
             </div>
         </div>
 
         <div class="footer">
-            <small><p class="text-center">&copy; <a href="http://affolter-engineering.ch">Affolter Engineering</a> 2013 - 2014</p></small><br>
             <select id="numero">
                 <option value="22">22</option>
                 <option value="24">24</option>
@@ -204,7 +210,10 @@
             </select>
             <button onclick="encenderLuz()">Encender Luz</button>
             <button onclick="apagarLuz()">Apagar Luz</button>
+            <button onclick="pedirExponerServicios()">Actualizar Info Servicios</button>
+
         </div>
     </div>
+</div>
 </body>
 </html>
