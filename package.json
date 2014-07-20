@@ -1,0 +1,24 @@
+{
+	"name": "DomoticTIP",
+	"description": "Integración de tecnología para control y automatización de espacio físico.",
+	"version": "0.0.1",
+	"author": "Martin Alejandro Melo",
+    "email" : "alejandromelo2005@gmail.com",
+    "homepage" : "https://github.com/MartinMelo/DomiticTIP",
+    "repository" : {
+        "type": "git",
+        "url": "git://github.com/MartinMelo/DomiticTIP.git"
+    },
+	"engines": {
+		"node": "0.10.x",
+		"npm": "1.4.x"
+	},
+    "scripts":{
+     "start": "node serverMqtt"
+    },
+    "dependencies": {
+        "mqtt": "0.3.11",
+        "mosca":"0.22.0",
+        "socket.io":"1.0.6"
+    }
+}

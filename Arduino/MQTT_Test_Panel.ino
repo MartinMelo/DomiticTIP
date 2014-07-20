@@ -48,6 +48,9 @@ void setup()
   Serial.begin(9600);
   Ethernet.begin(mac, ip);
   suscribirse();
+  pinMode(22, OUTPUT);
+  pinMode(24, OUTPUT);
+  pinMode(26, OUTPUT);
 }
 
 void loop()
@@ -76,13 +79,9 @@ void exponerServicios(){
 }
 //Realiza la accion pedida.
 void realizarAccion(JsonHashTable hashTable){
-  Serial.println("Realizando Accion");
   String destino = hashTable.getString("destino");
-  Serial.println("Destino: " + destino);
   String datos = hashTable.getString("datos");
-  Serial.println("Datos: " + datos);
   int largo = datos.length();
-  Serial.println("Largo " + largo);
   //Parseo el Json que tiene los datos.
   int i;
   for(i=0; i< largo ; i++) {
@@ -90,7 +89,6 @@ void realizarAccion(JsonHashTable hashTable){
   }
   message_buff[i] = '\0';
   JsonHashTable info = parser.parseHashTable(message_buff);
-   Serial.println("Mensaje Recibido :" + String(message_buff));
   if(destino == "iluminacion"){
     accionesIluminacion(info);
   }
@@ -100,33 +98,45 @@ void realizarAccion(JsonHashTable hashTable){
   
 }
 void accionesIluminacion(JsonHashTable hashTable){
+  int pin = hashTable.getLong("id");
+  String estado = hashTable.getString("estado");
+  if(estado == "on"){
+    digitalWrite(pin , HIGH);
+  }else{
+    digitalWrite(pin , LOW);
+  }
 }
 void accionesSensores(JsonHashTable hashTable){
   String id = hashTable.getString("id");
-  Serial.println("ID " + id);
-  if(id == "living"){
-    String living= String(random(4,30));
-    char templiving[2];
-    living.toCharArray(templiving,2);
-    client.publish("home/living/temp",templiving);
-  }
-  if(id == "basement"){
-    String base= String(random(4,30));
-    char tempBasement[2];
-    base.toCharArray(tempBasement,2);
-    client.publish("home/basement/temp",tempBasement);
+  String posicion = hashTable.getString("posicion");
+  if(id == "temperatura"){
+     publicarEstadoSensorTemperatura(posicion);
   }
   if(id == "puertas"){
-    publicarEstadoPuertas();
+     publicarEstadoPuerta(posicion);
   }
   
 }
-void publicarEstadoPuertas(){
+void publicarEstadoPuerta(String posicion){
+  if(posicion == "entrada"){
   client.publish("home/front/door", "true");
-    delay(1000);
+    delay(500);
   client.publish("home/front/window", "true");
-    delay(1000);
-  client.publish("home/back/door", "true");
-    delay(1000);
-  client.publish("home/back/window", "true");
+  }
+  if(posicion == "patio"){
+  client.publish("home/back/door", "false");
+    delay(500);
+  client.publish("home/back/window", "false");
+  }
+}
+void publicarEstadoSensorTemperatura(String posicion){
+  String sensor= String(random(1,30));
+  char temp[2];
+  sensor.toCharArray(temp,2);
+  if(posicion == "living"){
+    client.publish("home/living/temp",temp);
+  }
+  if(posicion == "basement"){
+    client.publish("home/basement/temp",temp);
+  }
 }

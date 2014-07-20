@@ -6,38 +6,38 @@ var mqtt = require('mqtt');
 
 
 var ascoltatore = {
-  //using ascoltatore
-  type: 'mongo',        
-  url: 'mongodb://localhost:27017/mqtt',
-  pubsubCollection: 'ascoltatori',
-  mongo: {}
+    //using ascoltatore
+    type: 'mongo',
+    url: 'mongodb://localhost:27017/mqtt',
+    pubsubCollection: 'ascoltatori',
+    mongo: {}
 };
 
 var moscaSettings = {
-  port: 1883,
-  backend: ascoltatore,
-  persistence: {
-    factory: mosca.persistence.Mongo,
-    url: 'mongodb://localhost:27017/mqtt'
-  }
+    port: 1883,
+    backend: ascoltatore,
+    persistence: {
+        factory: mosca.persistence.Mongo,
+        url: 'mongodb://localhost:27017/mqtt'
+    }
 };
 
 var server = new mosca.Server(moscaSettings);
 server.on('ready', setup);
 
 server.on('clientConnected', function(client) {
-    console.log('client connected', client.id);     
+    console.log('client connected', client.id);
 });
 
 // fired when a message is received
 server.on('published', function(packet, client) {
-  console.log('Published', packet.topic);
+    console.log('Published', packet.topic);
 
 });
 
 //in case of an error
 process.on("uncaughtException", function(error) {
-  return console.log(error.stack);
+    return console.log(error.stack);
 });
 
 
@@ -45,7 +45,7 @@ process.on("uncaughtException", function(error) {
 
 // fired when the mqtt server is ready
 function setup() {
-  console.log('Mosca server is up and running')
+    console.log('Mosca server is up and running')
 }
 
 //Server WEB
@@ -74,7 +74,10 @@ io.sockets.on('connection', function (socket) {
 });
 
 function publicarEnArduino(data){
-    mqttclient.publish(data.topic , data.payload);
+    var info = JSON.parse(data);
+    var topic = String(info.topic);
+    var payload = JSON.stringify(info.payload);
+    mqttclient.publish( topic ,payload);
 }
 // FIN WEB-CONTROLADOR SOCKET.IO
 
@@ -82,7 +85,7 @@ function publicarEnArduino(data){
 mqttclient.on('message', function(topic, payload) {
     io.sockets.emit('mqtt',
         {'topic'  : topic,
-         'payload' : payload
+            'payload' : payload
         }
     );
 });
