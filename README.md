@@ -23,7 +23,7 @@ Depende de varios otros programas:
 
 ```
 npm install
-node sererMqtt.js
+npm start
 ```
 
 ### Probar
