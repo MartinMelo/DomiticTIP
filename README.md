@@ -43,7 +43,7 @@ Una vez instalado inotool, ejecutar lo siguiente:
 ```
 cd Arduino
 ino init
-cd src
+cd lib
 git clone https://github.com/knolleary/pubsubclient.git
 git clone https://github.com/bblanchon/ArduinoJson.git
 cd ..
