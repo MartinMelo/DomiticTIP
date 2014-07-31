@@ -38,11 +38,11 @@ Para cargar el firmware del microcontrolador sera necesario tener Inotool.
 ```
 http://inotool.org/
 ```
-Una vez instalado inotool, ejecutar lo siguiente:
+Una vez instalado inotool, dentro de la carpeta del proyecto ejecutar lo siguiente:
 
 ```
 cd Arduino
-ino init
+mkdir lib
 cd lib
 git clone https://github.com/knolleary/pubsubclient.git
 git clone https://github.com/bblanchon/ArduinoJson.git
