@@ -42,11 +42,6 @@ Una vez instalado inotool, dentro de la carpeta del proyecto ejecutar lo siguien
 
 ```
 cd Arduino
-mkdir lib
-cd lib
-git clone https://github.com/knolleary/pubsubclient.git
-git clone https://github.com/bblanchon/ArduinoJson.git
-cd ..
-ino build -m mega2560
-ino upload -m mega2560 -p /dev/ttyACM1
+ino build 
+ino upload
 ```
