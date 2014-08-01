@@ -27,6 +27,7 @@
     <script type="text/javascript">
 
         var livingTemp = new Array();
+        var ambienteTemp = new Array();
         var basementTemp = new Array();
         var socket = io.connect('http://localhost:3000');
         socket.on('connect', function () {
@@ -78,6 +79,56 @@
                         }
 
                         var livingTempPlot = $.jqplot ('livingTempChart', [livingTemp], {
+                            axesDefaults: {
+                                labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+                                tickOptions: {
+                                    showMark: false,
+                                    showGridline: false,
+                                    show: false,
+                                    showLabel: false
+                                }
+                            },
+                            grid: {
+                                gridLineColor: '#FFFFFF',
+                                borderWidth: 0,
+                                shadow: false
+                            },
+                            seriesDefaults: {
+                                rendererOptions: {
+                                    smooth: true
+                                },
+                                showMarker: false,
+                                lineWidth: 2
+                            },
+                            axes: {
+                                xaxis: {
+                                    renderer:$.jqplot.DateAxisRenderer,
+                                    tickOptions:{
+                                        formatString:'%T'
+                                    },
+                                    pad: 0
+                                },
+                                yaxis: {
+                                }
+                            }
+                        });
+
+                        break;
+					case 'ambiente':
+                        $('#ambienteTempSensor').html('(Sensor value: ' + msg.payload + ')');
+                        $('#ambienteTempLabel').text(msg.payload + '°C');
+                        $('#ambienteTempLabel').removeClass('').addClass('label-default');
+
+                        var entry = new Array();
+                        entry.push(timestamp);
+                        entry.push(parseInt(msg.payload));
+                        ambienteTemp.push(entry);
+                        // Show only 20 values
+                        if (ambienteTemp.length >= 20) {
+                            ambienteTemp.shift()
+                        }
+
+                        var ambienteTempPlot = $.jqplot ('ambienteTempTempChart', [ambienteTemp], {
                             axesDefaults: {
                                 labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
                                 tickOptions: {
@@ -178,7 +229,14 @@
                         <td></td>
                         <td><h4>&nbsp;<span id="label2" class="label">Unknown</span></h4></td>
                     </tr>
-                    <!-- Living room temperature -->
+                    <!-- Ambiente room temperature -->
+                    <tr>
+                        <td><button  class="btn btn-warning" onclick="actualizarTemperatura('ambiente')">Actualizar</button></td>
+                        <td><h3>Living room temperature</h3><small id="ambienteTempSensor">(no value recieved)</small></td>
+                        <td><div id="ambienteTempChart" style="height:80px; width:180px;"></div></td>
+                        <td><h4>&nbsp;<span id="ambienteTempLabel" class="label">Unknown</span></h4></td>
+                    </tr>
+					<!-- Living room temperature -->
                     <tr>
                         <td><button  class="btn btn-warning" onclick="actualizarTemperatura('living')">Actualizar</button></td>
                         <td><h3>Living room temperature</h3><small id="livingTempSensor">(no value recieved)</small></td>

@@ -51,9 +51,21 @@ void setup()
 }
 //Configuro los pines.
 void configurarPlaca(){
-  pinMode(22, OUTPUT);
-  pinMode(24, OUTPUT);
-  pinMode(26, OUTPUT);
+  //Luces
+  int i=22;
+  for(i; i<=28;i++){
+    pinMode(i, OUTPUT);
+  }
+  //Fin Luces
+  //Puertas
+  i=38;
+    for(i; i<=41;i++){
+    pinMode(i, INPUT);
+  }
+  //Fin Puertas
+  //Sensores
+  pinMode(A15 , INPUT);
+  //Fin Sensores
 }
 void loop()
 {
@@ -102,8 +114,9 @@ void accionesIluminacion(JsonHashTable hashTable){
   String estado = hashTable.getString("estado");
   if(estado == "on"){
     digitalWrite(pin , HIGH);
-  }else{
-    digitalWrite(pin , LOW);
+  }
+  else{
+     digitalWrite(pin , LOW);
   }
 }
 void accionesSensores(JsonHashTable hashTable){
@@ -119,14 +132,23 @@ void accionesSensores(JsonHashTable hashTable){
 }
 void publicarEstadoPuerta(String posicion){
   if(posicion == "entrada"){
-  client.publish("home/front/door", "true");
-    delay(500);
-  client.publish("home/front/window", "true");
+    if(digitalRead(38) == HIGH){
+        client.publish("home/front/door", "true");
+        client.publish("home/front/window", "true");
+    }else{
+        client.publish("home/front/door", "false");
+        client.publish("home/front/window", "false");
+    }
+  
   }
   if(posicion == "patio"){
-  client.publish("home/back/door", "false");
-    delay(500);
-  client.publish("home/back/window", "false");
+    if(digitalRead(40) == HIGH){
+       client.publish("home/back/door", "true");
+       client.publish("home/back/window", "true");
+    }else{
+       client.publish("home/back/door", "false");
+       client.publish("home/back/window", "false");
+    }
   }
 }
 void publicarEstadoSensorTemperatura(String posicion){
@@ -138,5 +160,12 @@ void publicarEstadoSensorTemperatura(String posicion){
   }
   if(posicion == "basement"){
     client.publish("home/basement/temp",temp);
+  }
+  if(posicion == "ambiente"){
+    int a = (5.0 * analogRead(A15) * 100.0) / 1024;   
+    char b[3];
+    String str=String(a); //converting integer into a string
+    str.toCharArray(b,3);
+    client.publish("home/ambiente/temp",b);
   }
 }
