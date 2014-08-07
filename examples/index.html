@@ -27,6 +27,7 @@
     <script type="text/javascript">
 
         var livingTemp = new Array();
+		var manualAmbienteTemp = new Array();
         var ambienteTemp = new Array();
         var basementTemp = new Array();
         var socket = io.connect('http://localhost:3000');
@@ -128,7 +129,7 @@
                             ambienteTemp.shift()
                         }
 
-                        var ambienteTempPlot = $.jqplot ('ambienteTempTempChart', [ambienteTemp], {
+                        var ambienteTempPlot = $.jqplot ('ambienteTempChart', [ambienteTemp], {
                             axesDefaults: {
                                 labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
                                 tickOptions: {
@@ -164,7 +165,7 @@
                         });
 
                         break;
-                    case 'basement':
+					case 'basement':
                         $('#basementTempSensor').html('(Sensor value: ' + msg.payload + ')');
 
                         if (msg.payload >= 25) {
@@ -229,10 +230,17 @@
                         <td></td>
                         <td><h4>&nbsp;<span id="label2" class="label">Unknown</span></h4></td>
                     </tr>
-                    <!-- Ambiente room temperature -->
+                    <!-- Preset Ambiente room temperature -->
+                    <tr>
+                        <td><button  class="btn btn-warning" onclick="actualizarTemperatura('manualAmbiente')">Actualizar</button></td>
+                        <td><h3>Preset Temperatura Ambiente</h3><small id="manualAmbienteTempSensor">(no value recieved)</small></td>
+                        <td><div id="manualAmbienteTempChart" style="height:80px; width:180px;"></div></td>
+                        <td><h4>&nbsp;<span id="manualAmbienteTempLabel" class="label">Unknown</span></h4></td>
+                    </tr>
+					<!-- Ambiente room temperature -->
                     <tr>
                         <td><button  class="btn btn-warning" onclick="actualizarTemperatura('ambiente')">Actualizar</button></td>
-                        <td><h3>Living room temperature</h3><small id="ambienteTempSensor">(no value recieved)</small></td>
+                        <td><h3>Temperatura Ambiente</h3><small id="ambienteTempSensor">(no value recieved)</small></td>
                         <td><div id="ambienteTempChart" style="height:80px; width:180px;"></div></td>
                         <td><h4>&nbsp;<span id="ambienteTempLabel" class="label">Unknown</span></h4></td>
                     </tr>
