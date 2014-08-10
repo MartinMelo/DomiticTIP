@@ -2,6 +2,7 @@
 #include <Ethernet.h>
 #include <PubSubClient.h>
 #include <JsonParser.h>
+#include <SD.h>
 
 //Configuracion Ethernet Shield.
 byte mac[]    = {  0xDE, 0xED, 0xBA, 0xFE, 0xFE, 0xED };
@@ -48,9 +49,35 @@ void setup()
   Serial.begin(9600);
   Ethernet.begin(mac, ip);
   configurarPlaca();
+  configurarSDCard();
+  settearEstadoInicial();
+}
+void configurarSDCard(){
+  if (!SD.begin(4)) {
+    Serial.println("Sd card initialization failed!");
+    return;
+  }
+  Serial.println("Sd card initialization done.");
+  
+}
+//Levanto el estado inicial guardado en la sd card.
+//Y activo las luces en su estado inicial.
+void settearEstadoInicial(){
+  if (SD.exists("estados.json")) {
+    File estados = SD.open("estados.json");
+   //leo todo el archivo de estados
+    while (estados.available()) {
+        Serial.write(estados.read());
+    }
+  //Cierro el archivo de estados
+    estados.close();
+  }
 }
 //Configuro los pines.
 void configurarPlaca(){
+  //SD Card
+  pinMode(10, OUTPUT);
+  //FIN SD Card
   //Luces
   int i=22;
   for(i; i<=28;i++){
@@ -59,12 +86,12 @@ void configurarPlaca(){
   //Fin Luces
   //Puertas
   i=38;
-    for(i; i<=41;i++){
+  for(i; i<=41;i++){
     pinMode(i, INPUT);
   }
   //Fin Puertas
   //Sensores
-  pinMode(A15 , INPUT);
+  pinMode(A15 , INPUT); //LM35DZ
   //Fin Sensores
 }
 void loop()
@@ -162,7 +189,7 @@ void publicarEstadoSensorTemperatura(String posicion){
     client.publish("home/basement/temp",temp);
   }
   if(posicion == "ambiente"){
-    int a = (5.0 * analogRead(A15) * 100.0) / 1024;   
+    int a = (4.9 * analogRead(A15) * 100.0) / 1024;   
     char b[3];
     String str=String(a); //converting integer into a string
     str.toCharArray(b,3);
