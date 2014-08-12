@@ -10,7 +10,9 @@ app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Aut
 		$scope.create = function() {
 			// Create new Widget object
 			var widget = new Widgets ({
-				name: this.name
+				name: this.name,
+				type: this.type,
+				seccion: this.seccion
 			});
 
 			// Redirect after save
@@ -22,6 +24,8 @@ app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Aut
 
 			// Clear form fields
 			this.name = '';
+			this.type = '';
+			this.seccion = '';
 		};
 
 		// Remove existing Widget
