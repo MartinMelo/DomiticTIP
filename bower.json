@@ -4,20 +4,26 @@
   "description": "Integración de tecnología para control y automatización de espacio físico.",
   "dependencies": {
     "bootstrap": "~3",
-    "angular": "~1.2",
-    "angular-resource": "~1.2",
-    "angular-mocks": "~1.2",
-    "angular-cookies": "~1.2",
-    "angular-animate": "~1.2",
-    "angular-touch": "~1.2",
-    "angular-sanitize": "~1.2",
+    "jquery": "2.0.3",
+    "angular": "1.2.21",
+    "angular-resource": "~1.2.21",
+    "angular-mocks": "~1.2.21",
+    "angular-cookies": "~1.2.21",
+    "angular-animate": "~1.2.21",
+    "angular-touch": "~1.2.21",
+    "angular-sanitize": "~1.2.21",
     "angular-bootstrap": "~0.11.0",
     "angular-ui-utils": "~0.1.1",
     "angular-ui-router": "~0.2.10",
     "angular-ui-sortable": "~0.12.8",
-    "malhar-angular-widgets": "https://github.com/DataTorrent/malhar-angular-widgets.git#master",
-    "malhar-angular-dashboard": "https://github.com/DataTorrent/malhar-angular-dashboard.git#master",
     "underscore": "~1.6.0",
-    "es5-shim": "~4.0.1"
+    "es5-shim": "~2.0.8",
+    "malhar-angular-widgets": "https://github.com/DataTorrent/malhar-angular-widgets.git#master",
+    "malhar-angular-dashboard": "https://github.com/DataTorrent/malhar-angular-dashboard.git#master"
+  },
+  "resolutions": {
+    "angular": "1.2.21",
+    "jquery": "2.0.3",
+    "d3": "3.4.4"
   }
 }
