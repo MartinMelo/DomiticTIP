@@ -14,7 +14,11 @@ var ApplicationConfiguration = (function() {
         'ui.router',
         'ui.bootstrap',
         'ui.utils',
-        'ui.dashboard'
+        'ui.dashboard',
+        'ui.notify',
+        'ui.websocket',
+        'ui.models',
+        'ui.widgets'
     ];
 
 	// Add a new vertical module

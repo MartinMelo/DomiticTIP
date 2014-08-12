@@ -15,9 +15,14 @@ module.exports = {
 			css: [
 				'public/lib/bootstrap/dist/css/bootstrap.css',
 				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
-				'public/lib/malhar-angular-dashboard/dist/angular-ui-dashboard.css'
+				'public/lib/malhar-angular-dashboard/dist/angular-ui-dashboard.css',
+				'public/lib/ng-grid/ng-grid.css',
+                'public/lib/nvd3/nv.d3.css'
 			],
 			js: [
+                'public/lib/jquery/jquery.js',
+                'public/lib/jquery-ui/jquery-ui.js',
+                'public/lib/lodash/dist/lodash.js',
 				'public/lib/angular/angular.js',
 				'public/lib/angular-resource/angular-resource.js', 
 				'public/lib/angular-cookies/angular-cookies.js', 
@@ -26,6 +31,13 @@ module.exports = {
 				'public/lib/angular-sanitize/angular-sanitize.js', 
 				'public/lib/angular-ui-router/release/angular-ui-router.js',
 				'public/lib/angular-ui-utils/ui-utils.js',
+                'public/lib/angular-pines-notify/src/pnotify.js',
+                'public/lib/pines-notify/pnotify.core.js',
+                'public/lib/visibilityjs/lib/visibility.core.js',
+                'public/lib/d3/d3.js',
+                'public/lib/nvd3/nv.d3.js',
+				'public/lib/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js',
+                'public/lib/ng-grid/ng-grid-2.0.11.min.js',
 				'public/lib/angular-ui-sortable/sortable.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
                 'public/lib/malhar-angular-dashboard/dist/angular-ui-dashboard.js',
@@ -43,6 +55,7 @@ module.exports = {
 			'public/application.js',
 			'public/modules/*/*.js',
 			'public/modules/*/*/dist/*.js',
+			'public/modules/*/*/src/*.js',
 			'public/modules/*/*[!tests]*/*.js'
 		],
 		tests: [
