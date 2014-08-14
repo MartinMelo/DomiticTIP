@@ -73,17 +73,27 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http, Ran
     var controller = this;
     var widgetDefinitions = [
         {
-            name: 'time',
+            name: 'Hora',
             directive: 'wt-time',
             style: {
                 width: '33%'
             }
         },
         {
-            name: 'random',
+            name: 'Numero Random',
             directive: 'wt-random',
             style: {
                 width: '33%'
+            }
+        },
+        {
+            name: 'Temperatura',
+            directive: 'wt-scope-watch',
+            attrs: {
+                value: 'temperatura'
+            },
+            style: {
+                width: '34%'
             }
         },
         {
@@ -146,18 +156,14 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http, Ran
             }
         }
     ];
-    $http.get('/widgets/seccion/inicio').success(function(data){
-        controller.defaultWidgets = data;
+    var widgetsEnDb = [];
+    $http.get('/widgets/seccion/inicio').success(function(data, scope){
+        controller.widgetsEnDb = data;
     });
     var defaultWidgets = [
-        { name: 'time' },
-        { name: 'random' },
-        { name: 'scope-watch' },
-        { name: 'Line Chart' },
-        { name: 'NVD3 Line Chart' },
-        { name: 'Bar Chart' },
-        { name: 'topN' },
-        { name: 'gauge' }
+        { name: 'Hora' },
+        { name: 'Numero Random' },
+        { name: 'Temperatura' }
     ];
 
     $scope.dashboardOptions = {
