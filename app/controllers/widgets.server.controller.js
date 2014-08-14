@@ -116,6 +116,14 @@ exports.widgetByID = function(req, res, next, id) { Widget.findById(id).populate
 		next();
 	});
 };
+exports.widgetBySeccion = function(req, res, next, seccion) {
+    Widget.find({'seccion': seccion}).populate('user', 'displayName').exec(function(err, widget) {
+		if (err) return next(err);
+		if (! widget) return next(new Error('Failed to load Widget ' + seccion));
+		req.widget = widget ;
+		next();
+	});
+};
 
 /**
  * Widget authorization middleware

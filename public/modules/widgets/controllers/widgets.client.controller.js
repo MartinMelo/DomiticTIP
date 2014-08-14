@@ -68,8 +68,9 @@ app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Aut
 		};
 	}
 ]);
-app.controller('WidgetsInicioController', function ($scope, $interval, RandomTopNDataModel, RandomTimeSeriesDataModel,
+app.controller('WidgetsInicioController',function ($scope, $interval, $http, RandomTopNDataModel, RandomTimeSeriesDataModel,
                                              RandomMinutesDataModel, RandomNVD3TimeSeriesDataModel) {
+    var controller = this;
     var widgetDefinitions = [
         {
             name: 'time',
@@ -145,7 +146,9 @@ app.controller('WidgetsInicioController', function ($scope, $interval, RandomTop
             }
         }
     ];
-
+    $http.get('/widgets/seccion/inicio').success(function(data){
+        controller.defaultWidgets = data;
+    });
     var defaultWidgets = [
         { name: 'time' },
         { name: 'random' },
@@ -160,7 +163,8 @@ app.controller('WidgetsInicioController', function ($scope, $interval, RandomTop
     $scope.dashboardOptions = {
         widgetButtons: true,
         widgetDefinitions: widgetDefinitions,
-        defaultWidgets: defaultWidgets
+        defaultWidgets: defaultWidgets,
+        hideWidgetClose: true
     };
 
     // random scope value (scope-watch widget)
