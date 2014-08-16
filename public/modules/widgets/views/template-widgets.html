@@ -9,19 +9,7 @@
                 </li>
             </ul>
         </div>
-
-        <div class="btn-group" ng-if="options.widgetButtons">
-            <button ng-repeat="widget in widgetDefs"
-                    ng-click="addWidgetInternal($event, widget);" type="button" class="btn btn-primary">
-                {{widget.name}}
-            </button>
-        </div>
-
-        <button class="btn btn-warning" ng-click="resetWidgetsToDefault()">Default Widgets</button>
-
         <button ng-if="options.storage && options.explicitSave" ng-click="options.saveDashboard()" class="btn btn-success" ng-disabled="!options.unsavedChangeCount">{{ !options.unsavedChangeCount ? "all saved" : "save changes (" + options.unsavedChangeCount + ")" }}</button>
-
-        <button ng-click="clear();" type="button" class="btn btn-info">Clear</button>
     </div>
 
     <div ui-sortable="sortableOptions" ng-model="widgets" class="dashboard-widget-area">
