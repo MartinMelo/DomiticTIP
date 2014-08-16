@@ -70,7 +70,6 @@ app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Aut
 ]);
 app.controller('WidgetsInicioController',function ($scope, $interval, $http, RandomTopNDataModel, RandomTimeSeriesDataModel,
                                              RandomMinutesDataModel, RandomNVD3TimeSeriesDataModel) {
-    var controller = this;
     var widgetDefinitions = [
         {
             name: 'Hora',
@@ -156,15 +155,10 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http, Ran
             }
         }
     ];
-    var widgetsEnDb = [];
-    $http.get('/widgets/seccion/inicio').success(function(data, scope){
-        controller.widgetsEnDb = data;
+    $http.get('/widgets/seccion/inicio').success(function(data){
+        $scope.dashboardOptions.loadWidgets(data);
     });
-    var defaultWidgets = [
-        { name: 'Hora' },
-        { name: 'Numero Random' },
-        { name: 'Temperatura' }
-    ];
+    var defaultWidgets = [];
 
     $scope.dashboardOptions = {
         widgetButtons: true,
