@@ -27,7 +27,6 @@
     <script type="text/javascript">
 
         var livingTemp = new Array();
-		var manualAmbienteTemp = new Array();
         var ambienteTemp = new Array();
         var basementTemp = new Array();
         var socket = io.connect('http://localhost:3000');
@@ -229,13 +228,6 @@
                         <td><h3>Back door</h3><small id="value2">(no value recieved)</small></td>
                         <td></td>
                         <td><h4>&nbsp;<span id="label2" class="label">Unknown</span></h4></td>
-                    </tr>
-                    <!-- Preset Ambiente room temperature -->
-                    <tr>
-                        <td><button  class="btn btn-warning" onclick="actualizarTemperatura('manualAmbiente')">Actualizar</button></td>
-                        <td><h3>Preset Temperatura Ambiente</h3><small id="manualAmbienteTempSensor">(no value recieved)</small></td>
-                        <td><div id="manualAmbienteTempChart" style="height:80px; width:180px;"></div></td>
-                        <td><h4>&nbsp;<span id="manualAmbienteTempLabel" class="label">Unknown</span></h4></td>
                     </tr>
 					<!-- Ambiente room temperature -->
                     <tr>

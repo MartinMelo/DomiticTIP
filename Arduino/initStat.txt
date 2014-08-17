@@ -1,0 +1,6 @@
+{
+    "lucesEncendidas": [
+        22,
+        23
+    ]
+}

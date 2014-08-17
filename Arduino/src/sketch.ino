@@ -50,7 +50,7 @@ void setup()
   Ethernet.begin(mac, ip);
   configurarPlaca();
   configurarSDCard();
-  settearEstadoInicial();
+  cargarEstadoInicial();
 }
 void configurarSDCard(){
   if (!SD.begin(4)) {
@@ -60,18 +60,46 @@ void configurarSDCard(){
   Serial.println("Sd card initialization done.");
   
 }
-//Levanto el estado inicial guardado en la sd card.
-//Y activo las luces en su estado inicial.
-void settearEstadoInicial(){
-  if (SD.exists("estados.json")) {
-    File estados = SD.open("estados.json");
+//Carga el estado inicial guardado en la sd card.
+void cargarEstadoInicial(){
+  if (SD.exists("initStat.txt")) {
+    File configuracion = SD.open("initStat.txt");
    //leo todo el archivo de estados
-    while (estados.available()) {
-        Serial.write(estados.read());
+    String temp;
+    char data;
+    // make data to String;
+    while ((data = configuracion.read()) >= 0) 
+    {
+     temp = temp + data;
     }
   //Cierro el archivo de estados
-    estados.close();
+    configuracion.close();
+    int largo = temp.length();
+    //Parseo el Json que tiene los datos.
+    int i;
+    for(i=0; i< largo ; i++) {
+      message_buff[i] = temp[i];
+    }
+    message_buff[i] = '\0';
+    //Parseo el Json recibido
+    JsonHashTable hashTable = parser.parseHashTable(message_buff);
+    JsonArray lucesEncendidas = hashTable.getArray("lucesEncendidas");
+    configurarLuces(lucesEncendidas);
+  }else{
+    Serial.println("el archivo no existe");
   }
+}
+//Enciende las luces.
+void configurarLuces(JsonArray lucesArray){
+  int i = 0;
+  for(i; i < lucesArray.getLength();i++){
+    int l = lucesArray.getLong(i);
+    prenderLuz(l);
+  }
+  Serial.println("Luces Encendidas");
+}
+void prenderLuz(int luz){
+  digitalWrite(luz , HIGH);
 }
 //Configuro los pines.
 void configurarPlaca(){

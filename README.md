@@ -45,3 +45,4 @@ cd Arduino
 ino build 
 ino upload
 ```
+Tambien sera necesario copiar el archivo initstat.txt, que se encuentra en el directorio Arduino, dentro de la micro sd card que se va a utilizar en el ethernet shield.
