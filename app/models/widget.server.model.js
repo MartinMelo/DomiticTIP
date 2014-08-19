@@ -16,12 +16,12 @@ var WidgetSchema = new Schema({
 		required: 'Please fill Widget name',
 		trim: true
 	},
-    type: {
-		type: String,
-		default: '',
-		required: 'Please fill Widget type',
-		trim: true
-	},
+    title: {
+        type: String,
+        default: '',
+        required: 'Please fill Widget title',
+        trim: true
+    },
     seccion: {
 		type: String,
 		default: 'inicio',

@@ -5,13 +5,13 @@ var app = angular.module('widgets');
 app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Widgets',
 	function($scope, $stateParams, $location, Authentication, Widgets ) {
 		$scope.authentication = Authentication;
-
+        this.tipos = ['Hora', 'Temperatura', 'Sensor'];
 		// Create new Widget
 		$scope.create = function() {
 			// Create new Widget object
 			var widget = new Widgets ({
 				name: this.name,
-				type: this.type,
+				title: this.title,
 				seccion: this.seccion
 			});
 
@@ -24,7 +24,7 @@ app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Aut
 
 			// Clear form fields
 			this.name = '';
-			this.type = '';
+			this.title = '';
 			this.seccion = '';
 		};
 
@@ -164,7 +164,8 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http, Ran
         widgetButtons: true,
         widgetDefinitions: widgetDefinitions,
         defaultWidgets: defaultWidgets,
-        hideWidgetClose: true
+        hideWidgetClose: true,
+        hideWidgetSettings: true
     };
 
     // random scope value (scope-watch widget)
