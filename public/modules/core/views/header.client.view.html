@@ -25,11 +25,16 @@
 		</ul>
 		<ul class="nav navbar-nav navbar-right" data-ng-hide="authentication.user">
 			<li ui-route="/signup" ng-class="{active: $uiRoute}">
-				<a href="/#!/signup">Signup</a>
+				<a href="/#!/signup">
+                    <i class="fa fa-external-link"></i>
+                    Signup</a>
 			</li>
 			<li class="divider-vertical"></li>
 			<li ui-route="/signin" ng-class="{active: $uiRoute}">
-				<a href="/#!/signin">Signin</a>
+				<a href="/#!/signin">
+                    <i class="fa fa-sign-in"></i>
+                    Signin
+                </a>
 			</li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right" data-ng-show="authentication.user">
@@ -39,17 +44,35 @@
 				</a>
 				<ul class="dropdown-menu">
 					<li>
-						<a href="/#!/settings/profile">Edit Profile</a>
+						<a href="/#!/settings/profile">
+                            <i class="fa fa-pencil-square-o"></i>
+                            Edit Profile
+                        </a>
 					</li>
 					<li>
-						<a href="/#!/settings/accounts">Manage Social Accounts</a>
+						<a href="/#!/settings/accounts">
+                            <i class="fa fa-users"></i>
+                            Manage Social Accounts
+                        </a>
 					</li>
 					<li data-ng-show="authentication.user.provider === 'local'">
-						<a href="/#!/settings/password">Change Password</a>
+						<a href="/#!/settings/password">
+                            <i class="fa fa-key"></i>
+                            Change Password
+                        </a>
 					</li>
+                    <li>
+                        <a href="/#!/configuracion">
+                            <i class="fa fa-cogs"></i>
+                            Configuracion Del Sistema
+                        </a>
+                    </li>
 					<li class="divider"></li>
 					<li>
-						<a href="/auth/signout">Signout</a>
+						<a href="/auth/signout">
+                            <i class="fa fa-sign-out"></i>
+                            Signout
+                        </a>
 					</li>
 				</ul>
 			</li>

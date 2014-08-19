@@ -1,0 +1,19 @@
+<section data-ng-controller="SeccionsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Seccions</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="seccion in seccions" data-ng-href="#!/seccions/{{seccion._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="seccion.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="seccion.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="seccion.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!seccions.$resolved || seccions.length">
+    	No Seccions yet, why don't you <a href="/#!/seccions/create">create one</a>?
+    </div>
+</section>

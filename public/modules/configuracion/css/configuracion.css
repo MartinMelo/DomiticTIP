@@ -1,0 +1,26 @@
+.menu{
+    background-color: #525151;
+    width: 15%;
+    height: 100%;
+    float: left;
+}
+.main-panel{
+    background-image: url(../img/back.png);
+}
+.menu-item-parent{
+    padding-left: 20%;
+}
+.menu-child{
+
+}
+.colapsado{
+    display: none;
+}
+.expandido{
+    display: block;
+}
+.collapse-sign{
+    position: absolute!important;
+    right: 10px;
+    top: 42%;
+}
