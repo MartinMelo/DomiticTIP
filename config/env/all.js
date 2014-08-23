@@ -18,7 +18,8 @@ module.exports = {
 				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
 				'public/lib/malhar-angular-dashboard/dist/angular-ui-dashboard.css',
 				'public/lib/ng-grid/ng-grid.css',
-                'public/lib/nvd3/nv.d3.css'
+                'public/lib/nvd3/nv.d3.css',
+                'public/lib/ngDialog/css/ngDialog.css'
 			],
 			js: [
                 'public/lib/jquery/jquery.js',
@@ -42,7 +43,8 @@ module.exports = {
 				'public/lib/angular-ui-sortable/sortable.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
                 'public/lib/malhar-angular-dashboard/dist/angular-ui-dashboard.js',
-                'public/lib/malhar-angular-widgets/dist/malhar-angular-widgets.js'
+                'public/lib/malhar-angular-widgets/dist/malhar-angular-widgets.js',
+                'public/lib/ngDialog/js/ngDialog.js'
 
 			]
 		},

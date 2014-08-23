@@ -14,7 +14,9 @@ angular.module('dispositivos').controller('DispositivosController', ['$scope', '
 
 			// Redirect after save
 			dispositivo.$save(function(response) {
-				$location.path('dispositivos/' + response._id);
+                var url= 'modules/dispositivos/views/list-dispositivos.client.view.html';
+                $scope.cambiarPagina(url);
+				//$location.path('dispositivos/' + response._id);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});

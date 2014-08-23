@@ -14,7 +14,9 @@ angular.module('seccions').controller('SeccionsController', ['$scope', '$statePa
 
 			// Redirect after save
 			seccion.$save(function(response) {
-				$location.path('seccions/' + response._id);
+                var url= 'modules/seccions/views/list-seccions.client.view.html';
+                $scope.cambiarPagina(url);
+				//$location.path('seccions/' + response._id);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});

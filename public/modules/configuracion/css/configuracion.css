@@ -4,14 +4,14 @@
     height: 100%;
     float: left;
 }
-.main-panel{
-    background-image: url(../img/back.png);
-}
 .menu-item-parent{
     padding-left: 20%;
 }
 .menu-child{
-
+    padding-left: 20%;
+}
+.enBlanco{
+    color: #ffffff;
 }
 .colapsado{
     display: none;
@@ -20,7 +20,7 @@
     display: block;
 }
 .collapse-sign{
-    position: absolute!important;
+    position: absolute;
     right: 10px;
     top: 42%;
 }

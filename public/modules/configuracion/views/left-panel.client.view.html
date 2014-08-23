@@ -1,71 +1,22 @@
+<link rel="stylesheet" href="modules/configuracion/css/modal.css">
 <section data-ng-controller="LeftPanelController as LPCtrl">
     <div class="menu">
-        <ul class="menu-parent">
-            <li>
-                <a ng-click="LPCtrl.expandirPanel('Dispositivos-Child')">
-                    <i class="fa fa-upload fa-2x"></i>
-                    <span class="menu-item-parent">Dispositivos</span>
-                    <b class="fa fa-plus-square-o collapse-sign" id="Dispositivos-Child-b"></b>
+        <ul class="menu-parent nav nav-pills nav-stacked">
+            <li ng-repeat="menu in LPCtrl.menus">
+                <a ng-click="LPCtrl.expandirPanel('{{menu.colapseID}}')">
+                    <i class='{{menu.i}}'></i>
+                    <span class="menu-item-parent">{{menu.nombre}}</span>
+                    <b class="fa fa-plus-square-o collapse-sign" id='{{menu.colapseID}}-b'></b>
                 </a>
-                <ul class="menu-child colapsado" id="Dispositivos-Child">
-                    <li>
-                        <a href="/#!/dispositivos">
-                            Disponibles
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/#!/dispositivos/create">
-                            Agregar
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a ng-click="LPCtrl.expandirPanel('Widgets-Child')">
-                    <i class="fa fa-tasks fa-2x"></i>
-                    <span class="menu-item-parent">Widgets</span>
-                    <b class="fa fa-plus-square-o collapse-sign" id="Widgets-Child-b"></b>
-                </a>
-                <ul class="menu-child colapsado" id="Widgets-Child">
-                    <li>
-                        <a href="/#!/widgets">
-                            Disponibles
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/#!/widgets/create">
-                            Agregar
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li title="Secciones">
-                <a ng-click="LPCtrl.expandirPanel('Secciones-Child')">
-                    <i class="fa fa-sitemap fa-2x"></i>
-                    <span class="menu-item-parent">
-                        Secciones
-                    </span>
-                    <b class="fa fa-plus-square-o collapse-sign" id="Secciones-Child-b"></b>
-                </a>
-                <ul class="menu-child colapsado" id="Secciones-Child">
-                    <li>
-                        <a href="/#!/seccions">
-                            Disponibles
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/#!/seccions/create">
-                            Agregar
+                <ul class="menu-child nav nav-pills nav-stacked colapsado" id='{{menu.colapseID}}'>
+                    <li ng-repeat="li in menu.links">
+                        <a href ng-click="abrir('{{li.url}}')" class="enBlanco">
+                            {{li.span}}
                         </a>
                     </li>
                 </ul>
             </li>
         </ul>
     </div>
-    <script>
-       $(document).ready(function() {
-            $('.menu-parent').attr("class", "menu-parent nav nav-pills nav-stacked");
-            $('.menu-child').attr("class", "menu-child nav nav-pills nav-stacked colapsado");
-       });
-    </script>
+    <div ng-include="pagina" class="container menuCentral"></div>
 </section>

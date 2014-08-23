@@ -17,7 +17,9 @@ app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Aut
 
 			// Redirect after save
 			widget.$save(function(response) {
-				$location.path('widgets/' + response._id);
+                var url= 'modules/widgets/views/list-widgets.client.view.html';
+                $scope.cambiarPagina(url);
+				//$location.path('widgets/' + response._id);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -66,6 +68,12 @@ app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Aut
 				widgetId: $stateParams.widgetId
 			});
 		};
+        //Cargar Widget Por ID
+        $scope.findOne = function() {
+            $scope.widget = Widgets.get({
+                widgetId: $scope.widgetId
+            });
+        };
 	}
 ]);
 app.controller('WidgetsInicioController',function ($scope, $interval, $http, RandomTopNDataModel, RandomTimeSeriesDataModel,
