@@ -59,8 +59,14 @@ angular.module('seccions').controller('SeccionsController', ['$scope', '$statePa
 
 		// Find existing Seccion
 		$scope.findOne = function() {
-			$scope.seccion = Seccions.get({ 
+			$scope.seccion = Seccions.get({
 				seccionId: $stateParams.seccionId
+			});
+		};
+		// Find existing Seccion
+		$scope.cargarUna = function() {
+			$scope.seccion = Seccions.get({
+				seccionId: $scope.seccionId
 			});
 		};
 	}

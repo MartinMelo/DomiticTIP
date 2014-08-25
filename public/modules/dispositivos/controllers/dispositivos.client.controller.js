@@ -63,5 +63,11 @@ angular.module('dispositivos').controller('DispositivosController', ['$scope', '
 				dispositivoId: $stateParams.dispositivoId
 			});
 		};
+		// Find existing Dispositivo
+		$scope.cargarUno = function() {
+			$scope.dispositivo = Dispositivos.get({
+				dispositivoId: $scope.dispositivoId
+			});
+		};
 	}
 ]);

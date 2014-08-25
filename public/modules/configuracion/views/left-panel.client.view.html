@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="modules/configuracion/css/modal.css">
 <section data-ng-controller="LeftPanelController as LPCtrl">
     <div class="menu">
         <ul class="menu-parent nav nav-pills nav-stacked">
@@ -10,7 +9,7 @@
                 </a>
                 <ul class="menu-child nav nav-pills nav-stacked colapsado" id='{{menu.colapseID}}'>
                     <li ng-repeat="li in menu.links">
-                        <a href ng-click="abrir('{{li.url}}')" class="enBlanco">
+                        <a href ng-click="cambiarPagina('{{li.url}}')" class="enBlanco">
                             {{li.span}}
                         </a>
                     </li>

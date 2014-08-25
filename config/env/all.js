@@ -19,7 +19,9 @@ module.exports = {
 				'public/lib/malhar-angular-dashboard/dist/angular-ui-dashboard.css',
 				'public/lib/ng-grid/ng-grid.css',
                 'public/lib/nvd3/nv.d3.css',
-                'public/lib/ngDialog/css/ngDialog.css'
+                'public/lib/ngDialog/css/ngDialog.css',
+                'public/lib/ngDialog/css/ngDialog-theme-default.css',
+                'public/lib/ngDialog/css/ngDialog-theme-plain.css'
 			],
 			js: [
                 'public/lib/jquery/jquery.js',

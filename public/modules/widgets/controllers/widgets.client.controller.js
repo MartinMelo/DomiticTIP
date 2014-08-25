@@ -69,7 +69,7 @@ app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Aut
 			});
 		};
         //Cargar Widget Por ID
-        $scope.findOne = function() {
+        $scope.cargarUno = function() {
             $scope.widget = Widgets.get({
                 widgetId: $scope.widgetId
             });

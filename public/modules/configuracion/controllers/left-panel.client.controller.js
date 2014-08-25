@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('configuracion').controller('LeftPanelController', ['$scope','$http','ngDialog',
-	function($scope , $http,ngDialog) {
+var app= angular.module('configuracion');
+app.controller('LeftPanelController', ['$scope','$http','ngDialog',
+	function($scope , $http, ngDialog) {
         $scope.pagina = 'modules/widgets/views/list-widgets.client.view.html';
         this.menus = [
             {
@@ -69,12 +70,17 @@ angular.module('configuracion').controller('LeftPanelController', ['$scope','$ht
         $scope.cambiarIconos = function(nombreUL){
             $('#' +nombreUL + '-b').attr('class' , 'fa fa-minus-square-o collapse-sign');
         };
-        $scope.abrir = function (url) {
-            ngDialog.open({
-                template: url,
-                className: 'modalConf',
-                scope: $scope
-            });
+        $scope.cargarSeccion = function(id){
+            $scope.seccionId = id;
+            $scope.cambiarPagina('modules/seccions/views/view-seccion.client.view.html');
+        };
+        $scope.cargarWidget = function(id){
+            $scope.widgetId = id;
+            $scope.cambiarPagina('modules/widgets/views/view-widget.client.view.html');
+        };
+        $scope.cargarDispositivo = function(id){
+            $scope.dispositivoId = id;
+            $scope.cambiarPagina('modules/dispositivos/views/view-dispositivo.client.view.html');
         };
 	}
 ]);
