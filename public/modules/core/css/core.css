@@ -10,3 +10,13 @@
 body{
     background-image: url(../img/back.png);
 }
+.menuHeader{
+    background-image: -webkit-gradient(
+            linear,
+            left top,
+            left bottom,
+            color-stop(0, #f3f3f3),
+            color-stop(1, #e2e2e2)
+    );
+
+}

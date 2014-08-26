@@ -1,8 +1,9 @@
 .menu{
+    margin-top: 1%;
     background-color: #525151;
     width: 15%;
+    min-width: 230px;
     height: 100%;
-    float: left;
 }
 .menu-item-parent{
     padding-left: 20%;
@@ -23,4 +24,7 @@
     position: absolute;
     right: 10px;
     top: 42%;
+}
+.configuracion{
+    border-top: 2px solid #000000;
 }
