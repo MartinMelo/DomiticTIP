@@ -5,6 +5,7 @@ angular.module('seccions').controller('SeccionsController', ['$scope', '$statePa
 	function($scope, $stateParams, $location, Authentication, Seccions ) {
 		$scope.authentication = Authentication;
         $scope.urlList = 'modules/seccions/views/list-seccions.client.view.html';
+        $scope.urlCreate = 'modules/seccions/views/create-seccion.client.view.html';
         $scope.urlView = 'modules/seccions/views/view-seccion.client.view.html';
         $scope.urlEdit = 'modules/seccions/views/edit-seccion.client.view.html';
 
@@ -12,7 +13,8 @@ angular.module('seccions').controller('SeccionsController', ['$scope', '$statePa
 		$scope.create = function() {
 			// Create new Seccion object
 			var seccion = new Seccions ({
-				name: this.name
+                nombre: this.nombre,
+                descripcion: this.descripcion
 			});
 
 			// Redirect after save
@@ -24,7 +26,8 @@ angular.module('seccions').controller('SeccionsController', ['$scope', '$statePa
 			});
 
 			// Clear form fields
-			this.name = '';
+			this.nombre = '';
+			this.descripcion = '';
 		};
 
 		// Remove existing Seccion

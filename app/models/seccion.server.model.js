@@ -10,10 +10,16 @@ var mongoose = require('mongoose'),
  * Seccion Schema
  */
 var SeccionSchema = new Schema({
-	name: {
+    nombre: {
 		type: String,
 		default: '',
 		required: 'Please fill Seccion name',
+		trim: true
+	},
+    descripcion: {
+		type: String,
+		default: '',
+		required: 'Please fill Seccion descripcion',
 		trim: true
 	},
 	created: {

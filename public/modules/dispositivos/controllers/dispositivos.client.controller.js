@@ -5,17 +5,21 @@ angular.module('dispositivos').controller('DispositivosController', ['$scope', '
 	function($scope, $stateParams, $location, Authentication, Dispositivos ) {
 		$scope.authentication = Authentication;
         $scope.urlView = 'modules/dispositivos/views/view-dispositivo.client.view.html';
+        $scope.urlCreate = 'modules/dispositivos/views/create-dispositivo.client.view.html';
+        $scope.urlList = 'modules/dispositivos/views/list-dispositivos.client.view.html';
+        $scope.urlEdit = 'modules/dispositivos/views/edit-dispositivo.client.view.html';
 
 		// Create new Dispositivo
 		$scope.create = function() {
 			// Create new Dispositivo object
 			var dispositivo = new Dispositivos ({
-				name: this.name
+				nombre: this.nombre,
+                descripcion: this.descripcion
 			});
 
 			// Redirect after save
 			dispositivo.$save(function(response) {
-                var url= 'modules/dispositivos/views/list-dispositivos.client.view.html';
+                var url= $scope.urlList;
                 $scope.cambiarPagina(url);
 				//$location.path('dispositivos/' + response._id);
 			}, function(errorResponse) {
@@ -23,7 +27,8 @@ angular.module('dispositivos').controller('DispositivosController', ['$scope', '
 			});
 
 			// Clear form fields
-			this.name = '';
+			this.nombre = '';
+			this.descripcion = '';
 		};
 
 		// Remove existing Dispositivo
@@ -37,7 +42,7 @@ angular.module('dispositivos').controller('DispositivosController', ['$scope', '
 				}
 			} else {
 				$scope.dispositivo.$remove(function() {
-					$location.path('dispositivos');
+					$scope.cambiarPagina($scope.urlList);
 				});
 			}
 		};

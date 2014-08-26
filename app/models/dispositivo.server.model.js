@@ -10,10 +10,16 @@ var mongoose = require('mongoose'),
  * Dispositivo Schema
  */
 var DispositivoSchema = new Schema({
-	name: {
+	nombre: {
 		type: String,
 		default: '',
-		required: 'Please fill Dispositivo name',
+		required: 'Please fill Dispositivo nombre',
+		trim: true
+	},
+    descripcion: {
+		type: String,
+		default: '',
+		required: 'Please fill Dispositivo descripcion',
 		trim: true
 	},
 	created: {

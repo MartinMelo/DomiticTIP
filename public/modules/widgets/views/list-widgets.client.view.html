@@ -1,19 +1,19 @@
 <section data-ng-controller="WidgetsController" data-ng-init="find()">
-    <div class="page-header">
-        <h1>Widgets</h1>
+    <div class="page-header text-center">
+        <h1>Lista de Widgets</h1>
     </div>
     <div class="list-group">
         <a data-ng-repeat="widget in widgets" ng-click="cargar('{{urlView}}','{{widget._id}}')" class="list-group-item">
-			<small class="list-group-item-text">
-				Posted on
+            <h4 class="list-group-item-heading" data-ng-bind="widget.name"></h4>
+            <small class="list-group-item-text">
+				Fecha de creacion
 				<span data-ng-bind="widget.created | date:'medium'"></span>
-				by
+				por
 				<span data-ng-bind="widget.user.displayName"></span>
 			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="widget.name"></h4>
         </a>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!widgets.$resolved || widgets.length">
-    	No Widgets yet, why don't you <a href="/#!/widgets/create">create one</a>?
+        No hay ningun Widget creado, para crear uno <a ng-click="cambiarPagina('{{urlCreate}}')">Presiona Aqui</a>.
     </div>
 </section>
