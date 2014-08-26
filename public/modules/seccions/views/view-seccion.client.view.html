@@ -3,7 +3,7 @@
 		<h1 data-ng-bind="seccion.name"></h1>
 	</div>
 	<div class="pull-right" data-ng-show="authentication.user._id == seccion.user._id">
-		<a class="btn btn-primary" href="/#!/seccions/{{seccion._id}}/edit">
+		<a class="btn btn-primary" data-ng-click="cargar('{{urlEdit}}','{{seccion._id}}')">
 			<i class="glyphicon glyphicon-edit"></i>
 		</a>
 		<a class="btn btn-primary" data-ng-click="remove();">

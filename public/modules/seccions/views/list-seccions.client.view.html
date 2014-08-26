@@ -3,7 +3,7 @@
         <h1>Seccions</h1>
     </div>
     <div class="list-group">
-        <a data-ng-repeat="seccion in seccions" ng-click="cargarSeccion('{{seccion._id}}')" class="list-group-item">
+        <a data-ng-repeat="seccion in seccions" ng-click="cargar('{{urlView}}','{{seccion._id}}')" class="list-group-item">
 			<small class="list-group-item-text">
 				Posted on
 				<span data-ng-bind="seccion.created | date:'medium'"></span>

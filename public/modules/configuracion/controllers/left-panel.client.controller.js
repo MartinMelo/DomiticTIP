@@ -70,17 +70,9 @@ app.controller('LeftPanelController', ['$scope','$http','ngDialog',
         $scope.cambiarIconos = function(nombreUL){
             $('#' +nombreUL + '-b').attr('class' , 'fa fa-minus-square-o collapse-sign');
         };
-        $scope.cargarSeccion = function(id){
-            $scope.seccionId = id;
-            $scope.cambiarPagina('modules/seccions/views/view-seccion.client.view.html');
-        };
-        $scope.cargarWidget = function(id){
-            $scope.widgetId = id;
-            $scope.cambiarPagina('modules/widgets/views/view-widget.client.view.html');
-        };
-        $scope.cargarDispositivo = function(id){
-            $scope.dispositivoId = id;
-            $scope.cambiarPagina('modules/dispositivos/views/view-dispositivo.client.view.html');
+        $scope.cargar = function(url, id){
+            $scope.idView = id;
+            $scope.cambiarPagina(url);
         };
 	}
 ]);

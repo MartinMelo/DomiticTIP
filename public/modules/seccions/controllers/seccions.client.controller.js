@@ -4,6 +4,9 @@
 angular.module('seccions').controller('SeccionsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Seccions',
 	function($scope, $stateParams, $location, Authentication, Seccions ) {
 		$scope.authentication = Authentication;
+        $scope.urlList = 'modules/seccions/views/list-seccions.client.view.html';
+        $scope.urlView = 'modules/seccions/views/view-seccion.client.view.html';
+        $scope.urlEdit = 'modules/seccions/views/edit-seccion.client.view.html';
 
 		// Create new Seccion
 		$scope.create = function() {
@@ -14,8 +17,7 @@ angular.module('seccions').controller('SeccionsController', ['$scope', '$statePa
 
 			// Redirect after save
 			seccion.$save(function(response) {
-                var url= 'modules/seccions/views/list-seccions.client.view.html';
-                $scope.cambiarPagina(url);
+                $scope.cambiarPagina($scope.urlList);
 				//$location.path('seccions/' + response._id);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
@@ -36,7 +38,7 @@ angular.module('seccions').controller('SeccionsController', ['$scope', '$statePa
 				}
 			} else {
 				$scope.seccion.$remove(function() {
-					$location.path('seccions');
+                    $scope.cambiarPagina($scope.urlList);
 				});
 			}
 		};
@@ -66,7 +68,7 @@ angular.module('seccions').controller('SeccionsController', ['$scope', '$statePa
 		// Find existing Seccion
 		$scope.cargarUna = function() {
 			$scope.seccion = Seccions.get({
-				seccionId: $scope.seccionId
+				seccionId: $scope.idView
 			});
 		};
 	}

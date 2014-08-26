@@ -5,6 +5,9 @@ var app = angular.module('widgets');
 app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Widgets',
 	function($scope, $stateParams, $location, Authentication, Widgets ) {
 		$scope.authentication = Authentication;
+        $scope.urlList = 'modules/widgets/views/list-widgets.client.view.html';
+        $scope.urlView = 'modules/widgets/views/view-widget.client.view.html';
+        $scope.urlEdit = 'modules/widgets/views/edit-widget.client.view.html';
         this.tipos = ['Hora', 'Temperatura', 'Sensor'];
 		// Create new Widget
 		$scope.create = function() {
@@ -17,8 +20,7 @@ app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Aut
 
 			// Redirect after save
 			widget.$save(function(response) {
-                var url= 'modules/widgets/views/list-widgets.client.view.html';
-                $scope.cambiarPagina(url);
+                $scope.cambiarPagina($scope.urlList);
 				//$location.path('widgets/' + response._id);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
@@ -41,7 +43,7 @@ app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Aut
 				}
 			} else {
 				$scope.widget.$remove(function() {
-					$location.path('widgets');
+                    $scope.cambiarPagina($scope.urlList);
 				});
 			}
 		};
@@ -51,7 +53,8 @@ app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Aut
 			var widget = $scope.widget ;
 
 			widget.$update(function() {
-				$location.path('widgets/' + widget._id);
+                $scope.idView = widget._id;
+                $scope.cambiarPagina($scope.urlView);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -70,8 +73,9 @@ app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Aut
 		};
         //Cargar Widget Por ID
         $scope.cargarUno = function() {
+            console.log($scope.idView);
             $scope.widget = Widgets.get({
-                widgetId: $scope.widgetId
+                widgetId: $scope.idView
             });
         };
 	}

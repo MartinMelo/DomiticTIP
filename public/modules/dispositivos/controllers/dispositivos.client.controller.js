@@ -4,6 +4,7 @@
 angular.module('dispositivos').controller('DispositivosController', ['$scope', '$stateParams', '$location', 'Authentication', 'Dispositivos',
 	function($scope, $stateParams, $location, Authentication, Dispositivos ) {
 		$scope.authentication = Authentication;
+        $scope.urlView = 'modules/dispositivos/views/view-dispositivo.client.view.html';
 
 		// Create new Dispositivo
 		$scope.create = function() {
@@ -66,7 +67,7 @@ angular.module('dispositivos').controller('DispositivosController', ['$scope', '
 		// Find existing Dispositivo
 		$scope.cargarUno = function() {
 			$scope.dispositivo = Dispositivos.get({
-				dispositivoId: $scope.dispositivoId
+				dispositivoId: $scope.idView
 			});
 		};
 	}
