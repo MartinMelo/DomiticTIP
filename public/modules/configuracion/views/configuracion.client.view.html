@@ -1,4 +1,23 @@
 <section data-ng-controller="ConfiguracionController as config">
-    <left-panel id="left-panel-config"></left-panel>
-    <main-panel id="main-panel-config"></main-panel>
+    <div id="menuLateral" class="row">
+        <div class="menu col-md-4">
+            <ul class="menu-parent nav nav-pills nav-stacked">
+                <li ng-repeat="menu in config.menus">
+                    <a ng-click="config.expandirPanel('{{menu.colapseID}}')">
+                        <i class='{{menu.i}}'></i>
+                        <span class="menu-item-parent">{{menu.nombre}}</span>
+                        <b class="fa fa-plus-square-o collapse-sign" id='{{menu.colapseID}}-b'></b>
+                    </a>
+                    <ul class="menu-child nav nav-pills nav-stacked colapsado" id='{{menu.colapseID}}'>
+                        <li ng-repeat="li in menu.links">
+                            <a href ng-click="cambiarPagina('{{li.url}}')" class="enBlanco">
+                                {{li.span}}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div ng-include="pagina" class="container menuCentral col-md-8"></div>
+    </div>
 </section>
