@@ -62,13 +62,13 @@ app.controller('ConfiguracionController', ['$scope',
         };
         $scope.colapsarMenuAbierto = function(){
             $('.expandido').attr('class' , 'menu-child nav nav-pills nav-stacked colapsado');
-            $('.fa-minus-square-o').attr('class' , 'fa fa-plus-square-o collapse-sign');
+            $('.fa-minus-square-o').attr('class' , 'fa fa-plus-square-o collapse-sign enGris');
         };
         $scope.expandirMenuSeleccionado = function(nombreUL){
             $('#'+nombreUL).attr('class' , 'menu-child nav nav-pills nav-stacked expandido');
         };
         $scope.cambiarIconos = function(nombreUL){
-            $('#' +nombreUL + '-b').attr('class' , 'fa fa-minus-square-o collapse-sign');
+            $('#' +nombreUL + '-b').attr('class' , 'fa fa-minus-square-o collapse-sign enGris');
         };
         $scope.cargar = function(url, id){
             $scope.idView = id;

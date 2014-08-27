@@ -5,8 +5,8 @@
                 <li ng-repeat="menu in config.menus">
                     <a ng-click="config.expandirPanel('{{menu.colapseID}}')">
                         <i class='{{menu.i}}'></i>
-                        <span class="menu-item-parent">{{menu.nombre}}</span>
-                        <b class="fa fa-plus-square-o collapse-sign" id='{{menu.colapseID}}-b'></b>
+                        <span class="menu-item-parent enBlanco">{{menu.nombre}}</span>
+                        <b class="fa fa-plus-square-o collapse-sign enGris" id='{{menu.colapseID}}-b'></b>
                     </a>
                     <ul class="menu-child nav nav-pills nav-stacked colapsado" id='{{menu.colapseID}}'>
                         <li ng-repeat="li in menu.links">

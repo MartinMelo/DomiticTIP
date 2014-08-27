@@ -1,8 +1,7 @@
 .menu{
-    margin-top: 1%;
-    background-color: #525151;
+    background-image: linear-gradient(to right,#3a3633 93%,#2a2725 100%);
     width: 15%;
-    min-width: 230px;
+    min-width: 210px;
     height: 100%;
 }
 .menu-item-parent{
@@ -13,6 +12,9 @@
 }
 .enBlanco{
     color: #ffffff;
+}
+.enGris{
+    color: #a8a8a8;
 }
 .colapsado{
     display: none;
