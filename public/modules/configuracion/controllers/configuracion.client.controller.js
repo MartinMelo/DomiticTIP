@@ -74,5 +74,8 @@ app.controller('ConfiguracionController', ['$scope',
             $scope.idView = id;
             $scope.cambiarPagina(url);
         };
+        $scope.editar = function(url){
+            $scope.cambiarPagina(url);
+        };
 	}
 ]);

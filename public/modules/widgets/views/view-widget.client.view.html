@@ -3,7 +3,7 @@
 		<h1 data-ng-bind="widget.name"></h1>
 	</div>
 	<div class="pull-right" data-ng-show="authentication.user._id == widget.user._id">
-		<a class="btn btn-primary" ng-click="cargar('{{urlEdit}}','{{widget._id}}')">
+		<a class="btn btn-primary" ng-click="editar('{{urlEdit}}')">
 			<i class="glyphicon glyphicon-edit"></i>
 		</a>
 		<a class="btn btn-primary" data-ng-click="remove();">

@@ -2,13 +2,13 @@
 
 // Widgets controller
 var app = angular.module('widgets');
-app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Widgets',
-	function($scope, $stateParams, $location, Authentication, Widgets ) {
+app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Widgets','$http',
+	function($scope, $stateParams, $location, Authentication, Widgets, $http ) {
 		$scope.authentication = Authentication;
         $scope.urlList = 'modules/widgets/views/list-widgets.client.view.html';
         $scope.urlView = 'modules/widgets/views/view-widget.client.view.html';
         $scope.urlEdit = 'modules/widgets/views/edit-widget.client.view.html';
-        this.tipos = ['Hora', 'Temperatura', 'Sensor'];
+
 		// Create new Widget
 		$scope.create = function() {
 			// Create new Widget object
@@ -73,11 +73,19 @@ app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Aut
 		};
         //Cargar Widget Por ID
         $scope.cargarUno = function() {
-            console.log($scope.idView);
             $scope.widget = Widgets.get({
                 widgetId: $scope.idView
             });
         };
+
+
+        //Creacion de un widgets
+        this.tipos = ['Hora', 'Temperatura', 'Sensor'];
+        $scope.secciones = [];
+        $http.get('/seccions').success(function(data){
+            $scope.section = data[0];
+            $scope.secciones = data;
+        });
 	}
 ]);
 app.controller('WidgetsInicioController',function ($scope, $interval, $http, RandomTopNDataModel, RandomTimeSeriesDataModel,
