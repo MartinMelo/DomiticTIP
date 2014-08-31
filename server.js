@@ -62,7 +62,7 @@ var mqttclient = mqtt.createClient(mqttport, mqttbroker);
 
 
 // Reduce socket.io debug output
-io.set('log level', 0)
+io.set('log level', 0);
 
 // Configuracion de respuestas de Socket.io. desde la web para el controlador
 io.sockets.on('connection', function (socket) {

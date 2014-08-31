@@ -107,7 +107,7 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http, Ran
         },
         {
             name: 'Temperatura',
-            directive: 'wt-scope-watch',
+            directive: 'widget-temperatura',
             attrs: {
                 value: 'temperatura'
             },
