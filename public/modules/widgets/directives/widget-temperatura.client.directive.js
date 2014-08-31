@@ -10,7 +10,7 @@ app.directive('widgetTemperatura', ['$interval',
             scope: {
                 value: '=value'
             },
-            link: function (scope) {
+            link: function (scope, elem, attr) {
                 scope.value = 'Cargando';
                 var socket = io.connect('http://localhost:3000');
                 socket.on('connect', function () {
@@ -18,7 +18,7 @@ app.directive('widgetTemperatura', ['$interval',
                         scope.value = msg.payload;
                     });
                 });
-                socket.emit('subscribe', {topic : 'home/#'});
+                socket.emit('subscribe', {topic : attr.topico});
                 function update() {
                     var topico = 'arduino';
                     var datos = '{id: temperatura , posicion: ambiente}';

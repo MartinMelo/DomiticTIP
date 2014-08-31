@@ -109,7 +109,8 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http, Ran
             name: 'Temperatura',
             directive: 'widget-temperatura',
             attrs: {
-                value: 'temperatura'
+                value: 'temperatura',
+                topico: 'home/ambiente/temp'
             },
             style: {
                 width: '34%'
