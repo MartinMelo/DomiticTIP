@@ -22,6 +22,10 @@ var moscaSettings = {
         url: 'mongodb://localhost:27017/mqtt'
     }
 };
+// fired when the mqtt server is ready
+function setup() {
+    console.log('Mosca server is up and running');
+}
 
 var server = new mosca.Server(moscaSettings);
 server.on('ready', setup);
@@ -37,17 +41,14 @@ server.on('published', function(packet, client) {
 });
 
 //in case of an error
-process.on("uncaughtException", function(error) {
+process.on('uncaughtException', function(error) {
     return console.log(error.stack);
 });
 
 
 
 
-// fired when the mqtt server is ready
-function setup() {
-    console.log('Mosca server is up and running')
-}
+
 
 //Server WEB
 
@@ -65,6 +66,12 @@ var mqttclient = mqtt.createClient(mqttport, mqttbroker);
 io.set('log level', 0);
 
 // Configuracion de respuestas de Socket.io. desde la web para el controlador
+function publicarEnArduino(data){
+    var info = JSON.parse(data);
+    var topic = String(info.topic);
+    var payload = JSON.stringify(info.payload);
+    mqttclient.publish( topic ,payload);
+}
 io.sockets.on('connection', function (socket) {
     socket.on('subscribe', function (data) {
         mqttclient.subscribe(data.topic);
@@ -74,24 +81,19 @@ io.sockets.on('connection', function (socket) {
     });
 });
 
-function publicarEnArduino(data){
-    var info = JSON.parse(data);
-    var topic = String(info.topic);
-    var payload = JSON.stringify(info.payload);
-    mqttclient.publish( topic ,payload);
-}
+
 // FIN WEB-CONTROLADOR SOCKET.IO
 
 // Mensajes para la web desde arduino
 mqttclient.on('message', function(topic, payload) {
-    if(topic == "discover"){
+    if(topic === 'discover'){
         io.sockets.emit('discover',
             {'topic': topic,
                 'payload': payload
             }
         );
     }
-    if(topic.indexOf("home/")>=0) {
+    if(topic.indexOf('home/')>=0) {
         io.sockets.emit('mqtt',
             {'topic': topic,
                 'payload': payload

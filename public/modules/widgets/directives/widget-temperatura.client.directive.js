@@ -6,7 +6,7 @@ app.directive('widgetTemperatura', ['$interval',
         return {
             restrict: 'A',
             replace: true,
-            template: '<div>Value<div class="alert alert-info">{{value}}</div></div>',
+            template: '<div>Value<div class="alert alert-info">{{value}}°C</div></div>',
             scope: {
                 value: '=value'
             },
@@ -18,6 +18,7 @@ app.directive('widgetTemperatura', ['$interval',
                         scope.value = msg.payload;
                     });
                 });
+                socket.emit('subscribe', {topic : 'home/#'});
                 function update() {
                     var topico = 'arduino';
                     var datos = '{id: temperatura , posicion: ambiente}';
