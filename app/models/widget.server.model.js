@@ -28,6 +28,23 @@ var WidgetSchema = new Schema({
 		required: 'Please fill section name',
 		trim: true
 	},
+    attrs: {
+        value: {
+            type: String,
+            required: 'Please fill Value name',
+            trim: true
+        },
+        topico: {
+            type: String,
+            required: 'Please fill Topic Socket.io',
+            trim: true
+        },
+        idinfo: {
+            type: String,
+            required: 'Please fill id div name',
+            trim: true
+        }
+    },
 	created: {
 		type: Date,
 		default: Date.now

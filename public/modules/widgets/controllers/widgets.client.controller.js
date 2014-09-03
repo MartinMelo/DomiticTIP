@@ -15,7 +15,13 @@ app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Aut
 			var widget = new Widgets ({
 				name: this.name,
 				title: this.title,
-				seccion: this.seccion
+				seccion: this.seccion,
+                attrs:{
+                    value: this.title,
+                    topico: this.topico,
+                    idInfo: this.idInfo
+                }
+
 			});
 
 			// Redirect after save
@@ -30,6 +36,7 @@ app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Aut
 			this.name = '';
 			this.title = '';
 			this.seccion = '';
+            this.attrs= '';
 		};
 
 		// Remove existing Widget
@@ -111,7 +118,7 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http, Ran
             attrs: {
                 value: 'temperatura',
                 topico: 'topico',
-                idDiv: 'tempId'
+                idinfo: 'tempId'
             },
             style: {
                 width: '34%'

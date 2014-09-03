@@ -12,11 +12,11 @@ app.directive('widgetTemperatura', ['$interval',
             },
             link: function (scope, elem, attr) {
                 scope.value = 'Cargando';
-                scope.id = attr.iddiv;
+                scope.id = attr.idinfo;
                 var socket = io.connect('http://localhost:3000');
                 socket.on('connect', function () {
                     socket.on('mqtt', function (msg) {
-                        $('#'+ attr.iddiv).html(msg.payload);
+                        $('#'+ attr.idinfo).html(msg.payload);
                     });
                 });
                 socket.emit('subscribe', {topic : attr.topico});
