@@ -6,16 +6,17 @@ app.directive('widgetTemperatura', ['$interval',
         return {
             restrict: 'A',
             replace: true,
-            template: '<div>Value<div class="alert alert-info">{{value}}°C</div></div>',
+            template: '<div>Value{{attr}}<div class="alert alert-info"><span  id="{{id}}">{{value}}</span>°C</div></div>',
             scope: {
                 value: '=value'
             },
             link: function (scope, elem, attr) {
                 scope.value = 'Cargando';
+                scope.id = attr.iddiv;
                 var socket = io.connect('http://localhost:3000');
                 socket.on('connect', function () {
                     socket.on('mqtt', function (msg) {
-                        scope.value = msg.payload;
+                        $('#'+ attr.iddiv).html(msg.payload);
                     });
                 });
                 socket.emit('subscribe', {topic : attr.topico});
@@ -38,9 +39,11 @@ app.directive('widgetTemperatura', ['$interval',
                 var promise = $interval(update, 2000);
 
                 scope.$on('$destroy', function () {
+                    socket.emit('unsubscribe', {topic : attr.topico});
                     $interval.cancel(promise);
                 });
             }
         };
 	}
 ]);
+

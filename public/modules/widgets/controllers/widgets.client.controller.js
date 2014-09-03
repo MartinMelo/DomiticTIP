@@ -110,7 +110,8 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http, Ran
             directive: 'widget-temperatura',
             attrs: {
                 value: 'temperatura',
-                topico: 'home/ambiente/temp'
+                topico: 'topico',
+                idDiv: 'tempId'
             },
             style: {
                 width: '34%'
@@ -177,6 +178,7 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http, Ran
         }
     ];
     $http.get('/widgets/seccion/inicio').success(function(data){
+        $scope.dashboardOptions.widgetDefinitions =data ;
         $scope.dashboardOptions.loadWidgets(data);
     });
     var defaultWidgets = [];
@@ -188,26 +190,5 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http, Ran
         hideWidgetClose: true,
         hideWidgetSettings: true
     };
-
-    // random scope value (scope-watch widget)
-    $interval(function () {
-        $scope.randomValue = Math.random();
-    }, 500);
-
-    // percentage (gauge widget, progressbar widget)
-    $scope.percentage = 5;
-    $interval(function () {
-        $scope.percentage = ($scope.percentage + 10) % 100;
-    }, 1000);
-
-    // line chart widget
-    $interval(function () {
-        $scope.topN = _.map(_.range(0, 10), function (index) {
-            return {
-                name: 'item' + index,
-                value: Math.floor(Math.random() * 100)
-            };
-        });
-    }, 500);
 });
 
