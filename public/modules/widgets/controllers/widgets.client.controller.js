@@ -118,7 +118,8 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http, Ran
             attrs: {
                 value: 'temperatura',
                 topico: 'topico',
-                idinfo: 'tempId'
+                idinfo: 'tempId',
+                controlador: 'ard#'
             },
             style: {
                 width: '34%'

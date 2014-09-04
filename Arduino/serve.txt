@@ -1,0 +1,71 @@
+{
+    "suscripto": "ard1",
+    "tipos": [
+        {
+            "nombre": "luz"
+        },
+        {
+            "nombre": "sensor"
+        }
+    ],
+    "luz": [
+        {
+            "id": 22
+        },
+        {
+            "id": 23
+        },
+        {
+            "id": 24
+        },
+        {
+            "id": 25
+        },
+        {
+            "id": 26
+        },
+        {
+            "id": 27
+        },
+        {
+            "id": 28
+        }
+    ],
+    "sensor": [
+        {
+            "nombre": "puerta-delantera",
+            "topico": "ard1/front/door",
+            "tipo": "bool"
+        },
+        {
+            "nombre": "ventana-delantera",
+            "topico": "ard1/front/window",
+            "tipo": "bool"
+        },
+        {
+            "nombre": "puerta-trasera",
+            "topico": "ard1/back/door",
+            "tipo": "bool"
+        },
+        {
+            "nombre": "ventana-trasera",
+            "topico": "ard1/back/window",
+            "tipo": "bool"
+        },
+        {
+            "nombre": "living-temp",
+            "topico": "ard1/living/temp",
+            "tipo": "numero"
+        },
+        {
+            "nombre": "basement-temp",
+            "topico": "ard1/basement/temp",
+            "tipo": "numero"
+        },
+        {
+            "nombre": "ambiente-temp",
+            "topico": "ard1/ambiente/temp",
+            "tipo": "numero"
+        }
+    ]
+}

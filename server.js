@@ -93,8 +93,8 @@ mqttclient.on('message', function(topic, payload) {
             }
         );
     }
-    if(topic.indexOf('home/')>=0) {
-        io.sockets.emit('mqtt',
+    if(topic.indexOf('ard')>=0) {
+        io.sockets.emit('controlador',
             {'topic': topic,
                 'payload': payload
             }

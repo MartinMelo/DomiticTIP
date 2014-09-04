@@ -126,7 +126,7 @@ void loop()
 {
   client.loop();
   if(!client.connected()){
-    client.connect("arduino");
+    client.connect("ard1");
     suscribirse();
   }
 }
@@ -136,7 +136,7 @@ void refresh(){
 
 //me suscribo.
 void suscribirse(){
-  client.subscribe("arduino");
+  client.subscribe("ard1");
 }
 //Expone todo lo que tiene el microcontrolador.
 void exponerServicios(){
@@ -188,21 +188,21 @@ void accionesSensores(JsonHashTable hashTable){
 void publicarEstadoPuerta(String posicion){
   if(posicion == "entrada"){
     if(digitalRead(38) == HIGH){
-        client.publish("home/front/door", "true");
-        client.publish("home/front/window", "true");
+        client.publish("ard1/front/door", "true");
+        client.publish("ard1/front/window", "true");
     }else{
-        client.publish("home/front/door", "false");
-        client.publish("home/front/window", "false");
+        client.publish("ard1/front/door", "false");
+        client.publish("ard1/front/window", "false");
     }
   
   }
   if(posicion == "patio"){
     if(digitalRead(40) == HIGH){
-       client.publish("home/back/door", "true");
-       client.publish("home/back/window", "true");
+       client.publish("ard1/back/door", "true");
+       client.publish("ard1/back/window", "true");
     }else{
-       client.publish("home/back/door", "false");
-       client.publish("home/back/window", "false");
+       client.publish("ard1/back/door", "false");
+       client.publish("ard1/back/window", "false");
     }
   }
 }
@@ -211,16 +211,16 @@ void publicarEstadoSensorTemperatura(String posicion){
   char temp[2];
   sensor.toCharArray(temp,2);
   if(posicion == "living"){
-    client.publish("home/living/temp",temp);
+    client.publish("ard1/living/temp",temp);
   }
   if(posicion == "basement"){
-    client.publish("home/basement/temp",temp);
+    client.publish("ard1/basement/temp",temp);
   }
   if(posicion == "ambiente"){
     int a = (4.9 * analogRead(A15) * 100.0) / 1024;   
     char b[3];
     String str=String(a); //converting integer into a string
     str.toCharArray(b,3);
-    client.publish("home/ambiente/temp",b);
+    client.publish("ard1/ambiente/temp",b);
   }
 }

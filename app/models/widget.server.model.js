@@ -43,6 +43,11 @@ var WidgetSchema = new Schema({
             type: String,
             required: 'Please fill id div name',
             trim: true
+        },
+        controlador: {
+            type: String,
+            required: 'Please fill el topic del controlador',
+            trim: true
         }
     },
 	created: {

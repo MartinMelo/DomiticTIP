@@ -20,7 +20,7 @@ function apagarLuz(){
     var socket = io.connect('http://localhost:3000');
     var datos2 = '{id: '+numero+' , estado: off}';
     var mensaje = {
-        topic: 'arduino',
+        topic: 'ard1',
         payload:{
             comando: 'accion',
             destino: 'iluminacion',
@@ -31,7 +31,7 @@ function apagarLuz(){
 }
 function actualizarPuerta(puerta){
     var socket = io.connect('http://localhost:3000');
-    var topico = 'arduino';
+    var topico = 'ard1';
     var datos = '{id: puertas , posicion: '+ puerta +'}';
     var mensaje = {
         topic: topico,
@@ -45,7 +45,7 @@ function actualizarPuerta(puerta){
 }
 function actualizarTemperatura(posicion){
     var socket = io.connect('http://localhost:3000');
-    var topico = 'arduino';
+    var topico = 'ard1';
     var datos = '{id: temperatura , posicion: '+ posicion +'}';
     var mensaje = {
         topic: topico,
@@ -59,7 +59,7 @@ function actualizarTemperatura(posicion){
 }
 function pedirExponerServicios(){
     var socket = io.connect('http://localhost:3000');
-    var topico = 'arduino';
+    var topico = 'ard1';
     var mensaje = {
         topic: topico,
         payload:{
