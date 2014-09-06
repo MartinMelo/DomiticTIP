@@ -34,10 +34,10 @@
             socket.on('discover', function (msg) {
                 $('#servicios').text(msg.payload);
             });
-            socket.on('controlador', function (msg) {
+            socket.on('mqtt', function (msg) {
                 var message = msg.topic.split('/');
-                var area = message[1];
-                var state = message[2];
+                var area = message[2];
+                var state = message[3];
                 //console.log(msg.topic, msg.payload);
                 var timestamp = Math.round((new Date()).getTime() / 1000);
 
@@ -196,8 +196,8 @@
                     default: console.log('Error: Data do not match the MQTT topic.'); break;
                 }
             });
-            socket.emit('subscribe', {topic : 'ard1/#'});
-            socket.emit('subscribe', {topic : 'discover'});
+            socket.emit('subscribe', {topic : 'resp/ard1/#'});
+            socket.emit('subscribe', {topic : 'discover/ard1'});
         });
 
 

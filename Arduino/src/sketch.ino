@@ -138,11 +138,7 @@ void refresh(){
 void suscribirse(){
   client.subscribe("ard1");
 }
-//Expone todo lo que tiene el microcontrolador.
-void exponerServicios(){
-  char servicios[] = "{tipos: [luz, sensor], luz: [l1,l2,l3] , sensor: [s1,s2,s3] }";
-  client.publish("discover", servicios); 
-}
+
 
 //Realiza la accion pedida.
 void realizarAccion(JsonHashTable hashTable){
@@ -188,21 +184,21 @@ void accionesSensores(JsonHashTable hashTable){
 void publicarEstadoPuerta(String posicion){
   if(posicion == "entrada"){
     if(digitalRead(38) == HIGH){
-        client.publish("ard1/front/door", "true");
-        client.publish("ard1/front/window", "true");
+        client.publish("home/ard1/front/door", "true");
+        client.publish("home/ard1/front/window", "true");
     }else{
-        client.publish("ard1/front/door", "false");
-        client.publish("ard1/front/window", "false");
+        client.publish("home/ard1/front/door", "false");
+        client.publish("home/ard1/front/window", "false");
     }
   
   }
   if(posicion == "patio"){
     if(digitalRead(40) == HIGH){
-       client.publish("ard1/back/door", "true");
-       client.publish("ard1/back/window", "true");
+       client.publish("home/ard1/back/door", "true");
+       client.publish("home/ard1/back/window", "true");
     }else{
-       client.publish("ard1/back/door", "false");
-       client.publish("ard1/back/window", "false");
+       client.publish("home/ard1/back/door", "false");
+       client.publish("home/ard1/back/window", "false");
     }
   }
 }
@@ -211,16 +207,42 @@ void publicarEstadoSensorTemperatura(String posicion){
   char temp[2];
   sensor.toCharArray(temp,2);
   if(posicion == "living"){
-    client.publish("ard1/living/temp",temp);
+    client.publish("home/ard1/living/temp",temp);
   }
   if(posicion == "basement"){
-    client.publish("ard1/basement/temp",temp);
+    client.publish("home/ard1/basement/temp",temp);
   }
   if(posicion == "ambiente"){
     int a = (4.9 * analogRead(A15) * 100.0) / 1024;   
     char b[3];
     String str=String(a); //converting integer into a string
     str.toCharArray(b,3);
-    client.publish("ard1/ambiente/temp",b);
+    client.publish("home/ard1/ambiente/temp",b);
+  }
+}
+//Expone todo lo que tiene el microcontrolador.
+void exponerServicios(){
+  if (SD.exists("serve.txt")) {
+    File configuracion = SD.open("serve.txt");
+   //leo todo el archivo de estados
+    String temp;
+    char data;
+    // make data to String;
+    while ((data = configuracion.read()) >= 0) 
+    {
+     temp = temp + data;
+    }
+  //Cierro el archivo de estados
+    configuracion.close();
+    int largo = temp.length();
+    //Parseo el Json que tiene los datos.
+    int i;
+    for(i=0; i< largo ; i++) {
+      message_buff[i] = temp[i];
+    }
+    message_buff[i] = '\0';
+    client.publish("discover/ard1", message_buff); 
+  }else{
+    Serial.println("el archivo no existe");
   }
 }

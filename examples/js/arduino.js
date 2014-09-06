@@ -6,7 +6,7 @@ function encenderLuz(){
     var socket = io.connect('http://localhost:3000');
     var datos2 = '{id: '+numero+' , estado: on}';
     var mensaje = {
-        topic: 'arduino',
+        topic: 'ard1',
         payload:{
             comando: 'accion',
             destino: 'iluminacion',

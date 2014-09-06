@@ -10,7 +10,7 @@
                     </a>
                     <ul class="menu-child nav nav-pills nav-stacked colapsado" id='{{menu.colapseID}}'>
                         <li ng-repeat="li in menu.links">
-                            <a href ng-click="cambiarPagina('{{li.url}}')" class="enBlanco">
+                            <a href ng-click="cambiarPagina('{{li.url}}')" class="enBlanco linea">
                                 {{li.span}}
                             </a>
                         </li>
@@ -20,4 +20,10 @@
         </div>
         <div ng-include="pagina" class="col-md-8"></div>
     </div>
+    <style>
+        .linea{
+            border-right: 1px solid #ccc;
+            border-left: 1px solid #ccc;
+        }
+    </style>
 </section>

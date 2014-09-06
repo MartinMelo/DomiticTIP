@@ -15,13 +15,13 @@ app.directive('widgetTemperatura', ['$interval',
                 scope.id = attr.idinfo;
                 var socket = io.connect('http://localhost:3000');
                 socket.on('connect', function () {
-                    socket.on('controlador', function (msg) {
-                        if(msg.topic === attr.topico){
+                    socket.on('mqtt', function (msg) {
+                        if(msg.topic === 'resp/'+attr.topico){
                             $('#'+ attr.idinfo).html(msg.payload);
                         }
                     });
                 });
-                socket.emit('subscribe', {topic : attr.topico});
+                socket.emit('subscribe', {topic : 'resp/'+attr.topico});
                 function update() {
                     var topico = attr.controlador;
                     var datos = '{id: temperatura , posicion: ambiente}';
