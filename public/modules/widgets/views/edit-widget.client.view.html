@@ -6,14 +6,14 @@
         <form class="form-horizontal" data-ng-submit="update()" novalidate>
             <fieldset>
                 <div class="form-group">
-                    <label class="control-label" for="nombre">titulo</label>
+                    <label class="control-label" for="title">Titulo</label>
                     <div class="controls">
-                        <input type="text" data-ng-model="widget.nombre" id="nombre" class="form-control" placeholder="Nombre" required>
+                        <input type="text" data-ng-model="widget.title" id="title" class="form-control" placeholder="Title" required>
                     </div>
-                    <label class="control-label" for="descripcion">Descripcion</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="widget.descripcion" id="descripcion" class="form-control" placeholder="Descripcion" required>
-                    </div>
+                    <label class="control-label" for="seccion">Seccion</label>
+                    <select data-ng-model="widget.seccion" ng-options="seccion.nombre for seccion in secciones track by seccion" id="seccion" required
+                            class="form-control" placeholder="Seccion" ng-init="seccion = secciones[0]" title="Seccion">
+                    </select>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-default">

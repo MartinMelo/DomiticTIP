@@ -12,7 +12,7 @@
                         <input type="text" data-ng-model="title" id="title" class="form-control" placeholder="Title" required>
                         <label class="control-label" for="seccion">Seccion</label>
                         <select data-ng-model="section" ng-options="seccion.nombre for seccion in secciones track by seccion" id="seccion" required
-                                class="form-control" placeholder="Seccion" ng-init="section = secciones[0]" title="Seccion">
+                                class="form-control" placeholder="Seccion" ng-init="seccion = secciones[0]" title="Seccion">
                         </select>
                         <label class="control-label" for="name">Tipo</label>
                         <select data-ng-model="name" ng-options="tipo for tipo in wid.tipos track by tipo" id="name" required
