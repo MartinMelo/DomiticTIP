@@ -30,13 +30,11 @@ void callback(char* topic, byte* payload, unsigned int length) {
   //Manejo el pedido recibido.
   String comando = hashTable.getString("comando");
   if(comando == "exponerServicios"){
-     exponerServicios();
+     String servicio = hashTable.getString("servicio");
+     exponerServicios(servicio);
   }
   if(comando == "accion"){
     realizarAccion(hashTable);
-  }
-  if(comando == "actualizar"){
-    refresh();
   }
 }
 
@@ -184,21 +182,21 @@ void accionesSensores(JsonHashTable hashTable){
 void publicarEstadoPuerta(String posicion){
   if(posicion == "entrada"){
     if(digitalRead(38) == HIGH){
-        client.publish("home/ard1/front/door", "true");
-        client.publish("home/ard1/front/window", "true");
+        client.publish("resp/ard1/front/door", "true");
+        client.publish("resp/ard1/front/window", "true");
     }else{
-        client.publish("home/ard1/front/door", "false");
-        client.publish("home/ard1/front/window", "false");
+        client.publish("resp/ard1/front/door", "false");
+        client.publish("resp/ard1/front/window", "false");
     }
   
   }
   if(posicion == "patio"){
     if(digitalRead(40) == HIGH){
-       client.publish("home/ard1/back/door", "true");
-       client.publish("home/ard1/back/window", "true");
+       client.publish("resp/ard1/back/door", "true");
+       client.publish("resp/ard1/back/window", "true");
     }else{
-       client.publish("home/ard1/back/door", "false");
-       client.publish("home/ard1/back/window", "false");
+       client.publish("resp/ard1/back/door", "false");
+       client.publish("resp/ard1/back/window", "false");
     }
   }
 }
@@ -207,42 +205,30 @@ void publicarEstadoSensorTemperatura(String posicion){
   char temp[2];
   sensor.toCharArray(temp,2);
   if(posicion == "living"){
-    client.publish("home/ard1/living/temp",temp);
+    client.publish("resp/ard1/living/temp",temp);
   }
   if(posicion == "basement"){
-    client.publish("home/ard1/basement/temp",temp);
+    client.publish("resp/ard1/basement/temp",temp);
   }
   if(posicion == "ambiente"){
     int a = (4.9 * analogRead(A15) * 100.0) / 1024;   
     char b[3];
     String str=String(a); //converting integer into a string
     str.toCharArray(b,3);
-    client.publish("home/ard1/ambiente/temp",b);
+    client.publish("resp/ard1/ambiente/temp",b);
   }
 }
 //Expone todo lo que tiene el microcontrolador.
-void exponerServicios(){
-  if (SD.exists("serve.txt")) {
-    File configuracion = SD.open("serve.txt");
-   //leo todo el archivo de estados
-    String temp;
-    char data;
-    // make data to String;
-    while ((data = configuracion.read()) >= 0) 
-    {
-     temp = temp + data;
-    }
-  //Cierro el archivo de estados
-    configuracion.close();
-    int largo = temp.length();
-    //Parseo el Json que tiene los datos.
-    int i;
-    for(i=0; i< largo ; i++) {
-      message_buff[i] = temp[i];
-    }
-    message_buff[i] = '\0';
-    client.publish("discover/ard1", message_buff); 
-  }else{
-    Serial.println("el archivo no existe");
+void exponerServicios(String servicio){
+  char* json;
+  if(servicio == "todo"){
+    json= "{suscripto: ard1,tipos: [{nombre: luz},{nombre: sensor}]}";
   }
+  if(servicio == "luz"){
+    json="{luz: [{id: 22},{id: 23}]}";
+  }
+  if(servicio == "sensor"){
+    json="{sensor: [{nombre: ambiente-temp,topico: ard1/ambiente/temp,tipo: numero}]}";
+  }
+    client.publish("discover/ard1", json); 
 }

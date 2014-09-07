@@ -1,0 +1,11 @@
+{
+    "suscripto": "ard1",
+    "tipos": [
+        {
+            "nombre": "luz"
+        },
+        {
+            "nombre": "sensor"
+        }
+    ]
+}

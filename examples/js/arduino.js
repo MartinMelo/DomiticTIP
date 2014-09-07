@@ -63,7 +63,8 @@ function pedirExponerServicios(){
     var mensaje = {
         topic: topico,
         payload:{
-            comando: 'exponerServicios'
+            comando: 'exponerServicios',
+            servicio: 'todo'
         }
     };
     socket.emit('controlador', JSON.stringify(mensaje));
