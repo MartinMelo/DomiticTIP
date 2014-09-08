@@ -75,5 +75,38 @@ angular.module('dispositivos').controller('DispositivosController', ['$scope', '
 				dispositivoId: $scope.idView
 			});
 		};
+
+
+        $scope.dispositivos = [];
+        var socket = io.connect('http://localhost:3000');
+        socket.on('connect', function () {
+            socket.on('discover', function (msg) {
+                $scope.agregarALista(msg);
+            });
+        });
+        $scope.buscarDispositivos = function(){
+            socket.emit('subscribe', {topic : 'discover/ard1'});
+            $scope.pedirExponerServicios();
+        };
+        $scope.agregarALista = function(msg){
+            var json = JSON.parse(msg.payload);
+            $("#dispositivo").append(new Option(json.suscripto, json.suscripto));
+        };
+        $scope.pedirExponerServicios = function(){
+            var socket = io.connect('http://localhost:3000');
+            var topico = 'ard1';
+            var mensaje = {
+                topic: topico,
+                payload:{
+                    comando: 'exponerServicios',
+                    servicio: 'todo'
+                }
+            };
+            socket.emit('controlador', JSON.stringify(mensaje));
+        };
+
+        //Busco los dispositivos
+        $scope.buscarDispositivos();
+
 	}
 ]);

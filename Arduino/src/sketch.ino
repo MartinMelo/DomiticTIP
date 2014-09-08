@@ -222,13 +222,13 @@ void publicarEstadoSensorTemperatura(String posicion){
 void exponerServicios(String servicio){
   char* json;
   if(servicio == "todo"){
-    json= "{suscripto: ard1,tipos: [{nombre: luz},{nombre: sensor}]}";
+    json= "{\"suscripto\": \"ard1\",\"tipos\": [{\"nombre\":\"luz\"},{\"nombre\": \"sensor\"}]}";
   }
   if(servicio == "luz"){
-    json="{luz: [{id: 22},{id: 23}]}";
+    json="{\"luz\": \[{\"id\": 22},{\"id\": 23}]}";
   }
   if(servicio == "sensor"){
-    json="{sensor: [{nombre: ambiente-temp,topico: ard1/ambiente/temp,tipo: numero}]}";
+    json="{\"sensor\": [{\"nombre\": \"ambiente-temp\",\"topico\": \"ard1/ambiente/temp\",\"tipo\": \"numero\"}]}";
   }
     client.publish("discover/ard1", json); 
 }
