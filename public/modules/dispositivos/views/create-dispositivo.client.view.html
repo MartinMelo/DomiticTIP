@@ -1,4 +1,4 @@
-<section data-ng-controller="DispositivosController">
+<section data-ng-controller="DispositivosController as dispc" data-ng-init="buscarDispositivos()">
     <div class="page-header text-center">
         <h1>Crear Dispositivo</h1>
     </div>
@@ -14,9 +14,9 @@
                     <div class="controls">
                         <input type="text" data-ng-model="descripcion" id="descripcion" class="form-control" placeholder="Descripcion" required>
                     </div>
-                    <label class="control-label" for="dispositivo">Dispositivo <i class="fa fa-refresh fa-lg fa-spin"></i></label>
-                    <select data-ng-model="dispositivo" ng-options="dispositivo for seccion in dispositivos track by dispositivo" id="dispositivo" required
-                            class="form-control" placeholder="Dispositivo" title="Dispositivo">
+                    <label class="control-label" for="controlador">Controlador <i class="fa fa-refresh fa-lg fa-spin"></i></label>
+                    <select data-ng-model="controlador" id="controlador" class="form-control" placeholder="Controlador" required>
+                        <option value="Seleccione Un Controlador">Seleccione Un Controlador</option>
                     </select>
                     <div class="controls">
                     </div>

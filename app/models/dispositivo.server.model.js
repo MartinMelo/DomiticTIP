@@ -25,7 +25,7 @@ var DispositivoSchema = new Schema({
     controlador: {
 		type: String,
 		default: '',
-		required: 'Por favor seleccione un dispositivo',
+		required: 'Por favor seleccione un controlador',
 		trim: true
 	},
 	created: {

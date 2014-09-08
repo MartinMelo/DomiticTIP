@@ -14,7 +14,8 @@ angular.module('dispositivos').controller('DispositivosController', ['$scope', '
 			// Create new Dispositivo object
 			var dispositivo = new Dispositivos ({
 				nombre: this.nombre,
-                descripcion: this.descripcion
+                descripcion: this.descripcion,
+                controlador: this.controlador
 			});
 
 			// Redirect after save
@@ -29,6 +30,7 @@ angular.module('dispositivos').controller('DispositivosController', ['$scope', '
 			// Clear form fields
 			this.nombre = '';
 			this.descripcion = '';
+			this.controlador = '';
 		};
 
 		// Remove existing Dispositivo
@@ -77,24 +79,27 @@ angular.module('dispositivos').controller('DispositivosController', ['$scope', '
 		};
 
 
-        $scope.dispositivos = [];
+        $scope.controladores = [];
+        $scope.controlador = 'Seleccione Un Controlador';
         var socket = io.connect('http://localhost:3000');
         socket.on('connect', function () {
-            socket.on('discover', function (msg) {
+            socket.on('resp/discover', function (msg) {
                 $scope.agregarALista(msg);
             });
         });
         $scope.buscarDispositivos = function(){
-            socket.emit('subscribe', {topic : 'discover/ard1'});
+            socket.emit('subscribe', {topic : 'resp/discover'});
             $scope.pedirExponerServicios();
         };
         $scope.agregarALista = function(msg){
             var json = JSON.parse(msg.payload);
-            $("#dispositivo").append(new Option(json.suscripto, json.suscripto));
+            console.log("Nuevo Controlador: " + json.suscripto);
+            $scope.controladores[$scope.controladores.length] =json.suscripto;
+            $("#controlador").append(new Option(json.suscripto, json.suscripto));
         };
         $scope.pedirExponerServicios = function(){
             var socket = io.connect('http://localhost:3000');
-            var topico = 'ard1';
+            var topico = 'discover';
             var mensaje = {
                 topic: topico,
                 payload:{
@@ -105,8 +110,6 @@ angular.module('dispositivos').controller('DispositivosController', ['$scope', '
             socket.emit('controlador', JSON.stringify(mensaje));
         };
 
-        //Busco los dispositivos
-        $scope.buscarDispositivos();
 
 	}
 ]);

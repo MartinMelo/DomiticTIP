@@ -6,6 +6,7 @@
         <a data-ng-repeat="dispositivo in dispositivos" ng-click="cargar('{{urlView}}', '{{dispositivo._id}}')" class="list-group-item">
             <h4 class="list-group-item-heading" data-ng-bind="dispositivo.nombre"></h4>
             <h5 class="list-group-item-heading" data-ng-bind="dispositivo.descripcion"></h5>
+            <h5 class="list-group-item-heading" data-ng-bind="dispositivo.controlador"></h5>
 			<small class="list-group-item-text">
 				Fecha de creacion
 				<span data-ng-bind="dispositivo.created | date:'medium'"></span>
@@ -16,6 +17,6 @@
         </a>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!dispositivos.$resolved || dispositivos.length">
-        No hay ninguna Seccion creada, para crear una <a ng-click="cambiarPagina('{{urlCreate}}')">Presiona Aqui</a>.
+        No hay ninguna Dispositivo creado, para crear uno <a ng-click="cambiarPagina('{{urlCreate}}')">Presiona Aqui</a>.
     </div>
 </section>
