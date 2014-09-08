@@ -14,6 +14,10 @@
                         <select data-ng-model="section" ng-options="seccion.nombre for seccion in secciones track by seccion" id="seccion" required
                                 class="form-control" placeholder="Seccion" ng-init="seccion = secciones[0]" title="Seccion">
                         </select>
+                        <label class="control-label" for="controlador">Dispositivo</label>
+                        <select data-ng-model="controlador" ng-options="controlador.controlador for controlador in controladores track by controlador" id="controlador" required
+                                class="form-control" placeholder="Dispositivo" ng-init="controlador = controladores[0]">
+                        </select>
                         <label class="control-label" for="name">Tipo</label>
                         <select data-ng-model="name" ng-options="tipo for tipo in wid.tipos track by tipo" id="name" required
                                 class="form-control" placeholder="Name" ng-init="name = wid.tipos[0]" title="Tipo De Widget">

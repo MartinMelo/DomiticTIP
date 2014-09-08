@@ -19,7 +19,8 @@ app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Aut
                 attrs:{
                     value: this.title,
                     topico: this.topico,
-                    idInfo: this.idInfo
+                    idInfo: this.idInfo,
+                    controlador: this.controlador
                 }
 
 			});
@@ -37,6 +38,7 @@ app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Aut
 			this.title = '';
 			this.seccion = '';
             this.attrs= '';
+            this.controlador= '';
 		};
 
 		// Remove existing Widget
@@ -92,6 +94,11 @@ app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Aut
         $http.get('/seccions').success(function(data){
             $scope.section = data[0];
             $scope.secciones = data;
+        });
+        $scope.controladores = [];
+        $http.get('/dispositivos').success(function(data){
+            $scope.controlador = data[0];
+            $scope.controladores = data;
         });
 	}
 ]);
