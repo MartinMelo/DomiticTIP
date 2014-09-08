@@ -230,5 +230,5 @@ void exponerServicios(String servicio){
   if(servicio == "sensor"){
     json="{\"sensor\": [{\"nombre\": \"ambiente-temp\",\"topico\": \"ard1/ambiente/temp\",\"tipo\": \"numero\"}]}";
   }
-    client.publish("discover/ard1", json); 
+    client.publish("discover", json); 
 }

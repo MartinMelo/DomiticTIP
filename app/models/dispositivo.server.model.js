@@ -22,6 +22,12 @@ var DispositivoSchema = new Schema({
 		required: 'Please fill Dispositivo descripcion',
 		trim: true
 	},
+    controlador: {
+		type: String,
+		default: '',
+		required: 'Por favor seleccione un dispositivo',
+		trim: true
+	},
 	created: {
 		type: Date,
 		default: Date.now
