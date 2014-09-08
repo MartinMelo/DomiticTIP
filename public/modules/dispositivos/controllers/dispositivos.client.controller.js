@@ -81,21 +81,22 @@ angular.module('dispositivos').controller('DispositivosController', ['$scope', '
 
         $scope.controladores = [];
         $scope.controlador = 'Seleccione Un Controlador';
-        var socket = io.connect('http://localhost:3000');
-        socket.on('connect', function () {
-            socket.on('resp/discover', function (msg) {
+        $scope.socket = io.connect('http://localhost:3000');
+        $scope.socket.on('connect', function () {
+            console.log('Registrando Evento');
+            $scope.socket.on('resp/discover', function (msg) {
                 $scope.agregarALista(msg);
             });
         });
         $scope.buscarDispositivos = function(){
-            socket.emit('subscribe', {topic : 'resp/discover'});
+            $scope.socket.emit('subscribe', {topic : 'resp/discover'});
             $scope.pedirExponerServicios();
         };
         $scope.agregarALista = function(msg){
             var json = JSON.parse(msg.payload);
-            console.log("Nuevo Controlador: " + json.suscripto);
+            console.log('Nuevo Controlador: ' + json.suscripto);
             $scope.controladores[$scope.controladores.length] =json.suscripto;
-            $("#controlador").append(new Option(json.suscripto, json.suscripto));
+            $('#controlador').append(new Option(json.suscripto, json.suscripto));
         };
         $scope.pedirExponerServicios = function(){
             var socket = io.connect('http://localhost:3000');
@@ -107,7 +108,7 @@ angular.module('dispositivos').controller('DispositivosController', ['$scope', '
                     servicio: 'todo'
                 }
             };
-            socket.emit('controlador', JSON.stringify(mensaje));
+            $scope.socket.emit('controlador', JSON.stringify(mensaje));
         };
 
 

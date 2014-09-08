@@ -86,7 +86,6 @@ io.sockets.on('connection', function (socket) {
 
 // Mensajes para la web desde arduino
 mqttclient.on('message', function(topic, payload) {
-    console.log("El topico es: " + topic);
     if(topic.indexOf('resp/discover')>=0){
         io.sockets.emit('resp/discover',
             {'topic': topic,
