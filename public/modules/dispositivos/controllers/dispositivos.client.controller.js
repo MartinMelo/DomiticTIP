@@ -83,13 +83,12 @@ angular.module('dispositivos').controller('DispositivosController', ['$scope', '
         $scope.controlador = 'Seleccione Un Controlador';
         $scope.socket = io.connect('http://localhost:3000');
         $scope.socket.on('connect', function () {
-            console.log('Registrando Evento');
+            $scope.socket.emit('subscribe', {topic : 'resp/discover'});
             $scope.socket.on('resp/discover', function (msg) {
                 $scope.agregarALista(msg);
             });
         });
         $scope.buscarDispositivos = function(){
-            $scope.socket.emit('subscribe', {topic : 'resp/discover'});
             $scope.pedirExponerServicios();
         };
         $scope.agregarALista = function(msg){

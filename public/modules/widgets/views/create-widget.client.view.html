@@ -11,12 +11,12 @@
                         <label class="control-label" for="title">Titulo</label>
                         <input type="text" data-ng-model="title" id="title" class="form-control" placeholder="Title" required>
                         <label class="control-label" for="seccion">Seccion</label>
-                        <select data-ng-model="section" ng-options="seccion.nombre for seccion in secciones track by seccion" id="seccion" required
+                        <select data-ng-model="seccion" ng-options="seccion.nombre for seccion in secciones track by seccion" id="seccion" required
                                 class="form-control" placeholder="Seccion" ng-init="seccion = secciones[0]" title="Seccion">
                         </select>
-                        <label class="control-label" for="controlador">Dispositivo</label>
-                        <select data-ng-model="controlador" ng-options="controlador.controlador for controlador in controladores track by controlador" id="controlador" required
-                                class="form-control" placeholder="Dispositivo" ng-init="controlador = controladores[0]">
+                        <label class="control-label" for="dispositivo">Dispositivo</label>
+                        <select data-ng-model="dispositivo" ng-options="dispositivo.controlador for dispositivos in dispositivos track by dispositivo" id="dispositivo" required
+                                class="form-control" placeholder="Dispositivo" ng-init="dispositivo = dispositivos[0]">
                         </select>
                         <label class="control-label" for="name">Tipo</label>
                         <select data-ng-model="name" ng-options="tipo for tipo in wid.tipos track by tipo" id="name" required

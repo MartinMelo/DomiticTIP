@@ -15,12 +15,12 @@ app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Aut
 			var widget = new Widgets ({
 				name: this.name,
 				title: this.title,
-				seccion: this.seccion,
+				seccion: this.seccion.nombre,
                 attrs:{
                     value: this.title,
                     topico: this.topico,
-                    idInfo: this.idInfo,
-                    controlador: this.controlador
+                    idinfo: this.idinfo,
+                    controlador: this.dispositivo.controlador
                 }
 
 			});
@@ -38,7 +38,7 @@ app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Aut
 			this.title = '';
 			this.seccion = '';
             this.attrs= '';
-            this.controlador= '';
+            this.dispositivo= '';
 		};
 
 		// Remove existing Widget
@@ -89,21 +89,22 @@ app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Aut
 
 
         //Creacion de un widgets
+        $scope.topico = 'ard1/living/temp';
+        $scope.idinfo = 'idloco';
         this.tipos = ['Hora', 'Temperatura', 'Sensor'];
         $scope.secciones = [];
         $http.get('/seccions').success(function(data){
-            $scope.section = data[0];
+            $scope.seccion = data[0];
             $scope.secciones = data;
         });
-        $scope.controladores = [];
+        $scope.dispositivos = [];
         $http.get('/dispositivos').success(function(data){
-            $scope.controlador = data[0];
-            $scope.controladores = data;
+            $scope.dispositivo = data[0];
+            $scope.dispositivos = data;
         });
 	}
 ]);
-app.controller('WidgetsInicioController',function ($scope, $interval, $http, RandomTopNDataModel, RandomTimeSeriesDataModel,
-                                             RandomMinutesDataModel, RandomNVD3TimeSeriesDataModel) {
+app.controller('WidgetsInicioController',function ($scope, $interval, $http) {
     var widgetDefinitions = [
         {
             name: 'Hora',
@@ -130,65 +131,6 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http, Ran
             },
             style: {
                 width: '34%'
-            }
-        },
-        {
-            name: 'scope-watch',
-            directive: 'wt-scope-watch',
-            attrs: {
-                value: 'randomValue'
-            },
-            style: {
-                width: '34%'
-            }
-        },
-        {
-            name: 'Line Chart',
-            directive: 'wt-line-chart',
-            dataAttrName: 'chart',
-            dataModelType: RandomTimeSeriesDataModel,
-            style: {
-                width: '50%'
-            }
-        },
-        {
-            name: 'NVD3 Line Chart',
-            directive: 'wt-nvd3-line-chart',
-            dataAttrName: 'data',
-            dataModelType: RandomNVD3TimeSeriesDataModel,
-            dataModelArgs: {
-                rate: 40
-            },
-            style: {
-                width: '50%'
-            }
-        },
-        {
-            name: 'Bar Chart',
-            directive: 'wt-bar-chart',
-            dataAttrName: 'data',
-            dataModelType: RandomMinutesDataModel,
-            dataModelArgs: {
-                limit: 1000
-            },
-            style: {
-                width: '50%'
-            }
-        },
-        {
-            name: 'topN',
-            directive: 'wt-top-n',
-            dataAttrName: 'data',
-            dataModelType: RandomTopNDataModel
-        },
-        {
-            name: 'gauge',
-            directive: 'wt-gauge',
-            attrs: {
-                value: 'percentage'
-            },
-            style: {
-                width: '250px'
             }
         }
     ];

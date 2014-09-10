@@ -41,7 +41,7 @@ var WidgetSchema = new Schema({
         },
         idinfo: {
             type: String,
-            required: 'Please fill id div name',
+            required: 'No se esta generando el id de div',
             trim: true
         },
         controlador: {
