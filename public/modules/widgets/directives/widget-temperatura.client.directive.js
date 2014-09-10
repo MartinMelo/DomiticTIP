@@ -24,7 +24,8 @@ app.directive('widgetTemperatura', ['$interval',
                 socket.emit('subscribe', {topic : 'resp/'+attr.topico});
                 function update() {
                     var topico = attr.controlador;
-                    var datos = '{id: temperatura , posicion: ambiente}';
+                    var posicion = attr.topico.split('/')[1];
+                    var datos = '{id: temperatura , posicion:' + posicion+'}';
                     var mensaje = {
                         topic: topico,
                         payload:{
