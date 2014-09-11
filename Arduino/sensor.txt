@@ -1,23 +1,13 @@
 {
  "sensor": [
         {
-            "nombre": "puerta-delantera",
-            "topico": "ard1/front/door",
+            "nombre": "entrada",
+            "topico": "ard1/entrada",
             "tipo": "bool"
         },
         {
-            "nombre": "ventana-delantera",
-            "topico": "ard1/front/window",
-            "tipo": "bool"
-        },
-        {
-            "nombre": "puerta-trasera",
-            "topico": "ard1/back/door",
-            "tipo": "bool"
-        },
-        {
-            "nombre": "ventana-trasera",
-            "topico": "ard1/back/window",
+            "nombre": "patio",
+            "topico": "ard1/patio",
             "tipo": "bool"
         },
         {

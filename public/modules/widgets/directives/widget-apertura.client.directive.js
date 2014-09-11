@@ -1,12 +1,11 @@
 'use strict';
 
-var app= angular.module('widgets');
-app.directive('widgetTemperatura', ['$interval',
-	function($interval) {
+angular.module('widgets').directive('widgetApertura', ['$interval',
+    function($interval) {
         return {
             restrict: 'A',
             replace: true,
-            template: '<div>Value{{attr}}<div class="alert alert-info text-center"><span  id="{{id}}">{{value}}</span>°C</div></div>',
+            template: '<div>Value{{attr}}<div class="alert alert-info text-center" id="{{id}}" >{{value}}</div></div>',
             scope: {
                 value: '=value'
             },
@@ -17,15 +16,25 @@ app.directive('widgetTemperatura', ['$interval',
                 socket.on('connect', function () {
                     socket.on('mqtt', function (msg) {
                         if(msg.topic === 'resp/'+attr.topico){
-                            $('#'+ attr.idinfo).html(msg.payload);
+                            cambiarEstadoPuerta(msg.payload);
                         }
                     });
                 });
                 socket.emit('subscribe', {topic : 'resp/'+attr.topico});
+
+                function cambiarEstadoPuerta(estado) {
+                    if (estado === 'true') {
+                        $('#' + attr.idinfo).html('Cerrado');
+                        $('#' + attr.idinfo).removeClass('alert-danger').addClass('alert-success');
+                    }else {
+                        $('#' + attr.idinfo).html('Abierto');
+                        $('#' + attr.idinfo).removeClass('alert-info').addClass('alert-danger');
+                    }
+                }
                 function update() {
                     var topico = attr.controlador;
                     var posicion = attr.topico.split('/')[1];
-                    var datos = '{id: temperatura , posicion:' + posicion+'}';
+                    var datos = '{id: puertas , posicion:' + posicion+'}';
                     var mensaje = {
                         topic: topico,
                         payload:{
@@ -39,14 +48,14 @@ app.directive('widgetTemperatura', ['$interval',
 
                 update();
 
-                var promise = $interval(update, 5000);
+                var promise = $interval(update, 2000);
 
                 scope.$on('$destroy', function () {
-                    socket.emit('unsubscribe', {topic : attr.topico});
+                    socket.emit('unsubscribe', {topic : 'resp/' + attr.topico});
                     $interval.cancel(promise);
                 });
             }
         };
-	}
+    }
 ]);
 

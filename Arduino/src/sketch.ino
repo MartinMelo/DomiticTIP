@@ -135,6 +135,7 @@ void refresh(){
 //me suscribo.
 void suscribirse(){
   client.subscribe("ard1");
+  client.subscribe("discover");
 }
 
 
@@ -182,21 +183,17 @@ void accionesSensores(JsonHashTable hashTable){
 void publicarEstadoPuerta(String posicion){
   if(posicion == "entrada"){
     if(digitalRead(38) == HIGH){
-        client.publish("resp/ard1/front/door", "true");
-        client.publish("resp/ard1/front/window", "true");
+        client.publish("resp/ard1/entrada", "true");
     }else{
-        client.publish("resp/ard1/front/door", "false");
-        client.publish("resp/ard1/front/window", "false");
+        client.publish("resp/ard1/entrada", "false");
     }
   
   }
   if(posicion == "patio"){
     if(digitalRead(40) == HIGH){
-       client.publish("resp/ard1/back/door", "true");
-       client.publish("resp/ard1/back/window", "true");
+       client.publish("resp/ard1/patio", "true");
     }else{
-       client.publish("resp/ard1/back/door", "false");
-       client.publish("resp/ard1/back/window", "false");
+       client.publish("resp/ard1/patio", "false");
     }
   }
 }
@@ -230,5 +227,5 @@ void exponerServicios(String servicio){
   if(servicio == "sensor"){
     json="{\"sensor\": [{\"nombre\": \"ambiente-temp\",\"topico\": \"ard1/ambiente/temp\",\"tipo\": \"numero\"}]}";
   }
-    client.publish("discover", json); 
+    client.publish("resp/discover", json); 
 }

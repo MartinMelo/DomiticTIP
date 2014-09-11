@@ -44,7 +44,7 @@
                 $('#topic').html(msg.topic);
                 $('#message').html(msg.topic + ', ' + msg.payload);
                 switch (area) {
-                    case 'front':
+                    case 'entrada':
                         $('#value1').html('(Switch value: ' + msg.payload + ')');
                         if (msg.payload == 'true') {
                             $('#label1').text('Closed');
@@ -54,7 +54,7 @@
                             $('#label1').removeClass('label-success').addClass('label-danger');
                         }
                         break;
-                    case 'back':
+                    case 'patio':
                         $('#value2').html('(Switch value: ' + msg.payload + ')');
                         if (msg.payload == 'true') {
                             $('#label2').text('Closed');

@@ -86,6 +86,19 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http) {
             style: {
                 width: '32%'
             }
+        },
+        {
+            name: 'Apertura',
+            directive: 'widget-apertura',
+            attrs: {
+                value: 'sensor',
+                topico: 'topico',
+                idinfo: 'sensId',
+                controlador: 'ard#'
+            },
+            style: {
+                width: '32%'
+            }
         }
     ];
     $http.get('/widgets/seccion/inicio').success(function(data){
