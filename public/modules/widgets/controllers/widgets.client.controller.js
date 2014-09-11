@@ -110,14 +110,14 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http) {
             name: 'Hora',
             directive: 'wt-time',
             style: {
-                width: '33%'
+                width: '32%'
             }
         },
         {
             name: 'Numero Random',
             directive: 'wt-random',
             style: {
-                width: '33%'
+                width: '32%'
             }
         },
         {
@@ -130,7 +130,7 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http) {
                 controlador: 'ard#'
             },
             style: {
-                width: '34%'
+                width: '32%'
             }
         }
     ];
