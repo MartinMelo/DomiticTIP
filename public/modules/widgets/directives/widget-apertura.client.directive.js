@@ -24,10 +24,10 @@ angular.module('widgets').directive('widgetApertura', ['$interval',
 
                 function cambiarEstadoPuerta(estado) {
                     if (estado === 'true') {
-                        $('#' + attr.idinfo).html('Cerrado');
+                        $('#' + attr.idinfo).html('<b>Cerrado</b>');
                         $('#' + attr.idinfo).removeClass('alert-danger').addClass('alert-success');
                     }else {
-                        $('#' + attr.idinfo).html('Abierto');
+                        $('#' + attr.idinfo).html('<b>Abierto</b>');
                         $('#' + attr.idinfo).removeClass('alert-info').addClass('alert-danger');
                     }
                 }
