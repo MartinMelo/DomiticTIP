@@ -3,43 +3,13 @@
 // Widgets controller
 var app = angular.module('widgets');
 app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Widgets','$http',
-	function($scope, $stateParams, $location, Authentication, Widgets, $http ) {
+	function($scope, $stateParams, $location, Authentication, Widgets) {
 		$scope.authentication = Authentication;
         $scope.urlList = 'modules/widgets/views/list-widgets.client.view.html';
         $scope.urlView = 'modules/widgets/views/view-widget.client.view.html';
         $scope.urlEdit = 'modules/widgets/views/edit-widget.client.view.html';
 
-		// Create new Widget
-		$scope.create = function() {
-			// Create new Widget object
-			var widget = new Widgets ({
-				name: this.name,
-				title: this.title,
-				seccion: this.seccion.nombre,
-                attrs:{
-                    value: this.title,
-                    topico: this.topico,
-                    idinfo: this.idinfo,
-                    controlador: this.dispositivo.controlador
-                }
 
-			});
-
-			// Redirect after save
-			widget.$save(function(response) {
-                $scope.cambiarPagina($scope.urlList);
-				//$location.path('widgets/' + response._id);
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-
-			// Clear form fields
-			this.name = '';
-			this.title = '';
-			this.seccion = '';
-            this.attrs= '';
-            this.dispositivo= '';
-		};
 
 		// Remove existing Widget
 		$scope.remove = function( widget ) {
@@ -86,22 +56,6 @@ app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Aut
                 widgetId: $scope.idView
             });
         };
-
-
-        //Creacion de un widgets
-        $scope.topico = 'ard1/living/temp';
-        $scope.idinfo = 'idloco';
-        this.tipos = ['Hora', 'Temperatura', 'Sensor'];
-        $scope.secciones = [];
-        $http.get('/seccions').success(function(data){
-            $scope.seccion = data[0];
-            $scope.secciones = data;
-        });
-        $scope.dispositivos = [];
-        $http.get('/dispositivos').success(function(data){
-            $scope.dispositivo = data[0];
-            $scope.dispositivos = data;
-        });
 	}
 ]);
 app.controller('WidgetsInicioController',function ($scope, $interval, $http) {

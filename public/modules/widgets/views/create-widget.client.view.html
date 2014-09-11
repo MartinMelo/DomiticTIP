@@ -1,4 +1,4 @@
-<section data-ng-controller="WidgetsController as wid">
+<section data-ng-controller="CrearWidgetController as wid">
     <div class="page-header text-center">
         <h1>Crear Widget</h1>
     </div>
@@ -12,15 +12,15 @@
                         <input type="text" data-ng-model="title" id="title" class="form-control" placeholder="Title" required>
                         <label class="control-label" for="seccion">Seccion</label>
                         <select data-ng-model="seccion" ng-options="seccion.nombre for seccion in secciones track by seccion" id="seccion" required
-                                class="form-control" placeholder="Seccion" ng-init="seccion = secciones[0]" title="Seccion">
+                                class="form-control" ng-init="seccion = secciones[0]" title="Seccion">
                         </select>
                         <label class="control-label" for="dispositivo">Dispositivo</label>
                         <select data-ng-model="dispositivo" ng-options="dispositivo.controlador for dispositivos in dispositivos track by dispositivo" id="dispositivo" required
-                                class="form-control" placeholder="Dispositivo" ng-init="dispositivo = dispositivos[0]">
+                                class="form-control" ng-init="dispositivo = dispositivos[0]">
                         </select>
                         <label class="control-label" for="name">Tipo</label>
                         <select data-ng-model="name" ng-options="tipo for tipo in wid.tipos track by tipo" id="name" required
-                                class="form-control" placeholder="Name" ng-init="name = wid.tipos[0]" title="Tipo De Widget">
+                                class="form-control" ng-init="name = wid.tipos[0]" title="Tipo De Widget">
                         </select>
                     </div>
                 </div>
