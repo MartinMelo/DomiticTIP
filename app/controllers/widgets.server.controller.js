@@ -124,6 +124,23 @@ exports.widgetBySeccion = function(req, res, next, seccion) {
 		next();
 	});
 };
+exports.widgetByUser = function(req, res, next, usuario) {
+    Widget.find({'user': usuario}).populate('user', 'displayName').exec(function(err, widget) {
+		if (err) return next(err);
+		if (! widget) return next(new Error('Failed to load Widget for ' + usuario));
+		req.widget = widget ;
+		next();
+	});
+};
+exports.widgetByQuery = function(req, res, next, parametros) {
+    var json = JSON.parse(parametros);
+    Widget.find(json).populate('user', 'displayName').exec(function(err, widget) {
+        if (err) return next(err);
+        if (! widget) return next(new Error('Failed to load Widget for: ' + json));
+        req.widget = widget ;
+        next();
+    });
+};
 
 /**
  * Widget authorization middleware

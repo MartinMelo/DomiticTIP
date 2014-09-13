@@ -13,7 +13,16 @@ module.exports = function(app) {
 		.get(widgets.read)
 		.put(users.requiresLogin, widgets.hasAuthorization, widgets.update)
 		.delete(users.requiresLogin, widgets.hasAuthorization, widgets.delete);
+
     app.route('/widgets/seccion/:widgetSeccion')
+        .get(widgets.read)
+        .put(users.requiresLogin, widgets.hasAuthorization, widgets.update)
+        .delete(users.requiresLogin, widgets.hasAuthorization, widgets.delete);
+    app.route('/widgets/usuario/:widgetUser')
+        .get(widgets.read)
+        .put(users.requiresLogin, widgets.hasAuthorization, widgets.update)
+        .delete(users.requiresLogin, widgets.hasAuthorization, widgets.delete);
+    app.route('/widgets/query/:widgetParam')
         .get(widgets.read)
         .put(users.requiresLogin, widgets.hasAuthorization, widgets.update)
         .delete(users.requiresLogin, widgets.hasAuthorization, widgets.delete);
@@ -21,4 +30,6 @@ module.exports = function(app) {
 	// Finish by binding the Widget middleware
 	app.param('widgetId', widgets.widgetByID);
 	app.param('widgetSeccion', widgets.widgetBySeccion);
+    app.param('widgetUser', widgets.widgetByUser);
+    app.param('widgetParam', widgets.widgetByQuery);
 };

@@ -3,7 +3,7 @@
 // Widgets controller
 var app = angular.module('widgets');
 app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Widgets','$http',
-	function($scope, $stateParams, $location, Authentication, Widgets) {
+	function($scope, $stateParams, $location, Authentication, Widgets, $http) {
 		$scope.authentication = Authentication;
         $scope.urlList = 'modules/widgets/views/list-widgets.client.view.html';
         $scope.urlView = 'modules/widgets/views/view-widget.client.view.html';
@@ -41,8 +41,12 @@ app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Aut
 
 		// Find a list of Widgets
 		$scope.find = function() {
-			$scope.widgets = Widgets.query();
+            var user  = $scope.authentication.user._id;
+            $http.get('/widgets/usuario/'+ user).success(function(data){
+                $scope.widgets = data;
+            });
 		};
+
 
 		// Find existing Widget
 		$scope.findOne = function() {
@@ -114,7 +118,8 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http) {
             }
         }
     ];
-    $http.get('/widgets/seccion/inicio').success(function(data){
+    var parametros = '{"seccion": "inicio", "user": "'+ $scope.authentication.user._id+'"}';
+    $http.get('/widgets/query/' + parametros).success(function(data){
         $scope.dashboardOptions.widgetDefinitions =data ;
         $scope.dashboardOptions.loadWidgets(data);
     });
