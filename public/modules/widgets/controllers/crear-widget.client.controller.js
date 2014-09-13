@@ -38,7 +38,7 @@ angular.module('widgets').controller('CrearWidgetController', ['$scope', '$http'
         //Creacion de un widgets
         $scope.topico = 'ard1/living/temp';
         $scope.idinfo = 'idloco';
-        this.tipos = ['Hora', 'Temperatura', 'Sensor', 'Apertura'];
+        this.tipos = ['Hora', 'Temperatura', 'Sensor', 'Apertura', 'Iluminacion'];
         $scope.secciones = [];
         $http.get('/seccions').success(function(data){
             $scope.seccion = data[0];

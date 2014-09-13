@@ -99,6 +99,19 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http) {
             style: {
                 width: '32%'
             }
+        },
+        {
+            name: 'Iluminacion',
+            directive: 'widget-iluminacion',
+            attrs: {
+                value: 'sensor',
+                topico: 'topico',
+                idinfo: 'sensId',
+                controlador: 'ard#'
+            },
+            style: {
+                width: '32%'
+            }
         }
     ];
     $http.get('/widgets/seccion/inicio').success(function(data){
