@@ -6,7 +6,7 @@ app.directive('widgetTemperatura', ['$interval',
         return {
             restrict: 'A',
             replace: true,
-            template: '<div>Value{{attr}}<div class="alert alert-info text-center"><b><span  id="{{id}}">{{value}}</span>°C</b></div></div>',
+            template: '<div>Valor{{attr}}<div class="alert alert-info text-center"><b><span  id="{{id}}">{{value}}</span>°C</b></div></div>',
             scope: {
                 value: '=value'
             },
