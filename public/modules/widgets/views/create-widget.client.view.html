@@ -9,18 +9,22 @@
 
                     <div class="controls">
                         <label class="control-label" for="title">Titulo</label>
-                        <input type="text" data-ng-model="title" id="title" class="form-control" placeholder="Title" required>
+                        <input type="text" data-ng-model="title" id="title" class="form-control" placeholder="Titulo" required>
                         <label class="control-label" for="seccion">Seccion</label>
-                        <select data-ng-model="seccion" ng-options="seccion.nombre for seccion in secciones track by seccion" id="seccion" required
-                                class="form-control" ng-init="seccion = secciones[0]" title="Seccion">
+                        <select data-ng-model="seccion" ng-options="seccion.nombre for seccion in secciones" id="seccion" required
+                                class="form-control"  title="Seccion">
                         </select>
                         <label class="control-label" for="dispositivo">Dispositivo</label>
-                        <select data-ng-model="dispositivo" ng-options="dispositivo.controlador for dispositivos in dispositivos track by dispositivo" id="dispositivo" required
+                        <select data-ng-model="dispositivo" ng-options="dispositivo.controlador for dispositivos in dispositivos" id="dispositivo" required
                                 class="form-control" ng-init="dispositivo = dispositivos[0]">
                         </select>
                         <label class="control-label" for="name">Tipo</label>
-                        <select data-ng-model="name" ng-options="tipo for tipo in wid.tipos track by tipo" id="name" required
-                                class="form-control" ng-init="name = wid.tipos[0]" title="Tipo De Widget">
+                        <select data-ng-model="name" ng-options="tipo for tipo in wid.tipos" id="name" required
+                                class="form-control" ng-init="name = wid.tipos[0]" title="Tipo De Widget" ng-change="tipoSeleccionado()">
+                        </select>
+                        <label class="control-label" for="topico">Sensor<span id="sens"></span></label>
+                        <select data-ng-model="topico" id="topico" required class="form-control" title="Sensor">
+                            <option value="Seleccione Un Sensor">Seleccione Un Sensor</option>
                         </select>
                     </div>
                 </div>

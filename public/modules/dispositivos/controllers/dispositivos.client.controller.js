@@ -20,6 +20,7 @@ angular.module('dispositivos').controller('DispositivosController', ['$scope', '
 
 			// Redirect after save
 			dispositivo.$save(function(response) {
+                io.connect('http://localhost:3000').removeAllListeners('resp/discover');
                 var url= $scope.urlList;
                 $scope.cambiarPagina(url);
 				//$location.path('dispositivos/' + response._id);
@@ -81,21 +82,19 @@ angular.module('dispositivos').controller('DispositivosController', ['$scope', '
 
         $scope.controladores = [];
         $scope.controlador = 'Seleccione Un Controlador';
-        $scope.socket = io.connect('http://localhost:3000');
-        $scope.socket.on('connect', function () {
-            $scope.socket.emit('subscribe', {topic : 'resp/discover'});
-            $scope.socket.on('resp/discover', function (msg) {
-                $scope.agregarALista(msg);
-            });
+        var socket = io.connect('http://localhost:3000');
+        socket.emit('subscribe', {topic : 'resp/discover'});
+        socket.on('resp/discover', function (msg) {
+            $scope.agregarALista(msg);
         });
         $scope.buscarDispositivos = function(){
             $scope.pedirExponerServicios();
         };
         $scope.agregarALista = function(msg){
             var json = JSON.parse(msg.payload);
-            console.log('Nuevo Controlador: ' + json.suscripto);
             $scope.controladores[$scope.controladores.length] =json.suscripto;
             $('#controlador').append(new Option(json.suscripto, json.suscripto));
+            $('#controlador').effect("highlight", {color:"#ff0000"}, 500);
         };
         $scope.pedirExponerServicios = function(){
             var socket = io.connect('http://localhost:3000');
@@ -107,7 +106,7 @@ angular.module('dispositivos').controller('DispositivosController', ['$scope', '
                     servicio: 'todo'
                 }
             };
-            $scope.socket.emit('controlador', JSON.stringify(mensaje));
+            socket.emit('controlador', JSON.stringify(mensaje));
         };
 
 
