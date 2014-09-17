@@ -3,7 +3,7 @@
 var app = angular.module('configuracion');
 app.controller('ConfiguracionController', ['$scope',
 	function($scope) {
-        $scope.pagina = 'modules/widgets/views/list-widgets.client.view.html';
+        $scope.pagina = 'modules/configuracion/views/informacion.client.view.html';
         this.menus = [
             {
                 nombre: 'Dispositivos',
@@ -52,6 +52,10 @@ app.controller('ConfiguracionController', ['$scope',
                 ]
             }
         ];
+        $scope.cargarInformacion = function(){
+            $scope.colapsarMenuAbierto();
+            $scope.cambiarPagina('modules/configuracion/views/informacion.client.view.html');
+        };
         $scope.cambiarPagina = function(url){
             io.connect('http://localhost:3000').removeAllListeners('resp/discover');
             $scope.pagina = url;

@@ -2,6 +2,12 @@
     <div id="menuLateral" class="row">
         <div class="menu col-md-4">
             <ul class="menu-parent nav nav-pills nav-stacked">
+                <li>
+                    <a href ng-click="cargarInformacion()">
+                        <i class='fa fa-book fa-2x'></i>
+                        <span class="menu-item-parent enBlanco">Informacion</span>
+                    </a>
+                </li>
                 <li ng-repeat="menu in config.menus">
                     <a ng-click="config.expandirPanel('{{menu.colapseID}}')">
                         <i class='{{menu.i}}'></i>
