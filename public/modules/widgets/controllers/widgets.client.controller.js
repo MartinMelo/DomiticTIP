@@ -63,6 +63,11 @@ app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Aut
 	}
 ]);
 app.controller('WidgetsInicioController',function ($scope, $interval, $http) {
+    /**
+     * La definicion de los widgets por defecto.
+     * Esta cambia cuando se cargan de la base de datos.
+     * @type {*[]}
+     */
     var widgetDefinitions = [
         {
             name: 'Hora',
@@ -118,13 +123,23 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http) {
             }
         }
     ];
-    var parametros = '{"seccion": "inicio", "user": "'+ $scope.authentication.user._id+'"}';
+    /**
+     * Cargo el dashboard por primera vez con la seccion Inicio.
+     * @type {string}
+     */
+    $scope.seccion = 'inicio';
+    var seccion = $scope.seccion;
+    var parametros = '{"seccion":"'+ seccion +'", "user": "'+ $scope.authentication.user._id+'"}';
     $http.get('/widgets/query/' + parametros).success(function(data){
         $scope.dashboardOptions.widgetDefinitions =data ;
         $scope.dashboardOptions.loadWidgets(data);
     });
     var defaultWidgets = [];
 
+    /**
+     * Opciones del dashboard
+     * @type {{widgetButtons: boolean, widgetDefinitions: *[], defaultWidgets: Array, hideWidgetClose: boolean, hideWidgetSettings: boolean}}
+     */
     $scope.dashboardOptions = {
         widgetButtons: true,
         widgetDefinitions: widgetDefinitions,
@@ -132,5 +147,26 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http) {
         hideWidgetClose: true,
         hideWidgetSettings: true
     };
+    /**
+     * Cargo la lista de secciones
+     */
+    $scope.secciones = [];
+    $http.get('/seccions').success(function(data){
+        $scope.seccion= data[0];
+        $scope.secciones= data;
+    });
+    /**
+     * Carga los widgets de la seccion seleccionada.
+     * @param seccion
+     */
+    $scope.cambiarSeccion = function(datos){
+        var seccion = datos.seccion.nombre;
+        var parametros = '{"seccion":"'+ seccion +'", "user": "'+ $scope.authentication.user._id+'"}';
+        $http.get('/widgets/query/' + parametros).success(function(data){
+            $scope.dashboardOptions.widgetDefinitions =data ;
+            $scope.dashboardOptions.loadWidgets(data);
+        });
+    }
+
 });
 

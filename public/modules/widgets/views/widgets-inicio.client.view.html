@@ -1,5 +1,10 @@
 <section data-ng-controller="WidgetsInicioController as wgtCrtrl" class="container">
     <div class="row">
+        <div>
+            <select ng-model="seccion" ng-options="seccion.nombre for secciones in secciones" id="seccion" required
+                    ng-init="seccion = secciones[0]" data-ng-change="cambiarSeccion(this)">
+            </select>
+        </div>
         <div class="col-md-12">
             <div dashboard="dashboardOptions" template-url="modules/widgets/views/template-widgets.html"></div>
         </div>
