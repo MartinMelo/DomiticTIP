@@ -14,7 +14,6 @@ angular.module('widgets').controller('CrearWidgetController', ['$scope', '$http'
                 attrs:{
                     value: this.title.replace(/\s+/g, '_'),
                     topico: this.topico,
-                    idinfo: (this.title + '_'+this.seccion.nombre).replace(/\s+/g, '_'),
                     controlador: this.dispositivo.controlador
                 }
 

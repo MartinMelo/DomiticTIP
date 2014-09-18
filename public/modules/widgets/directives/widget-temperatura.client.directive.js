@@ -6,7 +6,7 @@ app.directive('widgetTemperatura', ['$interval',
         return {
             restrict: 'A',
             replace: true,
-            template: '<div>Valor{{attr}}<div class="alert alert-info text-center"><b><span  id="{{id}}">{{value}}</span>°C</b></div></div>',
+            template: '<div>Valor{{attr}}<div class="alert alert-info text-center"><b><span>{{value}}</span>°C</b></div></div>',
             scope: {
                 value: '=value'
             },
@@ -14,12 +14,10 @@ app.directive('widgetTemperatura', ['$interval',
                 scope.value = 'Cargando';
                 scope.id = attr.idinfo;
                 var socket = io.connect('http://localhost:3000');
-                socket.on('connect', function () {
-                    socket.on('mqtt', function (msg) {
-                        if(msg.topic === 'resp/'+attr.topico){
-                            $('#'+ attr.idinfo).html(msg.payload);
-                        }
-                    });
+                socket.on('mqtt', function (msg) {
+                    if(msg.topic === 'resp/'+attr.topico){
+                        scope.value = msg.payload
+                    }
                 });
                 socket.emit('subscribe', {topic : 'resp/'+attr.topico});
                 function update() {

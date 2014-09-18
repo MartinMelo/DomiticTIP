@@ -5,30 +5,30 @@ angular.module('widgets').directive('widgetApertura', ['$interval',
         return {
             restrict: 'A',
             replace: true,
-            template: '<div>Estado{{attr}}<div class="alert alert-info text-center" id="{{id}}" >{{value}}</div></div>',
+            templateUrl: 'modules/widgets/views/widget-apertura.client.view.html',
             scope: {
-                value: '=value'
+                value: '=value',
+                clase: '=clase'
             },
             link: function (scope, elem, attr) {
                 scope.value = 'Cargando';
-                scope.id = attr.idinfo;
+                //scope.idW= attr.topico + attr.value;
+                scope.idW= scope.$id;
                 var socket = io.connect('http://localhost:3000');
-                socket.on('connect', function () {
-                    socket.on('mqtt', function (msg) {
-                        if(msg.topic === 'resp/'+attr.topico){
-                            cambiarEstadoPuerta(msg.payload);
-                        }
-                    });
+                socket.on('mqtt', function (msg) {
+                    if(msg.topic === 'resp/'+attr.topico){
+                        cambiarEstadoPuerta(msg.payload);
+                    }
                 });
                 socket.emit('subscribe', {topic : 'resp/'+attr.topico});
 
                 function cambiarEstadoPuerta(estado) {
                     if (estado === 'true') {
-                        $('#' + attr.idinfo).html('<b>Cerrado</b>');
-                        $('#' + attr.idinfo).removeClass('alert-danger').addClass('alert-success');
+                        scope.value='Cerrado';
+                        $('#' + scope.idW).removeClass('alert-danger').addClass('alert-success');
                     }else {
-                        $('#' + attr.idinfo).html('<b>Abierto</b>');
-                        $('#' + attr.idinfo).removeClass('alert-info').addClass('alert-danger');
+                        scope.value='Abierto';
+                        $('#' + scope.idW).removeClass('alert-info').addClass('alert-danger');
                     }
                 }
                 function update() {

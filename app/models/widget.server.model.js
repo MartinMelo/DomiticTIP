@@ -39,11 +39,6 @@ var WidgetSchema = new Schema({
             required: 'Please fill Topic Socket.io',
             trim: true
         },
-        idinfo: {
-            type: String,
-            required: 'No se esta generando el id de div',
-            trim: true
-        },
         controlador: {
             type: String,
             required: 'Please fill el topic del controlador',

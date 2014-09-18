@@ -1,9 +1,11 @@
 <section data-ng-controller="WidgetsInicioController as wgtCrtrl" class="container">
     <div class="row">
         <div>
-            <select ng-model="seccion" ng-options="seccion.nombre for secciones in secciones" id="seccion" required
-                    ng-init="seccion = secciones[0]" data-ng-change="cambiarSeccion(this)">
-            </select>
+            <ul class="nav nav-tabs" role="tablist">
+                <li ng-repeat="sec in secciones">
+                    <a href data-ng-click="cambiarSeccion('{{sec.nombre}}')" id="a_ '{{sec.nombre}}'">{{sec.nombre}}</a>
+                </li>
+            </ul>
         </div>
         <div class="col-md-12">
             <div dashboard="dashboardOptions" template-url="modules/widgets/views/template-widgets.html"></div>

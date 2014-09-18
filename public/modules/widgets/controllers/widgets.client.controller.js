@@ -102,7 +102,6 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http) {
             attrs: {
                 value: 'sensor',
                 topico: 'topico',
-                idinfo: 'sensId',
                 controlador: 'ard#'
             },
             style: {
@@ -127,8 +126,7 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http) {
      * Cargo el dashboard por primera vez con la seccion Inicio.
      * @type {string}
      */
-    $scope.seccion = 'inicio';
-    var seccion = $scope.seccion;
+    var seccion = 'Office';
     var parametros = '{"seccion":"'+ seccion +'", "user": "'+ $scope.authentication.user._id+'"}';
     $http.get('/widgets/query/' + parametros).success(function(data){
         $scope.dashboardOptions.widgetDefinitions =data ;
@@ -159,12 +157,11 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http) {
      * Carga los widgets de la seccion seleccionada.
      * @param seccion
      */
-    $scope.cambiarSeccion = function(datos){
-        var seccion = datos.seccion.nombre;
+    $scope.cambiarSeccion = function(seccion){
         var parametros = '{"seccion":"'+ seccion +'", "user": "'+ $scope.authentication.user._id+'"}';
         $http.get('/widgets/query/' + parametros).success(function(data){
-            $scope.dashboardOptions.widgetDefinitions =data ;
-            $scope.dashboardOptions.loadWidgets(data);
+           $scope.dashboardOptions.widgetDefinitions = data ;
+           $scope.dashboardOptions.loadWidgets(data);
         });
     }
 
