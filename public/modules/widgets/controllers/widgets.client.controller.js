@@ -89,7 +89,6 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http) {
             attrs: {
                 value: 'temperatura',
                 topico: 'topico',
-                idinfo: 'tempId',
                 controlador: 'ard#'
             },
             style: {
@@ -114,7 +113,6 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http) {
             attrs: {
                 value: 'sensor',
                 topico: 'topico',
-                idinfo: 'sensId',
                 controlador: 'ard#'
             },
             style: {
