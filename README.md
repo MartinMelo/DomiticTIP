@@ -1,4 +1,6 @@
-DomiticTIP
+[![Build Status](https://travis-ci.org/MartinMelo/DomiticTIP.svg?branch=master)](https://travis-ci.org/MartinMelo/DomiticTIP)
+
+DomiticTIP 
 ==========
 
 Integración de tecnología para control y automatización de espacio físico
