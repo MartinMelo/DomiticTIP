@@ -150,7 +150,7 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http) {
      */
     $scope.secciones = [];
     $http.get('/seccions').success(function(data){
-        $scope.seccion= data[0];
+        $scope.seccion= data[0].nombre;
         $scope.secciones= data;
     });
     /**
@@ -158,12 +158,16 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http) {
      * @param seccion
      */
     $scope.cambiarSeccion = function(seccion){
+        $scope.seccion = seccion;
         var parametros = '{"seccion":"'+ seccion +'", "user": "'+ $scope.authentication.user._id+'"}';
         $http.get('/widgets/query/' + parametros).success(function(data){
            $scope.dashboardOptions.widgetDefinitions = data ;
            $scope.dashboardOptions.loadWidgets(data);
         });
-    }
+    };
+    this.isSelected = function(nombre){
+        return $scope.seccion === nombre;
+    };
 
 });
 
