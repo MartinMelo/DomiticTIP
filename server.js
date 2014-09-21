@@ -34,8 +34,16 @@ server.on('clientConnected', function(client) {
     console.log('client connected', client.id);
 });
 
-// fired when a message is received
+/**
+ * Aca se escuchan todos los mensajes publicados. Y es donde tambien llegan mis mensajes
+ * publicados por el lector de huellas.
+ */
 server.on('published', function(packet, client) {
+    if(packet.topic.indexOf('empleados/huella/')>=0) {
+        console.log('El topic es: ' + packet.topic);
+        console.log('El Payload es: ' + packet.payload);
+        console.log('Del Cliente: ' + client.id);
+    }
     console.log('Published', packet.topic);
 
 });
