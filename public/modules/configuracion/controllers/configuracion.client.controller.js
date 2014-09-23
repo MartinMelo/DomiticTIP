@@ -6,6 +6,21 @@ app.controller('ConfiguracionController', ['$scope',
         $scope.pagina = 'modules/configuracion/views/informacion.client.view.html';
         this.menus = [
             {
+                nombre: 'Climatización',
+                i: 'fa fa-sun-o fa-2x',
+                colapseID:'Climatizacion-Child',
+                links: [
+                    {
+                        url: 'modules/climatizacions/views/list-climatizacions.client.view.html',
+                        span: 'Disponibles'
+                    },
+                    {
+                        url: 'modules/climatizacions/views/create-climatizacion.client.view.html',
+                        span: 'Agregar'
+                    }
+                ]
+            },
+            {
                 nombre: 'Dispositivos',
                 i: 'fa fa-upload fa-2x',
                 colapseID:'Dispositivos-Child',

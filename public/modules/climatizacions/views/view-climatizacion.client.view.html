@@ -1,0 +1,21 @@
+<section data-ng-controller="ClimatizacionsController" data-ng-init="cargarUno()">
+	<div class="page-header">
+		<h1 data-ng-bind="climatizacion.nombre"></h1>
+	</div>
+	<div class="pull-right" data-ng-show="authentication.user._id == climatizacion.user._id">
+        <a class="btn btn-primary" data-ng-click="editar('{{urlEdit}}')">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+	</div>
+	<small>
+		<em class="text-muted">
+			Posted on
+			<span data-ng-bind="climatizacion.created | date:'mediumDate'"></span>
+			by
+			<span data-ng-bind="climatizacion.user.displayName"></span>
+		</em>
+	</small>
+</section>

@@ -13,35 +13,35 @@ var WidgetSchema = new Schema({
 	name: {
 		type: String,
 		default: '',
-		required: 'Please fill Widget name',
+		required: 'Por favor seleccione el tipo de Widget',
 		trim: true
 	},
     title: {
         type: String,
         default: '',
-        required: 'Please fill Widget title',
+        required: 'Por favor ingrese un titulo',
         trim: true
     },
     seccion: {
 		type: String,
 		default: 'inicio',
-		required: 'Please fill section name',
+		required: 'Por favor seleccione una seccion',
 		trim: true
 	},
     attrs: {
         value: {
             type: String,
-            required: 'Please fill Value name',
+            required: 'No se esta generando el value',
             trim: true
         },
         topico: {
             type: String,
-            required: 'Please fill Topic Socket.io',
+            required: 'No se esta guardando el Topico de socket.io',
             trim: true
         },
         controlador: {
             type: String,
-            required: 'Please fill el topic del controlador',
+            required: 'Por favor seleccione el controlador',
             trim: true
         }
     },

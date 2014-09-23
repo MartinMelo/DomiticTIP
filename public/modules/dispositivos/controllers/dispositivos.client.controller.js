@@ -55,7 +55,7 @@ angular.module('dispositivos').controller('DispositivosController', ['$scope', '
 			var dispositivo = $scope.dispositivo ;
 
 			dispositivo.$update(function() {
-				$location.path('dispositivos/' + dispositivo._id);
+                $scope.cambiarPagina($scope.urlList);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});

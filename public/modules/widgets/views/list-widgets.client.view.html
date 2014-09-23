@@ -6,6 +6,7 @@
         <a data-ng-repeat="widget in widgets" ng-click="cargar('{{urlView}}','{{widget._id}}')" class="list-group-item">
             <h4 class="list-group-item-heading" data-ng-bind="widget.title"></h4>
             <h5 class="list-group-item-heading" data-ng-bind="widget.name"></h5>
+            <h5 class="list-group-item-heading" data-ng-bind="widget.seccion"></h5>
             <small class="list-group-item-text">
 				Fecha de creacion
 				<span data-ng-bind="widget.created | date:'medium'"></span>
