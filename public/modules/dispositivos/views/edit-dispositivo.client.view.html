@@ -10,6 +10,14 @@
                     <div class="controls">
                         <input type="text" data-ng-model="dispositivo.nombre" id="nombre" class="form-control" placeholder="Nombre" required>
                     </div>
+                    <label class="control-label" for="descripcion">Descripcion</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="dispositivo.descripcion" id="descripcion" class="form-control" placeholder="Descripcion" required>
+                    </div>
+                    <label class="control-label" for="controlador">Controlador <i class="fa fa-refresh fa-lg fa-spin"></i></label>
+                    <select data-ng-model="dispositivo.controlador" id="controlador" class="form-control" placeholder="Controlador" required>
+                        <option value="Seleccione Un Controlador">Seleccione Un Controlador</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-default">

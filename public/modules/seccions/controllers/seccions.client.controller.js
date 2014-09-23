@@ -51,7 +51,7 @@ angular.module('seccions').controller('SeccionsController', ['$scope', '$statePa
 			var seccion = $scope.seccion ;
 
 			seccion.$update(function() {
-				$location.path('seccions/' + seccion._id);
+                $scope.cambiarPagina($scope.urlList);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
