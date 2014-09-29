@@ -1,0 +1,19 @@
+<section data-ng-controller="EmpleadosController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Empleados</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="empleado in empleados" data-ng-href="#!/empleados/{{empleado._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="empleado.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="empleado.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="empleado.nombre"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!empleados.$resolved || empleados.length">
+    	No Empleados yet, why don't you <a href="/#!/empleados/create">create one</a>?
+    </div>
+</section>
