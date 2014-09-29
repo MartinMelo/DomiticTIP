@@ -20,11 +20,15 @@
     "malhar-angular-widgets": "https://github.com/DataTorrent/malhar-angular-widgets.git#master",
     "malhar-angular-dashboard": "https://github.com/DataTorrent/malhar-angular-dashboard.git#master",
     "font-awesome": "~4.1.0",
-    "ngDialog": "0.2.11"
+    "ngDialog": "0.2.11",
+    "later": "*",
+    "schedule": "*"
   },
   "resolutions": {
     "angular": "1.2.21",
     "jquery": "2.0.3",
-    "d3": "3.4.4"
+    "d3": "3.4.4",
+    "schedule": "91d6330161f5acecbd437923059544d7327dae5f",
+    "later": "1.1.3"
   }
 }
