@@ -53,7 +53,7 @@
 		it('$scope.find() should create an array with at least one Climatizacion object fetched from XHR', inject(function(Climatizacions) {
 			// Create sample Climatizacion using the Climatizacions service
 			var sampleClimatizacion = new Climatizacions({
-				name: 'New Climatizacion'
+				nombre: 'New Climatizacion'
 			});
 
 			// Create a sample Climatizacions array that includes the new Climatizacion
@@ -73,7 +73,7 @@
 		it('$scope.findOne() should create an array with one Climatizacion object fetched from XHR using a climatizacionId URL parameter', inject(function(Climatizacions) {
 			// Define a sample Climatizacion object
 			var sampleClimatizacion = new Climatizacions({
-				name: 'New Climatizacion'
+				nombre: 'New Climatizacion'
 			});
 
 			// Set the URL parameter
@@ -93,17 +93,17 @@
 		it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function(Climatizacions) {
 			// Create a sample Climatizacion object
 			var sampleClimatizacionPostData = new Climatizacions({
-				name: 'New Climatizacion'
+				nombre: 'New Climatizacion'
 			});
 
 			// Create a sample Climatizacion response
 			var sampleClimatizacionResponse = new Climatizacions({
 				_id: '525cf20451979dea2c000001',
-				name: 'New Climatizacion'
+				nombre: 'New Climatizacion'
 			});
 
 			// Fixture mock form input values
-			scope.name = 'New Climatizacion';
+			scope.nombre = 'New Climatizacion';
 
 			// Set POST response
 			$httpBackend.expectPOST('climatizacions', sampleClimatizacionPostData).respond(sampleClimatizacionResponse);
@@ -113,7 +113,7 @@
 			$httpBackend.flush();
 
 			// Test form inputs are reset
-			expect(scope.name).toEqual('');
+			expect(scope.nombre).toEqual('');
 
 			// Test URL redirection after the Climatizacion was created
 			expect($location.path()).toBe('/climatizacions/' + sampleClimatizacionResponse._id);
@@ -123,7 +123,7 @@
 			// Define a sample Climatizacion put data
 			var sampleClimatizacionPutData = new Climatizacions({
 				_id: '525cf20451979dea2c000001',
-				name: 'New Climatizacion'
+				nombre: 'New Climatizacion'
 			});
 
 			// Mock Climatizacion in scope

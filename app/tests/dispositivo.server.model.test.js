@@ -29,7 +29,9 @@ describe('Dispositivo Model Unit Tests:', function() {
 
 		user.save(function() { 
 			dispositivo = new Dispositivo({
-				name: 'Dispositivo Name',
+				nombre: 'Dispositivo Name',
+                descripcion: 'New Descripcion',
+                controlador: 'New Controlador',
 				user: user
 			});
 
@@ -46,7 +48,7 @@ describe('Dispositivo Model Unit Tests:', function() {
 		});
 
 		it('should be able to show an error when try to save without name', function(done) { 
-			dispositivo.name = '';
+			dispositivo.nombre = '';
 
 			return dispositivo.save(function(err) {
 				should.exist(err);

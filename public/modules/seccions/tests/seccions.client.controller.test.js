@@ -53,7 +53,8 @@
 		it('$scope.find() should create an array with at least one Seccion object fetched from XHR', inject(function(Seccions) {
 			// Create sample Seccion using the Seccions service
 			var sampleSeccion = new Seccions({
-				name: 'New Seccion'
+				nombre: 'New Seccion',
+                descripcion: 'nueva descripcion'
 			});
 
 			// Create a sample Seccions array that includes the new Seccion
@@ -73,7 +74,8 @@
 		it('$scope.findOne() should create an array with one Seccion object fetched from XHR using a seccionId URL parameter', inject(function(Seccions) {
 			// Define a sample Seccion object
 			var sampleSeccion = new Seccions({
-				name: 'New Seccion'
+                nombre: 'New Seccion',
+                descripcion: 'nueva descripcion'
 			});
 
 			// Set the URL parameter
@@ -93,17 +95,19 @@
 		it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function(Seccions) {
 			// Create a sample Seccion object
 			var sampleSeccionPostData = new Seccions({
-				name: 'New Seccion'
+                nombre: 'New Seccion',
+                descripcion: 'nueva descripcion'
 			});
 
 			// Create a sample Seccion response
 			var sampleSeccionResponse = new Seccions({
 				_id: '525cf20451979dea2c000001',
-				name: 'New Seccion'
+                nombre: 'New Seccion',
+                descripcion: 'nueva descripcion'
 			});
 
 			// Fixture mock form input values
-			scope.name = 'New Seccion';
+			scope.nombre = 'New Seccion';
 
 			// Set POST response
 			$httpBackend.expectPOST('seccions', sampleSeccionPostData).respond(sampleSeccionResponse);
@@ -123,7 +127,8 @@
 			// Define a sample Seccion put data
 			var sampleSeccionPutData = new Seccions({
 				_id: '525cf20451979dea2c000001',
-				name: 'New Seccion'
+                nombre: 'New Seccion',
+                descripcion: 'nueva descripcion'
 			});
 
 			// Mock Seccion in scope

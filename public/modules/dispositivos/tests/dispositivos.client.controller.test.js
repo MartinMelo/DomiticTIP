@@ -53,7 +53,9 @@
 		it('$scope.find() should create an array with at least one Dispositivo object fetched from XHR', inject(function(Dispositivos) {
 			// Create sample Dispositivo using the Dispositivos service
 			var sampleDispositivo = new Dispositivos({
-				name: 'New Dispositivo'
+				nombre: 'New Dispositivo',
+                descripcion: 'New Descripcion',
+                controlador: 'New Controlador'
 			});
 
 			// Create a sample Dispositivos array that includes the new Dispositivo
@@ -73,7 +75,9 @@
 		it('$scope.findOne() should create an array with one Dispositivo object fetched from XHR using a dispositivoId URL parameter', inject(function(Dispositivos) {
 			// Define a sample Dispositivo object
 			var sampleDispositivo = new Dispositivos({
-				name: 'New Dispositivo'
+				nombre: 'New Dispositivo',
+                descripcion: 'New Descripcion',
+                controlador: 'New Controlador'
 			});
 
 			// Set the URL parameter
@@ -93,17 +97,21 @@
 		it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function(Dispositivos) {
 			// Create a sample Dispositivo object
 			var sampleDispositivoPostData = new Dispositivos({
-				name: 'New Dispositivo'
+				nombre: 'New Dispositivo',
+                descripcion: 'New Descripcion',
+                controlador: 'New Controlador'
 			});
 
 			// Create a sample Dispositivo response
 			var sampleDispositivoResponse = new Dispositivos({
 				_id: '525cf20451979dea2c000001',
-				name: 'New Dispositivo'
+				nombre: 'New Dispositivo',
+                descripcion: 'New Descripcion',
+                controlador: 'New Controlador'
 			});
 
 			// Fixture mock form input values
-			scope.name = 'New Dispositivo';
+			scope.nombre = 'New Dispositivo';
 
 			// Set POST response
 			$httpBackend.expectPOST('dispositivos', sampleDispositivoPostData).respond(sampleDispositivoResponse);
@@ -113,7 +121,7 @@
 			$httpBackend.flush();
 
 			// Test form inputs are reset
-			expect(scope.name).toEqual('');
+			expect(scope.nombre).toEqual('');
 
 			// Test URL redirection after the Dispositivo was created
 			expect($location.path()).toBe('/dispositivos/' + sampleDispositivoResponse._id);
@@ -123,7 +131,9 @@
 			// Define a sample Dispositivo put data
 			var sampleDispositivoPutData = new Dispositivos({
 				_id: '525cf20451979dea2c000001',
-				name: 'New Dispositivo'
+				nombre: 'New Dispositivo',
+                descripcion: 'New Descripcion',
+                controlador: 'New Controlador'
 			});
 
 			// Mock Dispositivo in scope

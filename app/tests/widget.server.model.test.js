@@ -26,10 +26,16 @@ describe('Widget Model Unit Tests:', function() {
 			username: 'username',
 			password: 'password'
 		});
-
 		user.save(function() { 
 			widget = new Widget({
 				name: 'Widget Name',
+                title: 'Titulo nombre',
+                seccion: 'seccion nombre',
+                attrs: {
+                    value:'un valor',
+                    topico:'un topico',
+                    controlador:'un controlador'
+                },
 				user: user
 			});
 

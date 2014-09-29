@@ -29,7 +29,8 @@ describe('Seccion Model Unit Tests:', function() {
 
 		user.save(function() { 
 			seccion = new Seccion({
-				name: 'Seccion Name',
+				nombre: 'Seccion Name',
+                descripcion: 'descripcions',
 				user: user
 			});
 
@@ -46,7 +47,7 @@ describe('Seccion Model Unit Tests:', function() {
 		});
 
 		it('should be able to show an error when try to save without name', function(done) { 
-			seccion.name = '';
+			seccion.nombre = '';
 
 			return seccion.save(function(err) {
 				should.exist(err);

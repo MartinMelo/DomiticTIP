@@ -53,7 +53,14 @@
 		it('$scope.find() should create an array with at least one Widget object fetched from XHR', inject(function(Widgets) {
 			// Create sample Widget using the Widgets service
 			var sampleWidget = new Widgets({
-				name: 'New Widget'
+				name: 'New Widget',
+                title: 'Titulo nombre',
+                seccion: 'seccion nombre',
+                attrs:{
+                    value:'un valor',
+                    topico:'un topico',
+                    controlador:'un controlador'
+                }
 			});
 
 			// Create a sample Widgets array that includes the new Widget
@@ -73,7 +80,14 @@
 		it('$scope.findOne() should create an array with one Widget object fetched from XHR using a widgetId URL parameter', inject(function(Widgets) {
 			// Define a sample Widget object
 			var sampleWidget = new Widgets({
-				name: 'New Widget'
+				name: 'New Widget',
+                title: 'Titulo nombre',
+                seccion: 'seccion nombre',
+                attrs:{
+                    value:'un valor',
+                    topico:'un topico',
+                    controlador:'un controlador'
+                }
 			});
 
 			// Set the URL parameter
@@ -93,17 +107,38 @@
 		it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function(Widgets) {
 			// Create a sample Widget object
 			var sampleWidgetPostData = new Widgets({
-				name: 'New Widget'
+				name: 'New Widget',
+                title: 'Titulo nombre',
+                seccion: 'seccion nombre',
+                attrs:{
+                    value:'un valor',
+                    topico:'un topico',
+                    controlador:'un controlador'
+                }
 			});
 
 			// Create a sample Widget response
 			var sampleWidgetResponse = new Widgets({
 				_id: '525cf20451979dea2c000001',
-				name: 'New Widget'
+				name: 'New Widget',
+                title: 'Titulo nombre',
+                seccion: 'seccion nombre',
+                attrs:{
+                    value:'un valor',
+                    topico:'un topico',
+                    controlador:'un controlador'
+                }
 			});
 
 			// Fixture mock form input values
 			scope.name = 'New Widget';
+            scope.title= 'Titulo nombre';
+            scope.seccion= 'seccion nombre';
+            scope.attrs={
+                value:'un valor',
+                topico:'un topico',
+                controlador:'un controlador'
+            };
 
 			// Set POST response
 			$httpBackend.expectPOST('widgets', sampleWidgetPostData).respond(sampleWidgetResponse);
@@ -123,7 +158,14 @@
 			// Define a sample Widget put data
 			var sampleWidgetPutData = new Widgets({
 				_id: '525cf20451979dea2c000001',
-				name: 'New Widget'
+				name: 'New Widget',
+                title: 'Titulo nombre',
+                seccion: 'seccion nombre',
+                attrs:{
+                    value:'un valor',
+                    topico:'un topico',
+                    controlador:'un controlador'
+                }
 			});
 
 			// Mock Widget in scope

@@ -29,7 +29,7 @@ describe('Climatizacion Model Unit Tests:', function() {
 
 		user.save(function() { 
 			climatizacion = new Climatizacion({
-				name: 'Climatizacion Name',
+				nombre: 'Climatizacion Name',
 				user: user
 			});
 
@@ -46,7 +46,7 @@ describe('Climatizacion Model Unit Tests:', function() {
 		});
 
 		it('should be able to show an error when try to save without name', function(done) { 
-			climatizacion.name = '';
+			climatizacion.nombre = '';
 
 			return climatizacion.save(function(err) {
 				should.exist(err);
