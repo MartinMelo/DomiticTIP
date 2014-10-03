@@ -18,10 +18,23 @@
                         <select data-ng-model="dispositivo" ng-options="dispositivo.controlador for dispositivos in dispositivos" id="dispositivo" required
                                 class="form-control" ng-init="dispositivo = dispositivos[0]">
                         </select>
-                        <label class="control-label" for="name">Tipo</label>
-                        <select data-ng-model="name" ng-options="tipo for tipo in wid.tipos" id="name" required
-                                class="form-control" ng-init="name = wid.tipos[0]" title="Tipo De Widget" ng-change="tipoSeleccionado()">
-                        </select>
+                        <label class="tipoWidget">Tipo De Widget</label>
+                        <div class="row separadoArriba text-center">
+                            <div class="col-md-4">
+                                <div class="separadoArriba">
+                                    <label class="alert bordado" id="temperatura" ng-click="temperaturaSelect()">Temperatura</label>
+                                    <img ng-src="modules/widgets/img/temperatura.png"/>
+                                </div>
+                                <div  class="separadoArriba">
+                                    <label class="alert bordado" id="iluminacion" ng-click="iluminacionSelect()">Iluminación</label>
+                                    <img ng-src="modules/widgets/img/iluminacion.png"/>
+                                </div>
+                                <div class="separadoArriba">
+                                    <label class="alert bordado" id="apertura" ng-click="aperturaSelect()">Apertura</label>
+                                    <img ng-src="modules/widgets/img/apertura.png"/>
+                                </div>
+                            </div>
+                        </div>
                         <label class="control-label" for="topico">Sensor<span id="sens"></span></label>
                         <select data-ng-model="topico" id="topico" required class="form-control" title="Sensor">
                             <option value="Seleccione Un Sensor">Seleccione Un Sensor</option>
@@ -37,4 +50,17 @@
             </fieldset>
         </form>
     </div>
+    <style>
+        .tipoWidget{
+            margin-top: 3%;
+            font-size: 20px;
+            border-bottom: 1px solid #330033;
+        }
+        .separadoArriba{
+            margin-top: 3%;
+        }
+        .bordado{
+            border: 1px solid #330033;
+        }
+    </style>
 </section>

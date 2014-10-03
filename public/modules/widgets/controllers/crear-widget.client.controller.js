@@ -51,16 +51,32 @@ angular.module('widgets').controller('CrearWidgetController', ['$scope', '$http'
 
         //Pedir servicios para el tipo de Widget seleccionado.
         $scope.topicos= [{'nombre': 'seleccione un Sensor' , 'topico': 'untopico'}];
-        $scope.tipoSeleccionado = function(){
+        $scope.iluminacionSelect = function(){
             $('#topico').empty();
             $('#sens').addClass('fa fa-refresh fa-lg fa-spin');
-            if(this.name === 'Iluminacion'){
-                $scope.pedirExponerServiciosDe('luz');
-            }
-            if(this.name === 'Temperatura' || this.name === 'Apertura'){
-                $scope.pedirExponerServiciosDe('sensor');
-            }
-
+            $('#iluminacion').addClass('alert-success');
+            $('#temperatura').removeClass('alert-success');
+            $('#apertura').removeClass('alert-success');
+            $scope.name= 'Iluminacion';
+            $scope.pedirExponerServiciosDe('luz');
+        };
+        $scope.temperaturaSelect = function(){
+            $('#topico').empty();
+            $('#sens').addClass('fa fa-refresh fa-lg fa-spin');
+            $('#temperatura').addClass('alert-success');
+            $('#iluminacion').removeClass('alert-success');
+            $('#apertura').removeClass('alert-success');
+            $scope.name= 'Temperatura';
+            $scope.pedirExponerServiciosDe('sensor');
+        };
+        $scope.aperturaSelect = function(){
+            $('#topico').empty();
+            $('#sens').addClass('fa fa-refresh fa-lg fa-spin');
+            $('#apertura').addClass('alert-success');
+            $('#iluminacion').removeClass('alert-success');
+            $('#temperatura').removeClass('alert-success');
+            $scope.name= 'Apertura';
+            $scope.pedirExponerServiciosDe('sensor');
         };
         var socket = io.connect('http://localhost:3000');
         socket.emit('subscribe', {topic : 'resp/discover'});
