@@ -13,7 +13,8 @@ angular.module('climatizacions').controller('ClimatizacionsController', ['$scope
 		$scope.create = function() {
 			// Create new Climatizacion object
 			var climatizacion = new Climatizacions ({
-                nombre: this.nombre
+                nombre: this.nombre,
+                temperatura: this.temperatura
 			});
 
 			// Redirect after save
@@ -25,6 +26,7 @@ angular.module('climatizacions').controller('ClimatizacionsController', ['$scope
 
 			// Clear form fields
 			this.nombre = '';
+			this.temperatura = '';
 		};
 
 		// Remove existing Climatizacion

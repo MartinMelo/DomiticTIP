@@ -16,6 +16,11 @@ var ClimatizacionSchema = new Schema({
 		required: 'Please fill Climatizacion nombre',
 		trim: true
 	},
+    temperatura: {
+		type: Number,
+		default: 24,
+		required: 'Por Favor ingrese la temperatura'
+	},
 	created: {
 		type: Date,
 		default: Date.now
