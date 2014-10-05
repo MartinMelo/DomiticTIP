@@ -4,6 +4,7 @@
     </div>
     <div class="list-group">
         <a data-ng-repeat="widget in widgets" ng-click="cargar('{{urlView}}','{{widget._id}}')" class="list-group-item">
+            <img ng-src="modules/widgets/img/{{widget.name}}.png" class="imgDeWidgetPequenia">
             <h4 class="list-group-item-heading" data-ng-bind="widget.title"></h4>
             <h5 class="list-group-item-heading" data-ng-bind="widget.name"></h5>
             <h5 class="list-group-item-heading" data-ng-bind="widget.seccion"></h5>
@@ -18,4 +19,12 @@
     <div class="alert alert-warning text-center" data-ng-hide="!widgets.$resolved || widgets.length">
         No hay ningun Widget creado, para crear uno <a ng-click="cambiarPagina('{{urlCreate}}')">Presiona Aqui</a>.
     </div>
+    <style>
+        .imgDeWidgetPequenia{
+            height: 18%;
+            width: 18%;
+            position: inherit;
+            float: right;
+        }
+    </style>
 </section>
