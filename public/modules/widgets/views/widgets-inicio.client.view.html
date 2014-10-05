@@ -1,5 +1,8 @@
 <section data-ng-controller="WidgetsInicioController as wgtCrtrl" class="container">
-    <div class="row">
+    <div ng-show="secciones.empty()">
+        <configurar></configurar>
+    </div>
+    <div class="row" ng-hide="secciones.empty()">
         <div>
             <ul class="nav nav-tabs" role="tablist">
                 <li ng-repeat="sec in secciones" ng-class="{ active:wgtCrtrl.isSelected('{{sec.nombre}}')}">
