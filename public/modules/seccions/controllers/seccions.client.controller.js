@@ -1,8 +1,8 @@
 'use strict';
 
 // Seccions controller
-angular.module('seccions').controller('SeccionsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Seccions',
-	function($scope, $stateParams, $location, Authentication, Seccions ) {
+angular.module('seccions').controller('SeccionsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Seccions','$http',
+	function($scope, $stateParams, $location, Authentication, Seccions,$http ) {
 		$scope.authentication = Authentication;
         $scope.urlList = 'modules/seccions/views/list-seccions.client.view.html';
         $scope.urlCreate = 'modules/seccions/views/create-seccion.client.view.html';
@@ -59,7 +59,10 @@ angular.module('seccions').controller('SeccionsController', ['$scope', '$statePa
 
 		// Find a list of Seccions
 		$scope.find = function() {
-			$scope.seccions = Seccions.query();
+            var querySecciones = '{"user": "'+ $scope.authentication.user._id+'"}';
+            $http.get('/seccions/query/' + querySecciones).success(function(data){
+                $scope.seccions= data;
+            });
 		};
 
 		// Find existing Seccion
