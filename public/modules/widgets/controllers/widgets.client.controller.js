@@ -120,16 +120,6 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http) {
             }
         }
     ];
-    /**
-     * Cargo el dashboard por primera vez con la seccion Inicio.
-     * @type {string}
-     */
-    var seccion = 'Office';
-    var parametros = '{"seccion":"'+ seccion +'", "user": "'+ $scope.authentication.user._id+'"}';
-    $http.get('/widgets/query/' + parametros).success(function(data){
-        $scope.dashboardOptions.widgetDefinitions =data ;
-        $scope.dashboardOptions.loadWidgets(data);
-    });
     var defaultWidgets = [];
 
     /**
@@ -147,9 +137,11 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http) {
      * Cargo la lista de secciones
      */
     $scope.secciones = [];
-    $http.get('/seccions').success(function(data){
+    var querySecciones = '{"user": "'+ $scope.authentication.user._id+'"}';
+    $http.get('/seccions/query/' + querySecciones).success(function(data){
         $scope.seccion= data[0].nombre;
         $scope.secciones= data;
+        $scope.cambiarSeccion(data[0].nombre);
     });
     /**
      * Carga los widgets de la seccion seleccionada.

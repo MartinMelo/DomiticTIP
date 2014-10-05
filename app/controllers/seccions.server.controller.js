@@ -116,6 +116,15 @@ exports.seccionByID = function(req, res, next, id) { Seccion.findById(id).popula
 		next();
 	});
 };
+exports.seccionByQuery = function(req, res, next, parametros) {
+    var json = JSON.parse(parametros);
+    Seccion.find(json).populate('user', 'displayName').exec(function(err, seccion) {
+		if (err) return next(err);
+		if (! seccion) return next(new Error('Failed to load Seccion ' + json));
+		req.seccion = seccion ;
+		next();
+	});
+};
 
 /**
  * Seccion authorization middleware

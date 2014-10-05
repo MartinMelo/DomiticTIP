@@ -13,7 +13,12 @@ module.exports = function(app) {
 		.get(seccions.read)
 		.put(users.requiresLogin, seccions.hasAuthorization, seccions.update)
 		.delete(users.requiresLogin, seccions.hasAuthorization, seccions.delete);
+    app.route('/seccions/query/:seccionParam')
+		.get(seccions.read)
+		.put(users.requiresLogin, seccions.hasAuthorization, seccions.update)
+		.delete(users.requiresLogin, seccions.hasAuthorization, seccions.delete);
 
 	// Finish by binding the Seccion middleware
 	app.param('seccionId', seccions.seccionByID);
+	app.param('seccionParam', seccions.seccionByQuery);
 };
