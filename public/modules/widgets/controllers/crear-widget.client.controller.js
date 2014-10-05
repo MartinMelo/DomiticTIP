@@ -37,7 +37,6 @@ angular.module('widgets').controller('CrearWidgetController', ['$scope', '$http'
         };
 
         //Creacion de un widgets
-        this.tipos = ['Seleccione un Tipo','Temperatura', 'Apertura', 'Iluminacion'];
         $scope.secciones = [];
         $http.get('/seccions').success(function(data){
             $scope.seccion = data[0];

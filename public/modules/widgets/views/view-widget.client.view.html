@@ -1,7 +1,23 @@
 <section data-ng-controller="WidgetsController" data-ng-init="cargarUno()">
 	<div class="page-header">
-		<h1 data-ng-bind="widget.name"></h1>
+		<h1 data-ng-bind="widget.title"></h1>
 	</div>
+    <div class="row">
+        <div class="col-md-8">
+            <label>Seccion</label>
+            <span data-ng-bind="widget.seccion"></span>
+        </div>
+        <div class="col-md-8">
+            <label>Sensor</label>
+            <span data-ng-bind="widget.attrs.topico"></span>
+        </div>
+
+        <div class="col-md-8">
+            <label class="control-label">Controlador</label>
+            <span data-ng-bind="widget.attrs.controlador"></span><br>
+            <img ng-src="modules/widgets/img/{{widget.name}}.png">
+        </div>
+    </div>
 	<div class="pull-right" data-ng-show="authentication.user._id == widget.user._id">
 		<a class="btn btn-primary" ng-click="editar('{{urlEdit}}')">
 			<i class="glyphicon glyphicon-edit"></i>

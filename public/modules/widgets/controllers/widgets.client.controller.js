@@ -27,17 +27,7 @@ app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Aut
 			}
 		};
 
-		// Update existing Widget
-		$scope.update = function() {
-			var widget = $scope.widget ;
 
-			widget.$update(function() {
-                $scope.idView = widget._id;
-                $scope.cambiarPagina($scope.urlView);
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-		};
 
 		// Find a list of Widgets
 		$scope.find = function() {

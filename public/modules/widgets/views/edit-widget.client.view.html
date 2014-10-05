@@ -1,4 +1,4 @@
-<section data-ng-controller="WidgetsController" data-ng-init="cargarUno()">
+<section data-ng-controller="EditarWidgetController" data-ng-init="cargarUno()">
     <div class="page-header">
         <h1>Edit Widget</h1>
     </div>
@@ -12,7 +12,33 @@
                     </div>
                     <label class="control-label" for="seccion">Seccion</label>
                     <select data-ng-model="widget.seccion" ng-options="seccion.nombre for seccion in secciones track by seccion" id="seccion" required
-                            class="form-control" placeholder="Seccion" ng-init="seccion = secciones[0]" title="Seccion">
+                            class="form-control" placeholder="Seccion" ng-init="widget.seccion" title="Seccion">
+                    </select>
+                    <label class="control-label" for="dispositivo">Dispositivo</label>
+                    <select data-ng-model="widget.dispositivo" ng-options="dispositivo.controlador for dispositivos in dispositivos" id="dispositivo" required
+                            class="form-control" ng-init="widget.dispositivo">
+                    </select>
+                    ###
+                    <label class="tipoWidget">Tipo De Widget</label>
+                    <div class="row separadoArriba text-center">
+                        <div class="col-md-4">
+                            <div class="separadoArriba">
+                                <label class="alert bordado" id="temperatura" ng-click="temperaturaSelect()">Temperatura</label>
+                                <img ng-src="modules/widgets/img/temperatura.png"/>
+                            </div>
+                            <div  class="separadoArriba">
+                                <label class="alert bordado" id="iluminacion" ng-click="iluminacionSelect()">Iluminación</label>
+                                <img ng-src="modules/widgets/img/iluminacion.png"/>
+                            </div>
+                            <div class="separadoArriba">
+                                <label class="alert bordado" id="apertura" ng-click="aperturaSelect()">Apertura</label>
+                                <img ng-src="modules/widgets/img/apertura.png"/>
+                            </div>
+                        </div>
+                    </div>
+                    <label class="control-label" for="topico">Sensor<span id="sens"></span></label>
+                    <select data-ng-model="topico" id="topico" required class="form-control" title="Sensor">
+                        <option value="Seleccione Un Sensor">Seleccione Un Sensor</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -24,4 +50,17 @@
             </fieldset>
         </form>
     </div>
+    <style>
+        .tipoWidget{
+            margin-top: 3%;
+            font-size: 20px;
+            border-bottom: 1px solid #330033;
+        }
+        .separadoArriba{
+            margin-top: 3%;
+        }
+        .bordado{
+            border: 1px solid #330033;
+        }
+    </style>
 </section>
