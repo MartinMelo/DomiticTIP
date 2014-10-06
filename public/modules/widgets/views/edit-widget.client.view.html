@@ -1,6 +1,6 @@
 <section data-ng-controller="EditarWidgetController" data-ng-init="cargarUno()">
     <div class="page-header">
-        <h1>Edit Widget</h1>
+        <h1>Editar Widget</h1>
     </div>
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="update()" novalidate>
@@ -12,13 +12,12 @@
                     </div>
                     <label class="control-label" for="seccion">Seccion</label>
                     <select data-ng-model="widget.seccion" ng-options="seccion.nombre for seccion in secciones track by seccion" id="seccion" required
-                            class="form-control" placeholder="Seccion" ng-init="widget.seccion" title="Seccion">
+                            class="form-control" placeholder="Seccion" title="Seccion">
                     </select>
                     <label class="control-label" for="dispositivo">Dispositivo</label>
                     <select data-ng-model="widget.dispositivo" ng-options="dispositivo.controlador for dispositivos in dispositivos" id="dispositivo" required
                             class="form-control" ng-init="widget.dispositivo">
                     </select>
-                    ###
                     <label class="tipoWidget">Tipo De Widget</label>
                     <div class="row separadoArriba text-center">
                         <div class="col-md-4">
