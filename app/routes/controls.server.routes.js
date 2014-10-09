@@ -9,6 +9,10 @@ module.exports = function(app) {
 		.get(controls.list)
 		.post(users.requiresLogin, controls.create);
 
+    app.route('/controls/llegadas')
+		.get(controls.list)
+		.post(users.requiresLogin, controls.create);
+
 	app.route('/controls/:controlId')
 		.get(controls.read)
 		.put(users.requiresLogin, controls.hasAuthorization, controls.update)

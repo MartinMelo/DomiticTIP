@@ -22,7 +22,8 @@
     "font-awesome": "~4.1.0",
     "ngDialog": "0.2.11",
     "later": "*",
-    "schedule": "*"
+    "schedule": "*",
+    "socket.io-client": "~1.1.0"
   },
   "resolutions": {
     "angular": "1.2.21",
