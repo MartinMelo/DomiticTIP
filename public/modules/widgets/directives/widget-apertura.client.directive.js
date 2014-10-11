@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('widgets').directive('widgetApertura', ['$interval',
-    function($interval) {
+angular.module('widgets').directive('widgetApertura', ['$interval','ENV',
+    function($interval, ENV) {
         return {
             restrict: 'A',
             replace: true,
@@ -14,7 +14,8 @@ angular.module('widgets').directive('widgetApertura', ['$interval',
                 scope.value = 'Cargando';
                 //scope.idW= attr.topico + attr.value;
                 scope.idW= scope.$id;
-                var socket = io.connect('http://localhost:3000');
+                var ip = ENV.server +':3000';
+                var socket = io.connect(ip);
                 socket.on('mqtt', function (msg) {
                     if(msg.topic === 'resp/'+attr.topico){
                         cambiarEstadoPuerta(msg.payload);
