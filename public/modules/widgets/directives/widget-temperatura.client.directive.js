@@ -1,8 +1,8 @@
 'use strict';
 
 var app= angular.module('widgets');
-app.directive('widgetTemperatura', ['$interval',
-	function($interval) {
+app.directive('widgetTemperatura', ['$interval','ENV',
+	function($interval, ENV) {
         return {
             restrict: 'A',
             replace: true,
@@ -13,7 +13,8 @@ app.directive('widgetTemperatura', ['$interval',
             link: function (scope, elem, attr) {
                 scope.value = 'Cargando';
                 scope.id = attr.idinfo;
-                var socket = io.connect('http://localhost:3000');
+                var ip = ENV.server +':3000';
+                var socket = io.connect(ip);
                 socket.on('mqtt', function (msg) {
                     if(msg.topic === 'resp/'+attr.topico){
                         scope.value = msg.payload;

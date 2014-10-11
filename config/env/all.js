@@ -49,7 +49,8 @@ module.exports = {
                 'public/lib/malhar-angular-widgets/dist/malhar-angular-widgets.js',
                 'public/lib/ngDialog/js/ngDialog.js',
                 'public/lib/later/later.js',
-                'public/lib/schedule/schedule.js'
+                'public/lib/schedule/schedule.js',
+                'public/config_env.js'
 
 			]
 		},
