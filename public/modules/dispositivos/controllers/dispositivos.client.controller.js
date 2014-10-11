@@ -1,8 +1,8 @@
 'use strict';
 
 // Dispositivos controller
-angular.module('dispositivos').controller('DispositivosController', ['$scope', '$stateParams', '$location', 'Authentication', 'Dispositivos',
-	function($scope, $stateParams, $location, Authentication, Dispositivos ) {
+angular.module('dispositivos').controller('DispositivosController', ['$scope', '$stateParams', '$location', 'Authentication', 'Dispositivos','ENV',
+	function($scope, $stateParams, $location, Authentication, Dispositivos, ENV ) {
 		$scope.authentication = Authentication;
         $scope.urlView = 'modules/dispositivos/views/view-dispositivo.client.view.html';
         $scope.urlCreate = 'modules/dispositivos/views/create-dispositivo.client.view.html';
@@ -20,7 +20,8 @@ angular.module('dispositivos').controller('DispositivosController', ['$scope', '
 
 			// Redirect after save
 			dispositivo.$save(function(response) {
-                io.connect('http://localhost:3000').removeAllListeners('resp/discover');
+                var ip = ENV.server + ':3000';
+                io.connect(ip).removeAllListeners('resp/discover');
                 var url= $scope.urlList;
                 $scope.cambiarPagina(url);
 				//$location.path('dispositivos/' + response._id);
@@ -82,7 +83,8 @@ angular.module('dispositivos').controller('DispositivosController', ['$scope', '
 
         $scope.controladores = [];
         $scope.controlador = 'Seleccione Un Controlador';
-        var socket = io.connect('http://localhost:3000');
+        var ip = ENV.server + ':3000';
+        var socket = io.connect(ip);
         socket.emit('subscribe', {topic : 'resp/discover'});
         socket.on('resp/discover', function (msg) {
             $scope.agregarALista(msg);
@@ -97,7 +99,8 @@ angular.module('dispositivos').controller('DispositivosController', ['$scope', '
             $('#controlador').effect("highlight", {color:"#ff0000"}, 500);
         };
         $scope.pedirExponerServicios = function(){
-            var socket = io.connect('http://localhost:3000');
+            var ip = ENV.server + ':3000';
+            var socket = io.connect(ip);
             var topico = 'discover';
             var mensaje = {
                 topic: topico,
