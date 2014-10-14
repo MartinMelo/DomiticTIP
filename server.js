@@ -40,9 +40,11 @@ server.on('clientConnected', function(client) {
  */
 server.on('published', function(packet, client) {
     if(packet.topic.indexOf('empleados/huella/')>=0) {
-        console.log('El topic es: ' + packet.topic);
-        console.log('El Payload es: ' + packet.payload);
-        console.log('Del Cliente: ' + client.id);
+        io.sockets.emit('huellita',
+            {'topic': packet.topic,
+                'payload': packet.payload
+            }
+        );
     }
     console.log('Published', packet.topic);
 
