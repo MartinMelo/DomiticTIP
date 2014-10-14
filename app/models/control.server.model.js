@@ -20,10 +20,12 @@ var ControlSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
-	empleado: {
-		type: Schema.ObjectId,
-		ref: 'Empleado'
-	}
+    huella: {
+        type: String,
+        default: '',
+        required: 'No se tiene la huella',
+        trim: true
+    }
 });
 
 mongoose.model('Control', ControlSchema);

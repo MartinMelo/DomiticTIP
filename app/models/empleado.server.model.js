@@ -16,6 +16,12 @@ var EmpleadoSchema = new Schema({
 		required: 'Por favor ingrese el nombre',
 		trim: true
 	},
+    huella: {
+        type: String,
+        default: '',
+        required: 'No se tiene la huella',
+        trim: true
+    },
 	created: {
 		type: Date,
 		default: Date.now
