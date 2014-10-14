@@ -1,3 +1,11 @@
-<section data-ng-controller="PartidasController">
-	This is the Partida
+<section data-ng-controller="PartidasController" class="container">
+    <div class="page-header">
+        <h1>Partidas</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="partida in partidas" data-ng-href="#!/controls/{{partida._id}}" class="list-group-item">
+            <h4 class="list-group-item-heading" data-ng-bind="partida.horario"></h4>
+            <h4 class="list-group-item-heading" data-ng-bind="partida.huella"></h4>
+        </a>
+    </div>
 </section>

@@ -12,6 +12,9 @@ module.exports = function(app) {
     app.route('/controls/llegadas')
 		.get(controls.list)
 		.post(users.requiresLogin, controls.create);
+    app.route('/controls/partidas')
+		.get(controls.list)
+		.post(users.requiresLogin, controls.create);
 
 	app.route('/controls/:controlId')
 		.get(controls.read)
