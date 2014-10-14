@@ -17,10 +17,6 @@ angular.module('controls').config(['$stateProvider',
 			url: '/controls/llegadas',
 			templateUrl: 'modules/controls/views/llegadas.client.view.html'
 		}).
-		state('listControls', {
-			url: '/controls',
-			templateUrl: 'modules/controls/views/list-controls.client.view.html'
-		}).
 		state('viewControl', {
 			url: '/controls/:controlId',
 			templateUrl: 'modules/controls/views/view-control.client.view.html'

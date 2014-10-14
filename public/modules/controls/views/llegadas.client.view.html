@@ -1,10 +1,10 @@
 <section data-ng-controller="LlegadasController" class="container">
     <div class="page-header">
-        <h1>Partidas</h1>
+        <h1>Llegadas</h1>
     </div>
     <div class="list-group">
         <a data-ng-repeat="llegada in llegadas" data-ng-href="#!/controls/{{llegada._id}}" class="list-group-item">
-            <h4 class="list-group-item-heading" data-ng-bind="llegada.horario"></h4>
+            <h4 class="list-group-item-heading" data-ng-bind="llegada.horario | date:'medium'"></h4>
             <h4 class="list-group-item-heading" data-ng-bind="llegada.huella"></h4>
         </a>
     </div>
