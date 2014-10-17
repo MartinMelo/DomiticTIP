@@ -26,10 +26,10 @@ angular.module('widgets').directive('widgetApertura', ['$interval','ENV',
                 function cambiarEstadoPuerta(estado) {
                     if (estado === 'true') {
                         scope.value='Cerrado';
-                        $('#' + scope.idW).removeClass('alert-danger').addClass('alert-success');
+                        $('#' + scope.idW).removeClass('alert-danger alert-info').addClass('alert-success');
                     }else {
                         scope.value='Abierto';
-                        $('#' + scope.idW).removeClass('alert-info').addClass('alert-danger');
+                        $('#' + scope.idW).removeClass('alert-success alert-info').addClass('alert-danger');
                     }
                 }
                 function update() {
