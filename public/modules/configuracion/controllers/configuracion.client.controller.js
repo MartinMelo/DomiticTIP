@@ -6,6 +6,21 @@ app.controller('ConfiguracionController', ['$scope',
         $scope.pagina = 'modules/configuracion/views/informacion.client.view.html';
         this.menus = [
             {
+                nombre: 'Tareas Automaticas',
+                i: 'fa fa-calendar fa-2x',
+                colapseID:'Tareas-Automaticas-Child',
+                links: [
+                    {
+                        url: 'modules/tareas/views/list-tareas.client.view.html',
+                        span: 'Disponibles'
+                    },
+                    {
+                        url: 'modules/tareas/views/create-tarea.client.view.html',
+                        span: 'Agregar'
+                    }
+                ]
+            },
+            {
                 nombre: 'Climatización',
                 i: 'fa fa-sun-o fa-2x',
                 colapseID:'Climatizacion-Child',
