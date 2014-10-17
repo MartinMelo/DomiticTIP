@@ -89,6 +89,13 @@ io.sockets.on('connection', function (socket) {
     socket.on('controlador', function (data) {
         publicarEnArduino(data);
     });
+    socket.on('schedulear', function (data) {
+        io.sockets.emit('schedulear',
+            {'topic': data.topic,
+                'payload': data.payload
+            }
+        );
+    });
 });
 
 
