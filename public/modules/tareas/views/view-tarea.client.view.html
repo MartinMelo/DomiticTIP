@@ -1,9 +1,9 @@
-<section data-ng-controller="TareasController" data-ng-init="findOne()">
-	<div class="page-header">
+<section data-ng-controller="TareasController" data-ng-init="cargarUna()">
+	<div class="page-header text-center">
 		<h1 data-ng-bind="tarea.name"></h1>
 	</div>
 	<div class="pull-right" data-ng-show="authentication.user._id == tarea.user._id">
-		<a class="btn btn-primary" href="/#!/tareas/{{tarea._id}}/edit">
+		<a class="btn btn-primary" data-ng-click="editar('{{urlEdit}}')">
 			<i class="glyphicon glyphicon-edit"></i>
 		</a>
 		<a class="btn btn-primary" data-ng-click="remove();">

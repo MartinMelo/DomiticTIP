@@ -1,9 +1,9 @@
 <section data-ng-controller="TareasController" data-ng-init="find()">
-    <div class="page-header">
+    <div class="page-header text-center">
         <h1>Tareas</h1>
     </div>
     <div class="list-group">
-        <a data-ng-repeat="tarea in tareas" data-ng-href="#!/tareas/{{tarea._id}}" class="list-group-item">
+        <a data-ng-repeat="tarea in tareas" ng-click="cargar('{{urlView}}','{{tarea._id}}')" class="list-group-item">
 			<small class="list-group-item-text">
 				Posted on
 				<span data-ng-bind="tarea.created | date:'medium'"></span>
@@ -14,6 +14,6 @@
         </a>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!tareas.$resolved || tareas.length">
-    	No Tareas yet, why don't you <a href="/#!/tareas/create">create one</a>?
+        No hay ninguna Seccion creada, para crear una <a ng-click="cambiarPagina('{{urlCreate}}')">Presiona Aqui</a>.
     </div>
 </section>

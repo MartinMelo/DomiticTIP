@@ -1,27 +1,14 @@
 'use strict';
 
 // Tareas controller
-angular.module('tareas').controller('TareasController', ['$scope', '$stateParams', '$location', 'Authentication', 'Tareas',
-	function($scope, $stateParams, $location, Authentication, Tareas ) {
+angular.module('tareas').controller('TareasController', ['$scope', '$stateParams', 'Authentication', 'Tareas',
+	function($scope, $stateParams, Authentication, Tareas ) {
 		$scope.authentication = Authentication;
+        $scope.urlList = 'modules/tareas/views/list-tareas.client.view.html';
+        $scope.urlCreate = 'modules/tareas/views/create-tarea.client.view.html';
+        $scope.urlView = 'modules/tareas/views/view-tarea.client.view.html';
+        $scope.urlEdit = 'modules/tareas/views/edit-tarea.client.view.html';
 
-		// Create new Tarea
-		$scope.create = function() {
-			// Create new Tarea object
-			var tarea = new Tareas ({
-				name: this.name
-			});
-
-			// Redirect after save
-			tarea.$save(function(response) {
-				$location.path('tareas/' + response._id);
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-
-			// Clear form fields
-			this.name = '';
-		};
 
 		// Remove existing Tarea
 		$scope.remove = function( tarea ) {
@@ -34,7 +21,7 @@ angular.module('tareas').controller('TareasController', ['$scope', '$stateParams
 				}
 			} else {
 				$scope.tarea.$remove(function() {
-					$location.path('tareas');
+                    $scope.cambiarPagina($scope.urlList);
 				});
 			}
 		};
@@ -44,7 +31,7 @@ angular.module('tareas').controller('TareasController', ['$scope', '$stateParams
 			var tarea = $scope.tarea ;
 
 			tarea.$update(function() {
-				$location.path('tareas/' + tarea._id);
+                $scope.cambiarPagina($scope.urlList);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -61,5 +48,11 @@ angular.module('tareas').controller('TareasController', ['$scope', '$stateParams
 				tareaId: $stateParams.tareaId
 			});
 		};
+        // Find existing Seccion
+        $scope.cargarUna = function() {
+            $scope.tarea = Tareas.get({
+                tareaId: $scope.idView
+            });
+        };
 	}
 ]);
