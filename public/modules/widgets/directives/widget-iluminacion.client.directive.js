@@ -12,9 +12,10 @@ angular.module('widgets').directive('widgetIluminacion', ['ENV',
                 scope.encender = function(){
                     var ip = ENV.server +':3000';
                     var socket = io.connect(ip);
+                    var topico = attr.controlador;
                     var datos2 = '{id: '+scope.luz+' , estado: on}';
                     var mensaje = {
-                        topic: 'ard1',
+                        topic: topico,
                         payload:{
                             comando: 'accion',
                             destino: 'iluminacion',
@@ -26,9 +27,10 @@ angular.module('widgets').directive('widgetIluminacion', ['ENV',
                 scope.apagar = function(){
                     var ip = ENV.server +':3000';
                     var socket = io.connect(ip);
+                    var topico = attr.controlador;
                     var datos2 = '{id: '+scope.luz+' , estado: off}';
                     var mensaje = {
-                        topic: 'ard1',
+                        topic: topico,
                         payload:{
                             comando: 'accion',
                             destino: 'iluminacion',
