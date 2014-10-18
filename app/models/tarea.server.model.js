@@ -10,10 +10,10 @@ var mongoose = require('mongoose'),
  * Tarea Schema
  */
 var TareaSchema = new Schema({
-	name: {
+	nombre: {
 		type: String,
 		default: '',
-		required: 'Please fill Tarea name',
+		required: 'Porfavor ingresa un nombre para la tarea automatica.',
 		trim: true
 	},
 	created: {

@@ -29,7 +29,7 @@ describe('Tarea Model Unit Tests:', function() {
 
 		user.save(function() { 
 			tarea = new Tarea({
-				name: 'Tarea Name',
+				nombre: 'Tarea nombre',
 				user: user
 			});
 
@@ -45,8 +45,8 @@ describe('Tarea Model Unit Tests:', function() {
 			});
 		});
 
-		it('should be able to show an error when try to save without name', function(done) { 
-			tarea.name = '';
+		it('should be able to show an error when try to save without nombre', function(done) {
+			tarea.nombre = '';
 
 			return tarea.save(function(err) {
 				should.exist(err);
