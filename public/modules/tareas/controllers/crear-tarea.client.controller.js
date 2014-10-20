@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authentication', 'Tareas',
-	function($scope, Authentication, Tareas) {
+angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authentication', 'Tareas','ENV',
+	function($scope, Authentication, Tareas, ENV) {
         $scope.authentication = Authentication;
         $scope.urlList = 'modules/tareas/views/list-tareas.client.view.html';
 
@@ -20,7 +20,8 @@ angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authenti
 
         //Crea una nueva tarea.
         $scope.create = function() {
-            // Create new Tarea object
+            var fechaSelecciona = $scope.fecha;
+            //Creo la tarea y la guardo.
             var tarea = new Tareas ({
                 nombre: this.nombre,
                 datos: {
@@ -33,6 +34,7 @@ angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authenti
 
             // Redirect after save
             tarea.$save(function(response) {
+                $scope.publicarTarea(tarea);
                 $scope.cambiarPagina($scope.urlList);
             }, function(errorResponse) {
                 $scope.error = errorResponse.data.message;
@@ -45,6 +47,17 @@ angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authenti
             this.repetir = '';
             this.calendario= {};
             this.informacion= {};
+        };
+
+        //Publico la tarea para que el servicio que corre las tareas se haga cargo
+        $scope.publicarTarea = function(tarea){
+            var ip = ENV.server + ':3000';
+            var socket = io.connect(ip);
+            var mensaje = {
+                topic: 'nuevaTarea',
+                payload: tarea.datos
+            };
+            socket.emit('schedulear' , JSON.stringify(mensaje));
         };
 	}
 ]);

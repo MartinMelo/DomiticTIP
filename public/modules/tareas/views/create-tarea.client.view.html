@@ -9,14 +9,17 @@
                     <div class="controls">
                         <label class="control-label" for="nombre">Nombre</label>
                         <input type="text" data-ng-model="nombre" id="nombre" class="form-control" placeholder="Nombre" required>
-
+                        <label class="control-label" for="tipo">Tipo de tarea</label>
+                        <select ng-model="tipo" ng-options="tipo for tipo in tipos" id="tipo" required
+                                class="form-control"  title="Tipo">
+                        </select>
                         <div >
                             <label class="control-label" for="repetir">Repetir Tarea</label>
                             <input type="checkbox" data-ng-model="repetir" id="repetir">
 
                             <div ng-hide="repetir">
                                 Select de dias con las horas y la zaraza.
-                                <select data-ng-model="dia" ng-options="dia for dia in dias" id="dias" required
+                                <select ng-model="dia" ng-options="dia for dia in dias" id="dia" required
                                         class="form-control"  title="Dia">
                                 </select>
                             </div>
