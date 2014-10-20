@@ -1,6 +1,6 @@
 <section data-ng-controller="TareasController" data-ng-init="find()">
     <div class="page-header text-center">
-        <h1>Tareas</h1>
+        <h1>Tareas Automaticas</h1>
     </div>
     <div class="list-group">
         <a data-ng-repeat="tarea in tareas" ng-click="cargar('{{urlView}}','{{tarea._id}}')" class="list-group-item">
@@ -14,6 +14,6 @@
         </a>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!tareas.$resolved || tareas.length">
-        No hay ninguna Seccion creada, para crear una <a ng-click="cambiarPagina('{{urlCreate}}')">Presiona Aqui</a>.
+        No hay ninguna Tarea Automatica creada, para crear una <a ng-click="cambiarPagina('{{urlCreate}}')">Presiona Aqui</a>.
     </div>
 </section>

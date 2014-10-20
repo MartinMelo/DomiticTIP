@@ -5,11 +5,30 @@ angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authenti
         $scope.authentication = Authentication;
         $scope.urlList = 'modules/tareas/views/list-tareas.client.view.html';
 
-        // Create new Tarea
+        ////////////////Datos para completar el formulario/////////////////////////////////////
+
+        //Seleccion de dia para tarea individual
+        $scope.dia = 'Lunes';
+        $scope.dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
+        //tipos de tareas automaticas
+        $scope.tipo = 'Iluminacion';
+        $scope.tipos = ['Iluminacion'];
+        //configuracion del calendario
+        $scope.mindate = Date.now();
+        $scope.fecha = $scope.mindate;
+
+
+        //Crea una nueva tarea.
         $scope.create = function() {
             // Create new Tarea object
             var tarea = new Tareas ({
-                name: this.name
+                nombre: this.nombre,
+                datos: {
+                    tipo: this.tipo,
+                    repetir: this.repetir,
+                    calendario: this.calendario,
+                    informacion: this.informacion
+                }
             });
 
             // Redirect after save
@@ -20,7 +39,12 @@ angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authenti
             });
 
             // Clear form fields
-            this.name = '';
+            this.nombre = '';
+            this.datos = {};
+            this.tipo ='';
+            this.repetir = '';
+            this.calendario= {};
+            this.informacion= {};
         };
 	}
 ]);
