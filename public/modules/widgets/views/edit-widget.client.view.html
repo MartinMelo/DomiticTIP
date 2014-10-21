@@ -14,10 +14,12 @@
                     <select data-ng-model="widget.seccion" ng-options="seccion.nombre for seccion in secciones track by seccion" id="seccion" required
                             class="form-control" placeholder="Seccion" title="Seccion">
                     </select>
+                    <span> Seccion Actual: <h4>{{widget.seccion}}</h4></span>
                     <label class="control-label" for="dispositivo">Dispositivo</label>
                     <select data-ng-model="widget.dispositivo" ng-options="dispositivo.controlador for dispositivos in dispositivos" id="dispositivo" required
                             class="form-control" ng-init="widget.dispositivo">
                     </select>
+                    <span> Dispositivo Actual: <h4>{{widget.attrs.controlador}}</h4></span>
                     <label class="tipoWidget">Tipo De Widget</label>
                     <div class="row separadoArriba text-center">
                         <div class="col-md-4">
@@ -35,10 +37,12 @@
                             </div>
                         </div>
                     </div>
+                    <span> Tipo Actual: <h4>{{widget.name}}</h4></span>
                     <label class="control-label" for="topico">Sensor<span id="sens"></span></label>
                     <select data-ng-model="topico" id="topico" required class="form-control" title="Sensor">
                         <option value="Seleccione Un Sensor">Seleccione Un Sensor</option>
                     </select>
+                    <span> Sensor Actual: <h4>{{widget.attrs.topico}}</h4></span>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-default">
