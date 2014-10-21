@@ -3,13 +3,19 @@
 angular.module('widgets').controller('EditarWidgetController', ['$scope', '$http', 'Widgets','Authentication',
 	function($scope, $http, Widgets, Authentication) {
         $scope.authentication = Authentication;
+        $scope.urlList = 'modules/widgets/views/list-widgets.client.view.html';
         // Update existing Widget
         $scope.update = function() {
             var widget = $scope.widget ;
+            widget.attrs.topico = this.topico;
+            widget.attrs.value = widget.title.replace(/\s+/g, '_');
+            widget.attrs.controlador = this.dispositivo.controlador;
+            widget.name = this.name;
+            widget.seccion = this.seccion.nombre;
 
             widget.$update(function() {
                 $scope.idView = widget._id;
-                $scope.cambiarPagina($scope.urlView);
+                $scope.cambiarPagina($scope.urlList);
             }, function(errorResponse) {
                 $scope.error = errorResponse.data.message;
             });
@@ -20,21 +26,23 @@ angular.module('widgets').controller('EditarWidgetController', ['$scope', '$http
             $scope.widget = Widgets.get({
                 widgetId: $scope.idView
             });
-            $scope.seccion = $scope.widget.seccion;
         };
+
 
         //Creacion de un widgets
         $scope.secciones = [];
         var querySecciones = '{"user": "'+ $scope.authentication.user._id+'"}';
         $http.get('/seccions/query/' + querySecciones).success(function(data){
             $scope.secciones = data;
+            $scope.seccion = data[0];
         });
         $scope.dispositivos = [];
         $http.get('/dispositivos').success(function(data){
-            $scope.dispositivo = data[0];
             $scope.dispositivos = data;
+            $scope.dispositivo = data[0];
         });
 
+        $scope.topico = 'Seleccione Un Sensor';
         /**
          * Para hacer el query al controlador.
          */

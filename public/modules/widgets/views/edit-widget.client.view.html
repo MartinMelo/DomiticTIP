@@ -11,12 +11,12 @@
                         <input type="text" data-ng-model="widget.title" id="title" class="form-control" placeholder="Title" required>
                     </div>
                     <label class="control-label" for="seccion">Seccion</label>
-                    <select data-ng-model="widget.seccion" ng-options="seccion.nombre for seccion in secciones track by seccion" id="seccion" required
+                    <select data-ng-model="seccion" ng-options="seccion.nombre for seccion in secciones" id="seccion" required
                             class="form-control" placeholder="Seccion" title="Seccion">
                     </select>
                     <span> Seccion Actual: <h4>{{widget.seccion}}</h4></span>
                     <label class="control-label" for="dispositivo">Dispositivo</label>
-                    <select data-ng-model="widget.dispositivo" ng-options="dispositivo.controlador for dispositivos in dispositivos" id="dispositivo" required
+                    <select data-ng-model="dispositivo" ng-options="dispositivo.controlador for dispositivos in dispositivos" id="dispositivo" required
                             class="form-control" ng-init="widget.dispositivo">
                     </select>
                     <span> Dispositivo Actual: <h4>{{widget.attrs.controlador}}</h4></span>
@@ -39,10 +39,10 @@
                     </div>
                     <span> Tipo Actual: <h4>{{widget.name}}</h4></span>
                     <label class="control-label" for="topico">Sensor<span id="sens"></span></label>
-                    <select data-ng-model="topico" id="topico" required class="form-control" title="Sensor">
+                    <select ng-model="topico" id="topico" required class="form-control" title="Sensor">
                         <option value="Seleccione Un Sensor">Seleccione Un Sensor</option>
                     </select>
-                    <span> Sensor Actual: <h4>{{widget.attrs.topico}}</h4></span>
+                    <span> Sensor Actual: <h4>{{widget.attrs.topico.split('/')[1]}}</h4></span>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-default">
