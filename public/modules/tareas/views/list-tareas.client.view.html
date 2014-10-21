@@ -4,13 +4,17 @@
     </div>
     <div class="list-group">
         <a data-ng-repeat="tarea in tareas" ng-click="cargar('{{urlView}}','{{tarea._id}}')" class="list-group-item">
+            Nombre: <h4 class="list-group-item-heading" data-ng-bind="tarea.nombre"></h4>
+            Fecha: <h4 class="list-group-item-heading" data-ng-bind="tarea.datos.calendario"></h4>
+            Tipo: <h4 class="list-group-item-heading" data-ng-bind="tarea.datos.tipo"></h4>
+            Accion: <h4 class="list-group-item-heading" data-ng-bind="tarea.datos.informacion"></h4>
 			<small class="list-group-item-text">
-				Posted on
+				Creado:
 				<span data-ng-bind="tarea.created | date:'medium'"></span>
-				by
+				por
 				<span data-ng-bind="tarea.user.displayName"></span>
 			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="tarea.name"></h4>
+
         </a>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!tareas.$resolved || tareas.length">

@@ -11,13 +11,21 @@ angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authenti
         $scope.dia = 'Lunes';
         $scope.dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
         //tipos de tareas automaticas
-        $scope.tipo = 'Iluminacion';
-        $scope.tipos = ['Iluminacion'];
+        $scope.tipo = 'Seleccione un tipo de tarea';
+        $scope.tipos = ['Seleccione un tipo de tarea','Iluminacion'];
         //configuracion del calendario
         $scope.mindate = Date.now();
-        //$scope.fecha = $scope.mindate;
 
-        $scope.informacion = 'on';
+        //Agrego los tipos de acciones segun el tipo seleccionado.
+        $scope.accion = 'Seleccione una accion';
+        $scope.acciones=['Seleccione una accion'];
+        $scope.cargarAcciones = function(){
+            if($scope.tipo === 'Iluminacion'){
+                $scope.acciones = ['Encender', 'Apagar'];
+                $scope.accion = $scope.acciones[0];
+            }
+        };
+
         //Crea una nueva tarea.
         $scope.create = function() {
             var fechaSelecciona = $scope.fecha;
@@ -28,7 +36,7 @@ angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authenti
                     tipo: this.tipo,
                     repetir: this.repetir,
                     calendario: this.fecha,
-                    informacion: this.informacion
+                    informacion: this.accion
                 }
             });
 
