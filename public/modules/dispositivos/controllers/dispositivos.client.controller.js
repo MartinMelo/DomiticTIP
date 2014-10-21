@@ -54,7 +54,7 @@ angular.module('dispositivos').controller('DispositivosController', ['$scope', '
 		// Update existing Dispositivo
 		$scope.update = function() {
 			var dispositivo = $scope.dispositivo ;
-
+            dispositivo.controlador = $scope.controlador;
 			dispositivo.$update(function() {
                 $scope.cambiarPagina($scope.urlList);
 			}, function(errorResponse) {
