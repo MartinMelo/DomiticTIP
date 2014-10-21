@@ -90,9 +90,10 @@ io.sockets.on('connection', function (socket) {
         publicarEnArduino(data);
     });
     socket.on('schedulear', function (data) {
+        var json = JSON.parse(data);
         io.sockets.emit('schedulear',
-            {'topic': data.topic,
-                'payload': data.payload
+            {'topic': json.topic,
+                'payload': json.payload
             }
         );
     });

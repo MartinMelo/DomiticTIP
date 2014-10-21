@@ -15,9 +15,9 @@ angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authenti
         $scope.tipos = ['Iluminacion'];
         //configuracion del calendario
         $scope.mindate = Date.now();
-        $scope.fecha = $scope.mindate;
+        //$scope.fecha = $scope.mindate;
 
-
+        $scope.informacion = 'on';
         //Crea una nueva tarea.
         $scope.create = function() {
             var fechaSelecciona = $scope.fecha;
@@ -27,7 +27,7 @@ angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authenti
                 datos: {
                     tipo: this.tipo,
                     repetir: this.repetir,
-                    calendario: this.calendario,
+                    calendario: this.fecha,
                     informacion: this.informacion
                 }
             });
@@ -55,7 +55,7 @@ angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authenti
             var socket = io.connect(ip);
             var mensaje = {
                 topic: 'nuevaTarea',
-                payload: tarea.datos
+                payload: tarea
             };
             socket.emit('schedulear' , JSON.stringify(mensaje));
         };

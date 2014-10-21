@@ -6,22 +6,34 @@
 var socket = require('socket.io-client')('http://localhost:3000');
 var schedule = require('node-schedule');
 
+/*
+*Es la lista donde van a estar las tareas que se ponen a correr cada vez que
+* se ejecute el servidor o cada vez que se cree una tarea nueva.
+ * De modo que se puedan cancelar mas facil.
+*/
+var tareasACorrer = [];
 socket.on('schedulear', function (data) {
-    var json = data.payload;
-    console.log(json);
-    crearTask(json);
+    crearTask(data.payload);
 });
 function crearTask(json){
-    var rule = new schedule.RecurrenceRule();
-    rule.minute = json.minuto;
-    //rule.hour = json.dia;
-    var luz = json.luz;
-    var estado = json.estado;
-    var topico = json.topico;
+    var repetir = json.datos.repetir;
+    var fecha = json.datos.calendario;
+    var anio = fecha.substring(0, 4);
+    var mes = fecha.substring(5, 7);
+    var dia = fecha.substring(8, 10);
+    var hora= 22;
+    var minutos= 00;
 
+    var rule = new schedule.RecurrenceRule();
+    rule.year = anio;
+    rule.month = mes;
+    rule.date = dia;
+    rule.hour = hora;
+    rule.minute = minutos;
+    console.log(rule);
     var j = schedule.scheduleJob(rule, function(){
         console.log('Scheduled Task Running');
-        accionesLuces(luz, estado,topico);
+        //ccionesLuces(luz, estado,topico);
     });
 }
 
