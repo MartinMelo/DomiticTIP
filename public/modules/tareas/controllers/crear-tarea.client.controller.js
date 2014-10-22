@@ -41,15 +41,8 @@ angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authenti
         $scope.topicos= [{'nombre': 'seleccione un Sensor' , 'topico': 'untopico'}];
         $scope.iluminacionSelect = function(){
             $('#topico').empty();
+            $('#sens').addClass('fa fa-refresh fa-lg fa-spin');
             $scope.pedirExponerServiciosDe('luz');
-        };
-        $scope.temperaturaSelect = function(){
-            $('#topico').empty();
-            $scope.pedirExponerServiciosDe('sensor');
-        };
-        $scope.aperturaSelect = function(){
-            $('#topico').empty();
-            $scope.pedirExponerServiciosDe('sensor');
         };
         var ip = ENV.server + ':3000';
         var socket = io.connect(ip);
