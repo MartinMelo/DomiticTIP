@@ -12,33 +12,32 @@ var schedule = require('node-schedule');
  * De modo que se puedan cancelar mas facil.
 */
 var tareasACorrer = [];
+socket.emit('subscribe', {topic : 'schedulear'});
 socket.on('schedulear', function (data) {
     crearTask(data.payload);
+    console.log('Task Created');
 });
 function crearTask(json){
     var repetir = json.datos.repetir;
     var fecha = json.datos.calendario;
-    var anio = fecha.substring(0, 4);
-    var mes = fecha.substring(5, 7);
-    var dia = fecha.substring(8, 10);
-    var hora= 22;
-    var minutos= 00;
 
-    var rule = new schedule.RecurrenceRule();
-    rule.year = anio;
-    rule.month = mes;
-    rule.date = dia;
-    rule.hour = hora;
-    rule.minute = minutos;
-    console.log(rule);
-    var j = schedule.scheduleJob(rule, function(){
-        console.log('Scheduled Task Running');
-        //ccionesLuces(luz, estado,topico);
+    var j = schedule.scheduleJob(fecha, function(){
+        var topico = json.datos.controlador;
+        var luz = json.datos.topico;
+        var estado = json.datos.informacion;
+        console.log('Ejecutando Tarea: ' + json.nombre);
+        console.log(json.datos);
+        accionesLuces(luz, estado,topico);
+        console.log('Tarea Finalizada: ' + json.nombre);
     });
 }
 
 function accionesLuces(numero, estado, topico){
-    var datos2 = '{id: '+numero+' , estado: '+estado+'}';
+    var cambiar= 'off';
+    if(estado === 'Encender'){
+        cambiar= 'on';
+    }
+    var datos2 = '{id: '+numero+' , estado: '+cambiar+'}';
     var mensaje = {
         topic: topico,
         payload:{

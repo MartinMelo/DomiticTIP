@@ -14,16 +14,26 @@
                                 class="form-control"  title="Tipo" ng-change="cargarAcciones()">
                             <option value="Seleccione">Seleccion un tipo de tarea</option>
                         </select>
-                        <div >
-                            <label class="control-label" for="repetir">Repetir Tarea</label>
-                            <input type="checkbox" data-ng-model="repetir" id="repetir">
-                            <div datepicker="asf" ng-model="fecha" class="calendario" min-date="mindate"></div>
-                            <label class="control-label" for="accion">Accion a Realizar</label>
-                            <select ng-model="accion" ng-options="accion for accion in acciones" id="accion" required
-                                    class="form-control"  title="Tipo">
-                                <option value="Seleccione">Seleccione una accion</option>
-                            </select>
-                        </div>
+                        <label class="control-label" for="accion">Accion a Realizar</label>
+                        <select ng-model="accion" ng-options="accion for accion in acciones" id="accion" required
+                                class="form-control"  title="Tipo">
+                            <option value="Seleccione">Seleccione una accion</option>
+                        </select>
+                        <label class="control-label" for="dispositivo">Dispositivo</label>
+                        <select data-ng-model="dispositivo" ng-options="dispositivo.controlador for dispositivos in dispositivos" id="dispositivo" required
+                                class="form-control" ng-init="dispositivo = dispositivos[0]">
+                        </select>
+                        <label class="control-label" for="topico">Sensor<span id="sens"></span></label>
+                        <select data-ng-model="topico" id="topico" required class="form-control" title="Sensor">
+                            <option value="Seleccione Un Sensor">Seleccione Un Sensor</option>
+                        </select>
+                        <label class="control-label" for="repetir">Repetir Tarea</label>
+                        <input type="checkbox" data-ng-model="repetir" id="repetir">
+                        <div datepicker="asf" ng-model="fecha" class="calendario" min-date="mindate"></div>
+                        <label class="control-label" for="hora">Hora</label>
+                        <input type="number" max="24" min="0" data-ng-model="hora" id="hora">
+                        <label class="control-label" for="minutos">Minutos</label>
+                        <input type="number" max="60" min="0" data-ng-model="minutos" id="minutos">
                     </div>
                 </div>
                 <div class="form-group">

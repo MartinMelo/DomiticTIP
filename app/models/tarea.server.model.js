@@ -39,6 +39,18 @@ var TareaSchema = new Schema({
             default: {},
             required: 'No se generaron los datos de la tarea.',
             trim: false
+        },
+        topico:{
+            type: Object,
+            default: {},
+            required: 'No se generaron los datos de la tarea.',
+            trim: false
+        },
+        controlador:{
+            type: Object,
+            default: {},
+            required: 'No se generaron los datos de la tarea.',
+            trim: false
         }
 	},
 	created: {
