@@ -41,7 +41,7 @@ app.directive('widgetTemperatura', ['$interval','ENV',
                 var promise = $interval(update, 5000);
 
                 scope.$on('$destroy', function () {
-                    socket.emit('unsubscribe', {topic : attr.topico});
+                    socket.removeAllListeners('resp/'+attr.topico);
                     $interval.cancel(promise);
                 });
             }

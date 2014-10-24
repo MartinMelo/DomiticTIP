@@ -52,7 +52,11 @@ app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Aut
         };
 	}
 ]);
-app.controller('WidgetsInicioController',function ($scope, $interval, $http) {
+app.controller('WidgetsInicioController',function ($scope, $interval, $http,ENV) {
+
+
+    var ip = ENV.server +':3000';
+    var socket = io.connect(ip);
     /**
      * La definicion de los widgets por defecto.
      * Esta cambia cuando se cargan de la base de datos.
@@ -138,6 +142,7 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http) {
      * @param seccion
      */
     $scope.cambiarSeccion = function(seccion){
+        socket.removeAllListeners();
         $scope.seccion = seccion;
         var parametros = '{"seccion":"'+ seccion +'", "user": "'+ $scope.authentication.user._id+'"}';
         $http.get('/widgets/query/' + parametros).success(function(data){

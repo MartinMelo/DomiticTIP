@@ -111,7 +111,9 @@ angular.module('dispositivos').controller('DispositivosController', ['$scope', '
             };
             socket.emit('controlador', JSON.stringify(mensaje));
         };
-
+        $scope.$on("$destroy", function() {
+            socket.removeAllListeners('resp/discover');
+        });
 
 	}
 ]);

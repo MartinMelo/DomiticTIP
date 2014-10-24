@@ -87,7 +87,6 @@ app.controller('ConfiguracionController', ['$scope',
             $scope.cambiarPagina('modules/configuracion/views/informacion.client.view.html');
         };
         $scope.cambiarPagina = function(url){
-            io.connect('http://localhost:3000').removeAllListeners('resp/discover');
             $scope.pagina = url;
         };
         this.expandirPanel = function(nombreUL){

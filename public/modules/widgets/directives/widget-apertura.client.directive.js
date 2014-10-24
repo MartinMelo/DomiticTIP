@@ -52,7 +52,7 @@ angular.module('widgets').directive('widgetApertura', ['$interval','ENV',
                 var promise = $interval(update, 2000);
 
                 scope.$on('$destroy', function () {
-                    socket.emit('unsubscribe', {topic : 'resp/' + attr.topico});
+                    socket.removeAllListeners('resp/'+attr.topico);
                     $interval.cancel(promise);
                 });
             }

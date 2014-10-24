@@ -4,9 +4,7 @@ angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authenti
 	function($scope, Authentication, Tareas, ENV , $http) {
         $scope.authentication = Authentication;
         $scope.urlList = 'modules/tareas/views/list-tareas.client.view.html';
-
         ////////////////Datos para completar el formulario/////////////////////////////////////
-
         //Seleccion de dia para tarea individual
         $scope.dia = 'Lunes';
         $scope.dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
@@ -39,6 +37,7 @@ angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authenti
 
         //Pedir servicios para el tipo de Widget seleccionado.
         $scope.topicos= [{'nombre': 'seleccione un Sensor' , 'topico': 'untopico'}];
+        $scope.topico= $scope.topicos[{'nombre': 'seleccione un Sensor' , 'topico': 'untopico'}];
         $scope.iluminacionSelect = function(){
             $('#topico').empty();
             $('#sens').addClass('fa fa-refresh fa-lg fa-spin');
@@ -133,5 +132,9 @@ angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authenti
             };
             socket.emit('schedulear' , JSON.stringify(mensaje));
         };
+        $scope.$on("$destroy", function() {
+            console.log('Se destruyo el Scope: '+ $scope.$id);
+            socket.removeAllListeners('resp/discover');
+        });
 	}
 ]);
