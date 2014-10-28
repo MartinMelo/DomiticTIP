@@ -50,7 +50,8 @@ module.exports = {
                 'public/lib/ngDialog/js/ngDialog.js',
                 'public/lib/later/later.js',
                 'public/lib/schedule/schedule.js',
-                'public/config_env.js'
+                'public/config_env.js',
+                'public/lib/angular-bootstrap/ui-bootstrap-tpls.js'
 
 			]
 		},
