@@ -1,7 +1,54 @@
 <section data-ng-controller="InformacionController as infCtrl">
-	<div class="text-center">
-    Aca va la info de que pasos seguir para poder configurar el sistema.
-
-    COMPLETAR
+    <div class="descripcion">
+        <span class="textoGrande">
+            Para el correcto funcionamiento de la aplicación sera necesario realizar los siguientes pasos:
+        </span>
     </div>
+    <div class="row">
+        <div class="col-md-8 text-center">
+            <h3>Agregar una sección</h3>
+            <div class="explicacion">
+                zaraza
+            </div>
+            <div class="link">
+                <a href ng-click="cambiarPagina('modules/seccions/views/create-seccion.client.view.html')">
+                    <i class='fa fa-sitemap fa-2x'></i>
+                    <span>Agregar Sección</span>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-8 text-center">
+            <h3>Agregar un dispositivo</h3>
+            <div class="explicacion">
+                zaraza
+            </div>
+            <div class="link">
+                <a href ng-click="cambiarPagina('modules/dispositivos/views/create-dispositivo.client.view.html')">
+                    <i class='fa fa-upload fa-2x'></i>
+                    <span>Agregar Dispositivo</span>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-8 text-center">
+            <h3>Agregar un Widget</h3>
+            <div class="explicacion">
+                zaraza
+            </div>
+            <div class="link">
+                <a href ng-click="cambiarPagina('modules/widgets/views/create-widget.client.view.html')">
+                    <i class='fa fa-tasks fa-2x'></i>
+                    <span>Agregar Widget</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <style>
+        .descripcion{
+            margin-top: 3%;
+        }
+        .textoGrande{
+            font-size: 18px;
+            color: #4682b4;
+        }
+    </style>
 </section>
