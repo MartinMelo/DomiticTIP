@@ -71,17 +71,23 @@ var TareaSchema = new Schema({
     }
 });
 
-mongoose.model('Tarea', TareaSchema);
+var Tarea = mongoose.model('Tarea', TareaSchema);
 
 var socket = require('socket.io-client')('http://localhost:3000');
 var schedule = require('node-schedule');
 
 function cargarTareasQueEstanEnDB(){
     console.info('Cargando Tareas Guardadas en DB');
-
+    var tareas = Tarea.find();
+    tareas.exec(cargaron);
+}
+function cargaron(err,lista){
+    console.log('Cantidad de tareas a cargar: ' + lista.length);
+    for(var i=0; i<lista.length;i++){
+        crearTask(lista[i]);
+    }
     console.info('Todas las tareas se cargaron');
 }
-
 cargarTareasQueEstanEnDB();
 /*
 *Es la lista donde van a estar las tareas que se ponen a correr cada vez que
