@@ -1,8 +1,8 @@
-<section data-ng-controller="WidgetsInicioController as wgtCrtrl" class="container">
-    <div ng-show="secciones.empty()">
+<section data-ng-controller="WidgetsInicioController as wgtCrtrl" class="container" data-ng-init="cargarDashBoard()">
+    <div ng-show="noHaySecciones">
         <configurar></configurar>
     </div>
-    <div class="row" ng-hide="secciones.empty()">
+    <div class="row" ng-hide="noHaySecciones">
         <div>
             <ul class="nav nav-tabs" role="tablist">
                 <li ng-repeat="sec in secciones" ng-class="{ active:wgtCrtrl.isSelected('{{sec.nombre}}')}">

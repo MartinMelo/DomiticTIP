@@ -127,16 +127,36 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http,ENV)
         hideWidgetClose: true,
         hideWidgetSettings: true
     };
+
+    //La inicio vacia.
+    $scope.secciones = [];
+
+    /**
+     * Carga el Dashboard del usuario.
+     */
+    $scope.cargarDashBoard = function(){
+      if(!$scope.noEstaLogueado){
+          $scope.cargarSecciones();
+      }
+    };
     /**
      * Cargo la lista de secciones
      */
-    $scope.secciones = [];
-    var querySecciones = '{"user": "'+ $scope.authentication.user._id+'"}';
-    $http.get('/seccions/query/' + querySecciones).success(function(data){
-        $scope.seccion= data[0].nombre;
-        $scope.secciones= data;
-        $scope.cambiarSeccion(data[0].nombre);
-    });
+    $scope.cargarSecciones = function(){
+        var querySecciones = '{"user": "'+ $scope.authentication.user._id+'"}';
+        $http.get('/seccions/query/' + querySecciones).success(function(data) {
+            if (data.length >0) {
+                $scope.noHaySecciones = false;
+                $scope.seccion = data[0].nombre;
+                $scope.secciones = data;
+                $scope.cambiarSeccion(data[0].nombre);
+            }else{
+                $scope.noHaySecciones = true;
+            }
+        });
+    };
+
+
     /**
      * Carga los widgets de la seccion seleccionada.
      * @param seccion
@@ -153,6 +173,5 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http,ENV)
     this.isSelected = function(nombre){
         return $scope.seccion === nombre;
     };
-
 });
 
