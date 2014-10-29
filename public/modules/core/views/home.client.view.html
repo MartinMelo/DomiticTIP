@@ -1,18 +1,18 @@
 <section data-ng-controller="HomeController as home">
-    <div ng-show="noEstaLogueado" class="container text-center">
-        <span>
+    <div ng-show="noEstaLogueado" class="container text-center separado">
+        <span class="textoGrande">
             No estas logueado, para hacerlo presiona el link "Login".
         </span>
-        <div  class="links">
+        <div  class="separado">
             <a href="/#!/signin" class="link">
                 <i class="fa fa-sign-in fa-2x"></i>
                 <h3>Login</h3>
             </a>
         </div>
-        <span>
+        <span class="textoGrande separado">
             Si aun no te registrastes, puedes hacerlo presionando el link "Registrarme"
         </span>
-        <div  class="links">
+        <div  class="separado">
             <a href="/#!/signup">
                 <i class="fa fa-external-link fa-2x"></i>
                 <h3>Registrarme</h3>
@@ -24,8 +24,11 @@
         <widgets-inicio></widgets-inicio>
     </div>
     <style>
-        .links{
+        .separado{
             margin-top: 4%;
+        }
+        .textoGrande{
+            font-size: 18px;
         }
     </style>
 </section>
