@@ -1,6 +1,6 @@
-<section data-ng-controller="ClimatizacionsController">
+<section data-ng-controller="CrearClimatizacionController">
     <div class="page-header">
-        <h1>Crear Configuracion</h1>
+        <h1>Crear Configuracion de climatización</h1>
     </div>
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="create()" novalidate>
@@ -11,6 +11,20 @@
                         <input type="text" data-ng-model="nombre" id="nombre" class="form-control" placeholder="Nombre" required>
                         <label class="control-label" for="temperatura">Temperatura</label>
                         <input type="number" data-ng-model="temperatura" data-ng-init="temperatura=24" id="temperatura" class="form-control" placeholder="Temperatura" required>
+                        <label class="control-label" for="forma">Forma</label>
+                        <select data-ng-model="forma" id="forma" required class="form-control" title="Forma">
+                            <option value=">">Mayor A</option>
+                            <option value="<">Menor A</option>
+                        </select>
+                        <label class="control-label" for="dispositivo">Dispositivo</label>
+                        <select data-ng-model="dispositivo" id="dispositivo" required
+                                class="form-control" ng-change="controladorSelecionado()">
+                            <option value="Seleccione Un Dispositivo">Seleccione Un Dispositivo</option>
+                        </select>
+                        <label class="control-label" for="topico">Sensor<span id="sens"></span></label>
+                        <select data-ng-model="topico" id="topico" required class="form-control" title="Sensor">
+                            <option value="Seleccione Un Sensor">Seleccione Un Sensor</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group">

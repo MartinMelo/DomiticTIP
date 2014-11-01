@@ -7,27 +7,7 @@ angular.module('climatizacions').controller('ClimatizacionsController', ['$scope
         $scope.urlView = 'modules/climatizacions/views/view-climatizacion.client.view.html';
         $scope.urlCreate = 'modules/climatizacions/views/create-climatizacion.client.view.html';
         $scope.urlEdit = 'modules/climatizacions/views/edit-climatizacion.client.view.html';
-		$scope.authentication = Authentication;
-
-		// Create new Climatizacion
-		$scope.create = function() {
-			// Create new Climatizacion object
-			var climatizacion = new Climatizacions ({
-                nombre: this.nombre,
-                temperatura: this.temperatura
-			});
-
-			// Redirect after save
-			climatizacion.$save(function(response) {
-                $scope.cambiarPagina($scope.urlList);
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-
-			// Clear form fields
-			this.nombre = '';
-			this.temperatura = '';
-		};
+        $scope.authentication = Authentication;
 
 		// Remove existing Climatizacion
 		$scope.remove = function( climatizacion ) {

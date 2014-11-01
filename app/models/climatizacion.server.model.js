@@ -21,6 +21,23 @@ var ClimatizacionSchema = new Schema({
 		default: 24,
 		required: 'Por Favor ingrese la temperatura'
 	},
+    forma: {
+		type: String,
+		default: '>',
+		required: 'Por Favor ingrese la Forma'
+	},
+    controlador: {
+        type: String,
+        default: '',
+        required: 'Por favor selecciona un controlador',
+        trim: true
+    },
+    topico: {
+        type: String,
+        default: '',
+        required: 'Por favor selecciona un sensor',
+        trim: true
+    },
 	created: {
 		type: Date,
 		default: Date.now
