@@ -36,7 +36,7 @@
     "method-override": "~1.0.0",
     "mongoose": "~3.8.8",
     "morgan": "~1.1.0",
-    "mosca": "0.22.0",
+    "mosca": "0.25.1",
     "mqtt": "0.3.11",
     "node-schedule": "^0.1.13",
     "passport": "~0.2.0",
