@@ -100,19 +100,26 @@ socket.on('schedulear', function (data) {
     crearTask(data.payload);
     console.log('Task Created');
 });
+socket.on('eliminarTarea', function (id) {
+    for(var i=0; i<tareasACorrer.length;i++){
+        if(tareasACorrer[i].id === id){
+            tareasACorrer[i].cancel();
+        }
+    }
+    console.log('Tarea Cancelada');
+});
 function crearTask(json){
     var repetir = json.datos.repetir;
     var fecha = json.datos.calendario;
-
     var j = schedule.scheduleJob(fecha, function(){
         var topico = json.datos.controlador;
         var luz = json.datos.topico;
         var estado = json.datos.informacion;
         console.log('Ejecutando Tarea: ' + json.nombre);
-        console.log(json.datos);
         accionesLuces(luz, estado,topico);
         console.log('Tarea Finalizada: ' + json.nombre);
     });
+    tareasACorrer.push({id:json._id ,tarea:j})
 }
 
 function accionesLuces(numero, estado, topico){
