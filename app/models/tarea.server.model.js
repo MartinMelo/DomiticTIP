@@ -48,6 +48,10 @@ var TareaSchema = new Schema({
             trim: false
         }
 	},
+    usada:{
+      type: Boolean,
+      default: false
+    },
 	created: {
 		type: Date,
 		default: Date.now

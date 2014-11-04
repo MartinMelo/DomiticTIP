@@ -56,6 +56,10 @@ var TareaSchema = new Schema({
             trim: false
         }
     },
+    usada:{
+        type: Boolean,
+        default: false
+    },
     created: {
         type: Date,
         default: Date.now
@@ -73,13 +77,16 @@ var schedule = require('node-schedule');
 
 function cargarTareasQueEstanEnDB(){
     console.info('Cargando Tareas Guardadas en DB');
-    var tareas = Tarea.find();
+    var tareas = Tarea.find({usada: false});
     tareas.exec(cargaron);
 }
 function cargaron(err,lista){
-    console.log('Cantidad de tareas a cargar: ' + lista.length);
+    console.log('Cantidad de tareas a Crear: ' + lista.length);
     for(var i=0; i<lista.length;i++){
-        crearTask(lista[i]);
+        var tarea = lista[i];
+        if(!tarea.usada) {
+            crearTask(tarea);
+        }
     }
     console.info('Todas las tareas se cargaron');
 }
@@ -113,7 +120,7 @@ function crearTask(json){
         console.log('Ejecutando Tarea: ' + json.nombre);
         accionesLuces(luz, estado,topico);
         console.log('Tarea Finalizada: ' + json.nombre);
-        json.remove();
+        marcarTareaComoUtilizada(json._id);
     });
     tareasACorrer.push({id:json._id ,tarea:j})
 }
@@ -133,4 +140,8 @@ function accionesLuces(numero, estado, topico){
         }
     };
     socket.emit('controlador' , JSON.stringify(mensaje));
+}
+function marcarTareaComoUtilizada(id){
+    //var tarea = Tarea.findOne({ _id: id }).exec();
+    var query =Tarea.update({ _id: id }, {usada: true}).exec();
 }
