@@ -142,6 +142,5 @@ function accionesLuces(numero, estado, topico){
     socket.emit('controlador' , JSON.stringify(mensaje));
 }
 function marcarTareaComoUtilizada(id){
-    //var tarea = Tarea.findOne({ _id: id }).exec();
-    var query =Tarea.update({ _id: id }, {usada: true}).exec();
+    Tarea.update({ _id: id }, {usada: true}).exec();
 }
