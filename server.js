@@ -97,6 +97,14 @@ io.sockets.on('connection', function (socket) {
             }
         );
     });
+    socket.on('eliminarTarea', function (data) {
+        var json = JSON.parse(data);
+        io.sockets.emit('eliminarTarea',
+            {'topic': json.topic,
+                'payload': json.payload
+            }
+        );
+    });
 });
 
 

@@ -75,11 +75,19 @@ var Tarea = mongoose.model('Tarea', TareaSchema);
 var socket = require('socket.io-client')('http://localhost:3000');
 var schedule = require('node-schedule');
 
+/**
+ * Trae las tareas de la db y manda a cargar las que no fueron utilizadas.
+ */
 function cargarTareasQueEstanEnDB(){
     console.info('Cargando Tareas Guardadas en DB');
     var tareas = Tarea.find({usada: false});
     tareas.exec(cargaron);
 }
+/**
+ * Carga las tareas que no fueron utilizadas
+ * @param err
+ * @param lista
+ */
 function cargaron(err,lista){
     console.log('Cantidad de tareas a Crear: ' + lista.length);
     for(var i=0; i<lista.length;i++){
@@ -98,15 +106,17 @@ cargarTareasQueEstanEnDB();
 */
 var tareasACorrer = [];
 socket.emit('subscribe', {topic : 'schedulear'});
+socket.emit('subscribe', {topic : 'eliminarTarea'});
 socket.on('schedulear', function (data) {
     crearTask(data.payload);
     console.log('Task Created');
 });
-socket.on('eliminarTarea', function (id) {
+socket.on('eliminarTarea', function (data) {
+    var id = data.payload.id;
     for(var i=0; i<tareasACorrer.length;i++){
         if(tareasACorrer[i].id === id){
-            tareasACorrer[i].cancel();
-            tareasACorrer[i].remove();
+            tareasACorrer[i].tarea.cancel();
+            delete tareasACorrer[i];
         }
     }
     console.log('Tarea Cancelada');
@@ -141,6 +151,10 @@ function accionesLuces(numero, estado, topico){
     };
     socket.emit('controlador' , JSON.stringify(mensaje));
 }
+/**
+ * Marca la tarea como Usada para que no se vuelva a intentar crearla nuevamente.
+ * @param id
+ */
 function marcarTareaComoUtilizada(id){
     Tarea.update({ _id: id }, {usada: true}).exec();
 }

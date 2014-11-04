@@ -1,8 +1,8 @@
 'use strict';
 
 // Tareas controller
-angular.module('tareas').controller('TareasController', ['$scope', '$stateParams', 'Authentication', 'Tareas',
-	function($scope, $stateParams, Authentication, Tareas ) {
+angular.module('tareas').controller('TareasController', ['$scope', '$stateParams', 'Authentication', 'Tareas','ENV',
+	function($scope, $stateParams, Authentication, Tareas,ENV ) {
 		$scope.authentication = Authentication;
         $scope.urlList = 'modules/tareas/views/list-tareas.client.view.html';
         $scope.urlCreate = 'modules/tareas/views/create-tarea.client.view.html';
@@ -21,11 +21,23 @@ angular.module('tareas').controller('TareasController', ['$scope', '$stateParams
 				}
 			} else {
 				$scope.tarea.$remove(function() {
+                    $scope.pedirCancelarTareaAlServicio($scope.tarea._id, $scope.tarea.usada);
                     $scope.cambiarPagina($scope.urlList);
 				});
 			}
 		};
 
+        $scope.pedirCancelarTareaAlServicio = function(tareaId, estaUsada){
+            if(!estaUsada){
+                var ip = ENV.server + ':3000';
+                var socket = io.connect(ip);
+                var mensaje = {
+                    topic: 'eliminarTarea',
+                    payload: {id: tareaId}
+                };
+                socket.emit('eliminarTarea' , JSON.stringify(mensaje));
+            }
+        };
 		// Update existing Tarea
 		$scope.update = function() {
 			var tarea = $scope.tarea ;
@@ -48,7 +60,7 @@ angular.module('tareas').controller('TareasController', ['$scope', '$stateParams
 				tareaId: $stateParams.tareaId
 			});
 		};
-        // Find existing Seccion
+        // Find existing Tarea
         $scope.cargarUna = function() {
             $scope.tarea = Tareas.get({
                 tareaId: $scope.idView
