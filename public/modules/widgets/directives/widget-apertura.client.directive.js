@@ -31,6 +31,7 @@ angular.module('widgets').directive('widgetApertura', ['$interval','ENV',
                         scope.value='Abierto';
                         $('#' + scope.idW).removeClass('alert-success alert-info').addClass('alert-danger');
                     }
+                    scope.$digest();
                 }
                 function update() {
                     var topico = attr.controlador;

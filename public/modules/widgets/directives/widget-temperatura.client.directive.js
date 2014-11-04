@@ -18,6 +18,7 @@ app.directive('widgetTemperatura', ['$interval','ENV',
                 socket.on('mqtt', function (msg) {
                     if(msg.topic === 'resp/'+attr.topico){
                         scope.value = msg.payload;
+                        scope.$digest();
                     }
                 });
                 socket.emit('subscribe', {topic : 'resp/'+attr.topico});
