@@ -48,9 +48,9 @@ angular.module('seccions').controller('SeccionsController', ['$scope', '$statePa
 
 		// Update existing Seccion
 		$scope.update = function() {
-			var seccion = $scope.seccion ;
-
+			var seccion = $scope.seccion;
 			seccion.$update(function() {
+                //TODO: cambiar la info en los widgets.
                 $scope.cambiarPagina($scope.urlList);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
