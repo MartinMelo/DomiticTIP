@@ -6,11 +6,15 @@ angular.module('widgets').controller('EditarWidgetController', ['$scope', '$http
         $scope.urlList = 'modules/widgets/views/list-widgets.client.view.html';
         // Update existing Widget
         $scope.update = function() {
-            var widget = $scope.widget ;
-            widget.attrs.topico = this.topico;
+            var widget = $scope.widget;
+            if (this.topico.indexOf('Seleccione')<0){
+                widget.attrs.topico = this.topico;
+            }
             widget.attrs.value = widget.title.replace(/\s+/g, '_');
             widget.attrs.controlador = this.dispositivo.controlador;
-            widget.name = this.name;
+            if(this.name) {
+                widget.name = this.name;
+            }
             widget.seccion = this.seccion.nombre;
 
             widget.$update(function() {
