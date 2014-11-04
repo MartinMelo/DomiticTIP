@@ -97,7 +97,6 @@ angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authenti
                 nombre: this.nombre,
                 datos: {
                     tipo: this.tipo,
-                    repetir: this.repetir,
                     calendario: fechaSeleccionada,
                     informacion: this.accion,
                     topico: this.topico,
@@ -117,7 +116,6 @@ angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authenti
             this.nombre = '';
             this.datos = {};
             this.tipo ='';
-            this.repetir = '';
             this.calendario= {};
             this.informacion= {};
         };

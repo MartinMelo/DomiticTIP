@@ -31,11 +31,6 @@ var TareaSchema = new Schema({
             required: 'Por favor ingresa el tipo de la tarea automatica.',
             trim: true
         },
-        repetir:{
-            type: Boolean,
-            default: false,
-            required: 'No se ingreso si se desea repetir la tarea'
-        },
         calendario:{
             type: Object,
             default: {},
@@ -104,12 +99,12 @@ socket.on('eliminarTarea', function (id) {
     for(var i=0; i<tareasACorrer.length;i++){
         if(tareasACorrer[i].id === id){
             tareasACorrer[i].cancel();
+            tareasACorrer[i].remove();
         }
     }
     console.log('Tarea Cancelada');
 });
 function crearTask(json){
-    var repetir = json.datos.repetir;
     var fecha = json.datos.calendario;
     var j = schedule.scheduleJob(fecha, function(){
         var topico = json.datos.controlador;
@@ -118,6 +113,7 @@ function crearTask(json){
         console.log('Ejecutando Tarea: ' + json.nombre);
         accionesLuces(luz, estado,topico);
         console.log('Tarea Finalizada: ' + json.nombre);
+        json.remove();
     });
     tareasACorrer.push({id:json._id ,tarea:j})
 }

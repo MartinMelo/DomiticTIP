@@ -23,11 +23,6 @@ var TareaSchema = new Schema({
             required: 'Por favor ingresa el tipo de la tarea automatica.',
             trim: true
         },
-        repetir:{
-            type: Boolean,
-            default: false,
-            required: 'No se ingreso si se desea repetir la tarea'
-        },
         calendario:{
             type: Object,
             default: {},
