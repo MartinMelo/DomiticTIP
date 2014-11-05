@@ -8,11 +8,11 @@
                 <div class="form-group">
                     <div class="controls">
                         <label class="control-label" for="nombre">Name</label>
-                        <input type="text" data-ng-model="nombre" id="nombre" class="form-control" placeholder="Nombre" required>
+                        <input type="text" data-ng-model="climatizacion.nombre" id="nombre" class="form-control" placeholder="Nombre" required>
                         <label class="control-label" for="temperatura">Temperatura</label>
-                        <input type="number" data-ng-model="temperatura" data-ng-init="temperatura=24" id="temperatura" class="form-control" placeholder="Temperatura" required>
+                        <input type="number" data-ng-model="climatizacion.temperatura" id="temperatura" class="form-control" placeholder="Temperatura" required>
                         <label class="control-label" for="forma">Forma</label>
-                        <select data-ng-model="forma" id="forma" required class="form-control" title="Forma">
+                        <select data-ng-model="climatizacion.forma" id="forma" required class="form-control" title="Forma">
                             <option value=">">Mayor A</option>
                             <option value="<">Menor A</option>
                         </select>
@@ -21,10 +21,12 @@
                                 class="form-control" ng-change="controladorSelecionado()">
                             <option value="Seleccione Un Dispositivo">Seleccione Un Dispositivo</option>
                         </select>
+                        <span> Dispositivo Actual: <h4>{{climatizacion.controlador}}</h4></span>
                         <label class="control-label" for="topico">Sensor<span id="sens"></span></label>
                         <select data-ng-model="topico" id="topico" required class="form-control" title="Sensor">
                             <option value="Seleccione Un Sensor">Seleccione Un Sensor</option>
                         </select>
+                        <span> Sensor Actual: <h4>{{climatizacion.topico.split('/')[1]}}</h4></span>
                     </div>
                 </div>
                 <div class="form-group">

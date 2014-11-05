@@ -11,12 +11,12 @@ angular.module('climatizacions').controller('EditarClimatizacionController', ['$
         $scope.dispositivo = 'Seleccione Un Dispositivo';
         $http.get('/dispositivos').success(function(data){
             for(var i in data){
-                $('#dispositivo').append(new Option(data[i].nombre, data[i].controlador));
+                $('#dispositivo').append(new Option(data[i].controlador, data[i].controlador));
             }
         });
 
         //Pedir servicios para el tipo de Widget seleccionado.
-        $scope.topico= {'nombre': 'seleccione un Sensor' , 'topico': 'untopico'};
+        $scope.topico= 'Seleccione Un Sensor';
         $scope.controladorSelecionado = function(){
             $('#topico').empty();
             $('#sens').addClass('fa fa-refresh fa-lg fa-spin');
@@ -56,29 +56,26 @@ angular.module('climatizacions').controller('EditarClimatizacionController', ['$
         //FIN de Pedir servicios para el tipo de Climatizacion seleccionada.
 
 
-        $scope.forma = '>';
-        // Create new Climatizacion
-        $scope.create = function() {
-            // Create new Climatizacion object
-            var climatizacion = new Climatizacions ({
-                nombre: this.nombre,
-                temperatura: this.temperatura,
-                forma: this.forma,
-                controlador: this.dispositivo,
-                topico: this.topico
-            });
 
-            // Redirect after save
-            climatizacion.$save(function(response) {
+        // Update existing Climatizacion
+        $scope.update = function() {
+            var climatizacion = $scope.climatizacion ;
+            if($scope.topico){
+                climatizacion.topico = $scope.topico;
+            }
+            if($scope.dispositivo.indexOf('Seleccion'<0)){
+                climatizacion.controlador = $scope.dispositivo.controlador;
+            }
+            climatizacion.$update(function() {
                 $scope.cambiarPagina($scope.urlList);
             }, function(errorResponse) {
                 $scope.error = errorResponse.data.message;
             });
-
-            // Clear form fields
-            this.nombre = '';
-            this.temperatura = '';
-            this.forma = '';
+        };
+        $scope.cargarUno = function() {
+            $scope.climatizacion = Climatizacions.get({
+                climatizacionId: $scope.idView
+            });
         };
         $scope.$on("$destroy", function() {
             socket.removeAllListeners('resp/discover');
