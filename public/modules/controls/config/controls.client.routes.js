@@ -5,10 +5,6 @@ angular.module('controls').config(['$stateProvider',
 	function($stateProvider) {
 		// Controls state routing
 		$stateProvider.
-		state('reportes', {
-			url: '/controls/reportes',
-			templateUrl: 'modules/controls/views/reportes.client.view.html'
-		}).
 		state('partidas', {
 			url: '/controls/partidas',
 			templateUrl: 'modules/controls/views/partidas.client.view.html'
