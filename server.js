@@ -46,7 +46,10 @@ server.on('published', function(packet, client) {
             }
         );
     }
-    console.log('Published', packet.topic);
+    if(packet.topic.indexOf('$SYS')<0){//Imprimo cuando no son mensajes internos de mqtt.
+        console.log('Published', packet.topic);
+    }
+
 
 });
 
