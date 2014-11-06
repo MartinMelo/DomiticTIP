@@ -19,8 +19,7 @@ var ApplicationConfiguration = (function() {
         'ui.websocket',
         'ui.models',
         'ui.widgets',
-        'ngDialog',
-        'config'
+        'ngDialog'
     ];
 
 	// Add a new vertical module

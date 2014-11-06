@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authentication', 'Tareas','ENV','$http',
-	function($scope, Authentication, Tareas, ENV , $http) {
+angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authentication', 'Tareas','$location','$http',
+	function($scope, Authentication, Tareas, $location , $http) {
         $scope.authentication = Authentication;
         $scope.urlList = 'modules/tareas/views/list-tareas.client.view.html';
         ////////////////Datos para completar el formulario/////////////////////////////////////
@@ -43,7 +43,7 @@ angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authenti
             $('#sens').addClass('fa fa-refresh fa-lg fa-spin');
             $scope.pedirExponerServiciosDe('luz');
         };
-        var ip = ENV.server + ':3000';
+        var ip = $location.$$host + ':3000';
         var socket = io.connect(ip);
         socket.emit('subscribe', {topic : 'resp/discover'});
         socket.on('resp/discover', function (msg) {
@@ -72,7 +72,7 @@ angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authenti
             $('#sens').removeClass('fa fa-refresh fa-lg fa-spin');
         };
         $scope.pedirExponerServiciosDe = function(tipo){
-            var ip = ENV.server + ':3000';
+            var ip = $location.$$host + ':3000';
             var socket = io.connect(ip);
             var topico = $scope.dispositivo.controlador+ '/discover';
             var mensaje = {
@@ -122,7 +122,7 @@ angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authenti
 
         //Publico la tarea para que el servicio que corre las tareas se haga cargo
         $scope.publicarTarea = function(tarea){
-            var ip = ENV.server + ':3000';
+            var ip = $location.$$host + ':3000';
             var socket = io.connect(ip);
             var mensaje = {
                 topic: 'nuevaTarea',
@@ -131,7 +131,6 @@ angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authenti
             socket.emit('schedulear' , JSON.stringify(mensaje));
         };
         $scope.$on("$destroy", function() {
-            console.log('Se destruyo el Scope: '+ $scope.$id);
             socket.removeAllListeners('resp/discover');
         });
 	}

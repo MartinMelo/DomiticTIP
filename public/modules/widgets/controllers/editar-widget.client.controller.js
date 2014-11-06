@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('widgets').controller('EditarWidgetController', ['$scope', '$http', 'Widgets','Authentication',
-	function($scope, $http, Widgets, Authentication) {
+angular.module('widgets').controller('EditarWidgetController', ['$scope', '$http', 'Widgets','Authentication','$location',
+	function($scope, $http, Widgets, Authentication,$location) {
         $scope.authentication = Authentication;
         $scope.urlList = 'modules/widgets/views/list-widgets.client.view.html';
         // Update existing Widget
@@ -77,7 +77,8 @@ angular.module('widgets').controller('EditarWidgetController', ['$scope', '$http
             $scope.name= 'Apertura';
             $scope.pedirExponerServiciosDe('sensor');
         };
-        var socket = io.connect('http://localhost:3000');
+        var ip=$location.$$host +':3000'
+        var socket = io.connect(ip);
         socket.emit('subscribe', {topic : 'resp/discover'});
         socket.on('resp/discover', function (msg) {
             $scope.agregarALista(msg);

@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('widgets').directive('widgetIluminacion', ['ENV',
-	function(ENV) {
+angular.module('widgets').directive('widgetIluminacion', ['$location',
+	function($location) {
         return {
             restrict: 'A',
             replace: true,
@@ -10,7 +10,7 @@ angular.module('widgets').directive('widgetIluminacion', ['ENV',
             link: function (scope, elem, attr) {
                 scope.luz = attr.topico;
                 scope.encender = function(){
-                    var ip = ENV.server +':3000';
+                    var ip = $location.$$host +':3000';
                     var socket = io.connect(ip);
                     var topico = attr.controlador;
                     var datos2 = '{id: '+scope.luz+' , estado: on}';
@@ -25,7 +25,7 @@ angular.module('widgets').directive('widgetIluminacion', ['ENV',
                     socket.emit('controlador' , JSON.stringify(mensaje));
                 };
                 scope.apagar = function(){
-                    var ip = ENV.server +':3000';
+                    var ip = $location.$$host +':3000';
                     var socket = io.connect(ip);
                     var topico = attr.controlador;
                     var datos2 = '{id: '+scope.luz+' , estado: off}';

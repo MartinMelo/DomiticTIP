@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('climatizacions').controller('CrearClimatizacionController', ['$scope','Authentication','Climatizacions','ENV','$http',
-	function($scope,Authentication,Climatizacions,ENV,$http) {
+angular.module('climatizacions').controller('CrearClimatizacionController', ['$scope','Authentication','Climatizacions','$location','$http',
+	function($scope,Authentication,Climatizacions,$location,$http) {
         $scope.urlList = 'modules/climatizacions/views/list-climatizacions.client.view.html';
         $scope.authentication = Authentication;
 
@@ -23,7 +23,7 @@ angular.module('climatizacions').controller('CrearClimatizacionController', ['$s
             $('#dispositivo option[value="Seleccione Un Dispositivo"]').remove();
             $scope.pedirExponerServiciosDe('sensor');
         };
-        var ip = ENV.server + ':3000';
+        var ip = $location.$$host + ':3000';
         var socket = io.connect(ip);
         socket.emit('subscribe', {topic : 'resp/discover'});
         socket.on('resp/discover', function (msg) {
@@ -41,7 +41,7 @@ angular.module('climatizacions').controller('CrearClimatizacionController', ['$s
             $('#sens').removeClass('fa fa-refresh fa-lg fa-spin');
         };
         $scope.pedirExponerServiciosDe = function(tipo){
-            var ip = ENV.server + ':3000';
+            var ip = $location.$$host + ':3000';
             var socket = io.connect(ip);
             var topico = $scope.dispositivo+ '/discover';
             var mensaje = {

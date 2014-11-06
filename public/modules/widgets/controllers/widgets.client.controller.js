@@ -52,10 +52,10 @@ app.controller('WidgetsController', ['$scope', '$stateParams', '$location', 'Aut
         };
 	}
 ]);
-app.controller('WidgetsInicioController',function ($scope, $interval, $http,ENV) {
+app.controller('WidgetsInicioController',function ($scope, $interval, $http,$location) {
 
 
-    var ip = ENV.server +':3000';
+    var ip = $location.$$host +':3000';
     var socket = io.connect(ip);
     /**
      * La definicion de los widgets por defecto.

@@ -1,8 +1,8 @@
 'use strict';
 
 // Tareas controller
-angular.module('tareas').controller('TareasController', ['$scope', '$stateParams', 'Authentication', 'Tareas','ENV',
-	function($scope, $stateParams, Authentication, Tareas,ENV ) {
+angular.module('tareas').controller('TareasController', ['$scope', '$stateParams', 'Authentication', 'Tareas','$location',
+	function($scope, $stateParams, Authentication, Tareas,$location ) {
 		$scope.authentication = Authentication;
         $scope.urlList = 'modules/tareas/views/list-tareas.client.view.html';
         $scope.urlCreate = 'modules/tareas/views/create-tarea.client.view.html';
@@ -29,7 +29,7 @@ angular.module('tareas').controller('TareasController', ['$scope', '$stateParams
 
         $scope.pedirCancelarTareaAlServicio = function(tareaId, estaUsada){
             if(!estaUsada){
-                var ip = ENV.server + ':3000';
+                var ip = $location.$$host + ':3000';
                 var socket = io.connect(ip);
                 var mensaje = {
                     topic: 'eliminarTarea',
