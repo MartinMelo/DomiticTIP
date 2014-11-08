@@ -1,8 +1,8 @@
 'use strict';
 
 // Seccions controller
-angular.module('seccions').controller('SeccionsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Seccions','$http',
-	function($scope, $stateParams, $location, Authentication, Seccions,$http ) {
+angular.module('seccions').controller('SeccionsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Seccions','$http','Widgets',
+	function($scope, $stateParams, $location, Authentication, Seccions,$http ,Widgets) {
 		$scope.authentication = Authentication;
         $scope.urlList = 'modules/seccions/views/list-seccions.client.view.html';
         $scope.urlCreate = 'modules/seccions/views/create-seccion.client.view.html';
@@ -32,25 +32,20 @@ angular.module('seccions').controller('SeccionsController', ['$scope', '$statePa
 
 		// Remove existing Seccion
 		$scope.remove = function( seccion ) {
-			if ( seccion ) { seccion.$remove();
+            var nombre = $scope.seccion.nombre;
+            new Seccions($scope.seccion).$remove(function() {
+                $scope.actualizarWidgets(nombre, 'Sin Seccion');
+                $scope.cambiarPagina($scope.urlList);
+            });
 
-				for (var i in $scope.seccions ) {
-					if ($scope.seccions [i] === seccion ) {
-						$scope.seccions.splice(i, 1);
-					}
-				}
-			} else {
-				$scope.seccion.$remove(function() {
-                    $scope.cambiarPagina($scope.urlList);
-				});
-			}
 		};
 
 		// Update existing Seccion
 		$scope.update = function() {
-			var seccion = $scope.seccion;
+            var nombreAnterior = $scope.nombreAnterior;
+			var seccion = new Seccions($scope.seccion);
 			seccion.$update(function() {
-                //TODO: cambiar la info en los widgets.
+                $scope.actualizarWidgets(nombreAnterior, seccion.nombre);
                 $scope.cambiarPagina($scope.urlList);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
@@ -73,9 +68,28 @@ angular.module('seccions').controller('SeccionsController', ['$scope', '$statePa
 		};
 		// Find existing Seccion
 		$scope.cargarUna = function() {
-			$scope.seccion = Seccions.get({
-				seccionId: $scope.idView
-			});
+            $http.get('/seccions/'+$scope.idView).success(function(data){
+                $scope.seccion= data;
+                $scope.nombreAnterior = data.nombre;
+            });
+
 		};
+        /**
+         * Actualiza todos los widgets con el nombre de seccion actual al nuevo
+         */
+        $scope.actualizarWidgets = function (seccionActual,seccionNueva){
+            var parametros = '{"seccion":"'+ seccionActual +'", "user": "'+ $scope.authentication.user._id+'"}';
+            $http.get('/widgets/query/' + parametros).success(function(data){
+                for(var i=0; i<data.length;i++){
+                    var wigetta= new Widgets(data[i]);
+                    wigetta.seccion = seccionNueva;
+                    wigetta.$update(function(response) {
+                    }, function(errorResponse) {
+                        $scope.error = errorResponse.data.message;
+                    });
+
+                }
+            });
+        }
 	}
 ]);
