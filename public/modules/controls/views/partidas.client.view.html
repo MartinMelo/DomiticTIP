@@ -1,11 +1,13 @@
 <section data-ng-controller="PartidasController" class="container">
     <div class="page-header">
         <h1>Partidas</h1>
+        <h3><span class="label label-info">Fecha actual: {{fecha | date:'short'}}</span></h3>
     </div>
     <div class="list-group">
         <a data-ng-repeat="partida in partidas" data-ng-href="#!/controls/{{partida._id}}" class="list-group-item">
-            <h4 class="list-group-item-heading" data-ng-bind="partida.horario | date:'medium'"></h4>
-            <h4 class="list-group-item-heading" data-ng-bind="partida.huella"></h4>
+            <h4 class="list-group-item-heading" data-ng-bind="partida.empleado.apellido"></h4>
+            <h4 class="list-group-item-heading" data-ng-bind="partida.empleado.nombre"></h4>
+            <h4 class="list-group-item-heading" data-ng-bind="partida.horario | date:'short'"></h4>
         </a>
     </div>
 </section>
