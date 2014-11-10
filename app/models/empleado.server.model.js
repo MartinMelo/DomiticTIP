@@ -16,6 +16,18 @@ var EmpleadoSchema = new Schema({
 		required: 'Por favor ingrese el nombre',
 		trim: true
 	},
+    apellido: {
+		type: String,
+		default: '',
+		required: 'Por favor ingrese el nombre',
+		trim: true
+	},
+    documento: {
+		type: String,
+		default: '',
+		required: 'Por favor ingrese el numero de documento',
+		trim: true
+	},
     huella: {
         type: String,
         default: '',
@@ -25,10 +37,6 @@ var EmpleadoSchema = new Schema({
 	created: {
 		type: Date,
 		default: Date.now
-	},
-	user: {
-		type: Schema.ObjectId,
-		ref: 'User'
 	}
 });
 
