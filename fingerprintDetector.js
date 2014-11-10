@@ -28,11 +28,9 @@ var SchemaControl = new Schema({
         type: Date,
         default: Date.now
     },
-    huella: {
-        type: String,
-        default: '',
-        required: 'No se tiene la huella',
-        trim: true
+    empleado: {
+        type: Schema.ObjectId,
+        ref: 'Empleado'
     }
 });
 var SchemaEmpleado = new Schema({
@@ -69,10 +67,7 @@ var Control = mongoose.model('Control' , SchemaControl);
 var Empleado = mongoose.model('Empleado' , SchemaEmpleado);
 
 socket.on('huellita', function (data) {
-    console.log('El topic es: ' + data.topic);
-    console.log('El Payload es: ' + data.payload);
     var topico = data.topic.split('/')[2];
-    console.log('topico final ' + topico);
     var payload = JSON.parse(data.payload);
     if(topico === 'registrar'){
         registrarEmpleado(payload);
@@ -83,17 +78,22 @@ socket.on('huellita', function (data) {
 
 });
 function registrarControl(tipo, huella){
-    var control = new Control({
-        tipo: tipo,
-        huella: huella
+    Empleado.findOne({huella: huella}).exec(function(err, empleado){
+        var control = new Control({
+            tipo: tipo,
+            huella: huella,
+            empleado: empleado
+        });
+        control.save(function (data) {
+            console.log('Control realizado a: ' + empleado.apellido + ' ' + empleado.nombre);
+        });
     });
-    control.save(function (data) {
-        console.log('Success' + data);
-    });
+
 }
 function registrarEmpleado(empleado){
     var empleado = new Empleado(empleado);
     empleado.save(function (data) {
-        console.log('Success' + data);
+        console.log('Empleado Creado: ' + empleado.apellido + ' ' + empleado.nombre);
     });
 }
+

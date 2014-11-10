@@ -20,11 +20,9 @@ var ControlSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
-    huella: {
-        type: String,
-        default: '',
-        required: 'No se tiene la huella',
-        trim: true
+    empleado: {
+        type: Schema.ObjectId,
+        ref: 'Empleado'
     }
 });
 

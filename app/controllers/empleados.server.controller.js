@@ -95,7 +95,7 @@ exports.delete = function(req, res) {
 /**
  * List of Empleados
  */
-exports.list = function(req, res) { Empleado.find().sort('-created').populate('user', 'displayName').exec(function(err, empleados) {
+exports.list = function(req, res) { Empleado.find().sort('-created').exec(function(err, empleados) {
 		if (err) {
 			return res.send(400, {
 				message: getErrorMessage(err)
@@ -109,7 +109,7 @@ exports.list = function(req, res) { Empleado.find().sort('-created').populate('u
 /**
  * Empleado middleware
  */
-exports.empleadoByID = function(req, res, next, id) { Empleado.findById(id).populate('user', 'displayName').exec(function(err, empleado) {
+exports.empleadoByID = function(req, res, next, id) { Empleado.findById(id).exec(function(err, empleado) {
 		if (err) return next(err);
 		if (! empleado) return next(new Error('Failed to load Empleado ' + id));
 		req.empleado = empleado ;
