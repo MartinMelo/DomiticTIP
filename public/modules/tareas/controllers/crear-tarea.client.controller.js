@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authentication', 'Tareas','$location','$http',
-	function($scope, Authentication, Tareas, $location , $http) {
+angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authentication', 'Tareas','$rootScope','$http',
+	function($scope, Authentication, Tareas, $rootScope , $http) {
         $scope.authentication = Authentication;
         $scope.urlList = 'modules/tareas/views/list-tareas.client.view.html';
         ////////////////Datos para completar el formulario/////////////////////////////////////
@@ -43,8 +43,7 @@ angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authenti
             $('#sens').addClass('fa fa-refresh fa-lg fa-spin');
             $scope.pedirExponerServiciosDe('luz');
         };
-        var ip = $location.$$host + ':3000';
-        var socket = io.connect(ip);
+        var socket = $rootScope.socket;
         socket.emit('subscribe', {topic : 'resp/discover'});
         socket.on('resp/discover', function (msg) {
             $scope.agregarALista(msg);
@@ -72,8 +71,6 @@ angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authenti
             $('#sens').removeClass('fa fa-refresh fa-lg fa-spin');
         };
         $scope.pedirExponerServiciosDe = function(tipo){
-            var ip = $location.$$host + ':3000';
-            var socket = io.connect(ip);
             var topico = $scope.dispositivo.controlador+ '/discover';
             var mensaje = {
                 topic: topico,
@@ -122,8 +119,6 @@ angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authenti
 
         //Publico la tarea para que el servicio que corre las tareas se haga cargo
         $scope.publicarTarea = function(tarea){
-            var ip = $location.$$host + ':3000';
-            var socket = io.connect(ip);
             var mensaje = {
                 topic: 'nuevaTarea',
                 payload: tarea

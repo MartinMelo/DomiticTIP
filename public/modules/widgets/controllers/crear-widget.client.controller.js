@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('widgets').controller('CrearWidgetController', ['$scope', '$http', 'Widgets','$location',
-	function($scope, $http, Widgets, $location) {
+angular.module('widgets').controller('CrearWidgetController', ['$scope', '$http', 'Widgets','$rootScope',
+	function($scope, $http, Widgets, $rootScope) {
         $scope.urlList = 'modules/widgets/views/list-widgets.client.view.html';
 
         // Create new Widget
@@ -77,8 +77,7 @@ angular.module('widgets').controller('CrearWidgetController', ['$scope', '$http'
             $scope.name= 'Apertura';
             $scope.pedirExponerServiciosDe('sensor');
         };
-        var ip = $location.$$host + ':3000';
-        var socket = io.connect(ip);
+        var socket = $rootScope.socket;
         socket.emit('subscribe', {topic : 'resp/discover'});
         socket.on('resp/discover', function (msg) {
             $scope.agregarALista(msg);
@@ -106,8 +105,6 @@ angular.module('widgets').controller('CrearWidgetController', ['$scope', '$http'
             $('#sens').removeClass('fa fa-refresh fa-lg fa-spin');
         };
         $scope.pedirExponerServiciosDe = function(tipo){
-            var ip = $location.$$host + ':3000';
-            var socket = io.connect(ip);
             var topico = $scope.dispositivo.controlador+ '/discover';
             var mensaje = {
                 topic: topico,
