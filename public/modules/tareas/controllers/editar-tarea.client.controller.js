@@ -1,37 +1,44 @@
 'use strict';
 
-angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authentication', 'Tareas','$rootScope','$http',
+angular.module('tareas').controller('EditarTareaController', ['$scope', 'Authentication', 'Tareas','$rootScope','$http',
 	function($scope, Authentication, Tareas, $rootScope , $http) {
         $scope.authentication = Authentication;
         $scope.urlList = 'modules/tareas/views/list-tareas.client.view.html';
+        //configuracion del calendario
+        $scope.mindate = Date.now();
         ////////////////Datos para completar el formulario/////////////////////////////////////
         //tipos de tareas automaticas
         $scope.tipo = 'Seleccione un tipo de tarea';
         $scope.tipos = ['Seleccione un tipo de tarea','Iluminacion'];
-        //configuracion del calendario
-        $scope.mindate = Date.now();
-        $scope.hora= 12;
-        $scope.minutos= 0;
-
+        //Sensor
+        $scope.topico = 'Seleccione Un Sensor';
+        //Agrego los dispositivos
+        $scope.dispositivo = 'Seleccione un Dispositivo';
+        $http.get('/dispositivos').success(function(data){
+            for(var i in data) {
+                $('#dispositivo').append(new Option(data[i].nombre, data[i].controlador));
+            }
+        });
+        //Traer la tarea de db.
+        $scope.cargarUna = function() {
+            Tareas.get({tareaId: $scope.idView}).$promise.then(function(data){
+                $scope.tarea = data;
+                var fecha = new Date(data.datos.calendario);
+                $scope.hora = fecha.getHours();
+                $scope.minutos = fecha.getMinutes();
+            });
+        };
 
         //Agrego los tipos de acciones segun el tipo seleccionado.
         $scope.accion = 'Seleccione una accion';
         $scope.acciones=['Seleccione una accion'];
         $scope.cargarAcciones = function(){
-            if($scope.tipo === 'Iluminacion'){
+            if($scope.tipo === 'Iluminacion' && $scope.dispositivo.indexOf('Seleccione un')<0){
                 $scope.acciones = ['Encender', 'Apagar'];
                 $scope.accion = $scope.acciones[0];
                 $scope.iluminacionSelect();
             }
         };
-
-        //Agrego los dispositivos
-        $scope.dispositivos = [];
-        $http.get('/dispositivos').success(function(data){
-            $scope.dispositivo = data[0];
-            $scope.dispositivos = data;
-        });
-
         //Pedir servicios para el tipo de tarea seleccionado.
         $scope.topicos= [{'nombre': 'seleccione un Sensor' , 'topico': 'untopico'}];
         $scope.topico= $scope.topicos[{'nombre': 'seleccione un Sensor' , 'topico': 'untopico'}];
@@ -68,7 +75,7 @@ angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authenti
             $('#sens').removeClass('fa fa-refresh fa-lg fa-spin');
         };
         $scope.pedirExponerServiciosDe = function(tipo){
-            var topico = $scope.dispositivo.controlador+ '/discover';
+            var topico = $scope.dispositivo+ '/discover';
             var mensaje = {
                 topic: topico,
                 payload:{
@@ -80,50 +87,16 @@ angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authenti
         };
         //FIN de Pedir servicios para el tipo de Widget seleccionado.
 
+        /////////////////////UPDATE DE LA TAREA////////////////////////////////////////
+        // Update existing Tarea
+        $scope.update = function() {
+            var tarea = $scope.tarea ;
 
-        //Crea una nueva tarea.
-        $scope.create = function() {
-            var fechaSeleccionada = $scope.fecha;
-            fechaSeleccionada.setHours($scope.hora);
-            fechaSeleccionada.setMinutes($scope.minutos);
-            //Creo la tarea y la guardo.
-            var tarea = new Tareas ({
-                nombre: this.nombre,
-                datos: {
-                    tipo: this.tipo,
-                    calendario: fechaSeleccionada,
-                    informacion: this.accion,
-                    topico: this.topico,
-                    controlador: this.dispositivo.controlador
-                }
-            });
-
-            // Redirect after save
-            tarea.$save(function(response) {
-                $scope.publicarTarea(tarea);
+            tarea.$update(function() {
                 $scope.cambiarPagina($scope.urlList);
             }, function(errorResponse) {
                 $scope.error = errorResponse.data.message;
             });
-
-            // Clear form fields
-            this.nombre = '';
-            this.datos = {};
-            this.tipo ='';
-            this.calendario= {};
-            this.informacion= {};
         };
-
-        //Publico la tarea para que el servicio que corre las tareas se haga cargo
-        $scope.publicarTarea = function(tarea){
-            var mensaje = {
-                topic: 'nuevaTarea',
-                payload: tarea
-            };
-            socket.emit('schedulear' , JSON.stringify(mensaje));
-        };
-        $scope.$on("$destroy", function() {
-            socket.removeAllListeners('resp/discover');
-        });
 	}
 ]);

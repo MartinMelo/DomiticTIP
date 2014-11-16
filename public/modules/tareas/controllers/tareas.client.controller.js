@@ -37,16 +37,6 @@ angular.module('tareas').controller('TareasController', ['$scope', '$stateParams
                 socket.emit('eliminarTarea' , JSON.stringify(mensaje));
             }
         };
-		// Update existing Tarea
-		$scope.update = function() {
-			var tarea = $scope.tarea ;
-
-			tarea.$update(function() {
-                $scope.cambiarPagina($scope.urlList);
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-		};
 
 		// Find a list of Tareas
 		$scope.find = function() {

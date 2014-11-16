@@ -27,7 +27,8 @@
                                 class="form-control"  title="Tipo">
                             <option value="Seleccione">Seleccione una accion</option>
                         </select>
-                        <div datepicker="asf" ng-model="fecha" class="calendario" min-date="mindate"></div>
+                        <label class="control-label" for="fecha">Fecha</label>
+                        <div datepicker="asf" ng-model="fecha" id="fecha" class="calendario" min-date="mindate"></div>
                         <label class="control-label" for="hora">Hora</label>
                         <input type="number" max="24" min="0" data-ng-model="hora" id="hora">
                         <label class="control-label" for="minutos">Minutos</label>
