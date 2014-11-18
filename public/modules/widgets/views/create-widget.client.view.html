@@ -36,8 +36,8 @@
                             </div>
                         </div>
                         <label class="control-label" for="topico">Sensor<span id="sens"></span></label>
-                        <select data-ng-model="topico" id="topico" required class="form-control" title="Sensor">
-                            <option value="Seleccione Un Sensor">Seleccione Un Sensor</option>
+                        <select data-ng-model="topico" id="topico" required class="form-control" title="Sensor"
+                                ng-options="topico.nombre for topico in topicos" ng-init="topico = topicos[0]">
                         </select>
                     </div>
                 </div>

@@ -80,6 +80,7 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http,$roo
             directive: 'widget-temperatura',
             attrs: {
                 value: 'temperatura',
+                nombre: 'nombre',
                 topico: 'topico',
                 controlador: 'ard#'
             },
@@ -92,6 +93,7 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http,$roo
             directive: 'widget-apertura',
             attrs: {
                 value: 'sensor',
+                nombre: 'nombre',
                 topico: 'topico',
                 controlador: 'ard#'
             },
@@ -104,6 +106,7 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http,$roo
             directive: 'widget-iluminacion',
             attrs: {
                 value: 'sensor',
+                nombre: 'nombre',
                 topico: 'topico',
                 controlador: 'ard#'
             },

@@ -34,6 +34,11 @@ var WidgetSchema = new Schema({
             required: 'No se esta generando el value',
             trim: true
         },
+        nombre: {
+            type: String,
+            required: 'No se esta guardando el nombre de Topico de socket.io',
+            trim: true
+        },
         topico: {
             type: String,
             required: 'No se esta guardando el Topico de socket.io',

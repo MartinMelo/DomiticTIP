@@ -7,8 +7,9 @@ angular.module('widgets').controller('EditarWidgetController', ['$scope', '$http
         // Update existing Widget
         $scope.update = function() {
             var widget = $scope.widget;
-            if (this.topico.indexOf('Seleccione')<0){
-                widget.attrs.topico = this.topico;
+            if (this.topico.nombre.indexOf('Seleccione')<0){
+                widget.attrs.nombre = this.topico.nombre;
+                widget.attrs.topico = this.topico.topico;
             }
             widget.attrs.value = widget.title.replace(/\s+/g, '_');
             widget.attrs.controlador = this.dispositivo.controlador;
@@ -51,7 +52,6 @@ angular.module('widgets').controller('EditarWidgetController', ['$scope', '$http
          * Para hacer el query al controlador.
          */
         $scope.iluminacionSelect = function(){
-            $('#topico').empty();
             $('#sens').addClass('fa fa-refresh fa-lg fa-spin');
             $('#iluminacion').addClass('alert-success');
             $('#temperatura').removeClass('alert-success');
@@ -60,7 +60,6 @@ angular.module('widgets').controller('EditarWidgetController', ['$scope', '$http
             $scope.pedirExponerServiciosDe('luz');
         };
         $scope.temperaturaSelect = function(){
-            $('#topico').empty();
             $('#sens').addClass('fa fa-refresh fa-lg fa-spin');
             $('#temperatura').addClass('alert-success');
             $('#iluminacion').removeClass('alert-success');
@@ -69,7 +68,6 @@ angular.module('widgets').controller('EditarWidgetController', ['$scope', '$http
             $scope.pedirExponerServiciosDe('sensor');
         };
         $scope.aperturaSelect = function(){
-            $('#topico').empty();
             $('#sens').addClass('fa fa-refresh fa-lg fa-spin');
             $('#apertura').addClass('alert-success');
             $('#iluminacion').removeClass('alert-success');
@@ -84,24 +82,26 @@ angular.module('widgets').controller('EditarWidgetController', ['$scope', '$http
         });
         $scope.agregarALista = function(msg){
             var json = JSON.parse(msg.payload);
-            $('#topico').append(new Option('Seleccione Un Sensor', 'Seleccione Un Sensor'));
+            $scope.topicos=[];
+            $scope.topicos.push({nombre: 'Seleccione un Sensor',topico:'Seleccione un Sensor'});
             if(json.sensor === undefined){
                 var luces = json.luz;
                 for(var i in luces){
-                    $('#topico').append(new Option(luces[i].nombre, luces[i].topico));
+                    $scope.topicos.push(luces[i]);
                 }
-                this.topico =luces[0].topico;
             }else {
                 var sensores = json.sensor;
                 for(var i in sensores){
                     if((sensores[i].tipo === 'numero') && (this.name  ==='Temperatura')){
-                        $('#topico').append(new Option(sensores[i].nombre, sensores[i].topico));
+                        $scope.topicos.push(sensores[i]);
                     }
                     if((sensores[i].tipo === 'bool') && (this.name  ==='Apertura')){
-                        $('#topico').append(new Option(sensores[i].nombre, sensores[i].topico));
+                        $scope.topicos.push(sensores[i]);
                     }
                 }
             }
+            $scope.topico = $scope.topicos[0];
+            $scope.$digest();
             $('#sens').removeClass('fa fa-refresh fa-lg fa-spin');
         };
         $scope.pedirExponerServiciosDe = function(tipo){
