@@ -16,7 +16,7 @@ angular.module('tareas').controller('EditarTareaController', ['$scope', 'Authent
         $scope.dispositivo = 'Seleccione un Dispositivo';
         $http.get('/dispositivos').success(function(data){
             for(var i in data) {
-                $('#dispositivo').append(new Option(data[i].nombre, data[i].controlador));
+                $('#dispositivo').append(new Option(data[i].controlador, data[i].controlador));
             }
         });
         //Traer la tarea de db.
@@ -43,7 +43,6 @@ angular.module('tareas').controller('EditarTareaController', ['$scope', 'Authent
         $scope.topicos= [{'nombre': 'seleccione un Sensor' , 'topico': 'untopico'}];
         $scope.topico= $scope.topicos[{'nombre': 'seleccione un Sensor' , 'topico': 'untopico'}];
         $scope.iluminacionSelect = function(){
-            $('#topico').empty();
             $('#sens').addClass('fa fa-refresh fa-lg fa-spin');
             $scope.pedirExponerServiciosDe('luz');
         };
@@ -52,26 +51,20 @@ angular.module('tareas').controller('EditarTareaController', ['$scope', 'Authent
         socket.on('resp/discover', function (msg) {
             $scope.agregarALista(msg);
         });
+        $scope.topicos = [{nombre: 'Seleccione un Sensor',topico:'Seleccione un Sensor'}];
+        $scope.topico = $scope.topicos[0];
         $scope.agregarALista = function(msg){
             var json = JSON.parse(msg.payload);
-            $('#topico').append(new Option('Seleccione Un Sensor', 'Seleccione Un Sensor'));
-            if(json.sensor === undefined){
+            if(json.luz){
+                $scope.topicos=[];
+                $scope.topicos.push({nombre: 'Seleccione un Sensor',topico:'Seleccione un Sensor'});
                 var luces = json.luz;
                 for(var i in luces){
-                    $('#topico').append(new Option(luces[i].nombre, luces[i].topico));
-                }
-                this.topico =luces[0].topico;
-            }else {
-                var sensores = json.sensor;
-                for(var i in sensores){
-                    if((sensores[i].tipo === 'numero') && (this.name  ==='Temperatura')){
-                        $('#topico').append(new Option(sensores[i].nombre, sensores[i].topico));
-                    }
-                    if((sensores[i].tipo === 'bool') && (this.name  ==='Apertura')){
-                        $('#topico').append(new Option(sensores[i].nombre, sensores[i].topico));
-                    }
+                    $scope.topicos.push(luces[i]);
                 }
             }
+            $scope.topico = $scope.topicos[0];
+            $scope.$digest();
             $('#sens').removeClass('fa fa-refresh fa-lg fa-spin');
         };
         $scope.pedirExponerServiciosDe = function(tipo){
@@ -91,6 +84,26 @@ angular.module('tareas').controller('EditarTareaController', ['$scope', 'Authent
         // Update existing Tarea
         $scope.update = function() {
             var tarea = $scope.tarea ;
+            if($scope.fecha){
+                $scope.fecha.setHours($scope.hora);
+                $scope.fecha.setMinutes($scope.minutos);
+                tarea.datos.calendario = $scope.fecha;
+            }else{
+                var asd = new Date(tarea.datos.calendario);
+                asd.setHours($scope.hora);
+                asd.setMinutes($scope.minutos);
+                tarea.datos.calendario = asd;
+            }
+            if($scope.accion.indexOf('Seleccione')<0){
+                tarea.datos.informacion = $scope.accion;
+            }
+            if($scope.dispositivo.indexOf('Seleccione')<0){
+                tarea.datos.controlador = $scope.dispositivo;
+            }
+            if($scope.tipo.indexOf('Seleccione')<0){
+                tarea.datos.tipo = $scope.tipo;
+            }
+
 
             tarea.$update(function() {
                 $scope.cambiarPagina($scope.urlList);

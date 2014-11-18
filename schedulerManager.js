@@ -125,7 +125,7 @@ function crearTask(json){
     var fecha = json.datos.calendario;
     var j = schedule.scheduleJob(fecha, function(){
         var topico = json.datos.controlador;
-        var luz = json.datos.topico;
+        var luz = json.datos.topico.topico;
         var estado = json.datos.informacion;
         console.log('Ejecutando Tarea: ' + json.nombre);
         accionesLuces(luz, estado,topico);
