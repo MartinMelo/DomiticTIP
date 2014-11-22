@@ -168,6 +168,7 @@ void accionesClimatizador(JsonHashTable hashTable){
   String estado = hashTable.getString("estado");
   String sensor = hashTable.getString("sensor");
   int grados = hashTable.getLong("grados");
+  //No hago nada aun.
 }
 void accionesIluminacion(JsonHashTable hashTable){
   int pin = hashTable.getLong("id");
