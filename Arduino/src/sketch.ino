@@ -136,6 +136,7 @@ void refresh(){
 void suscribirse(){
   client.subscribe("ard1");
   client.subscribe("discover");
+  client.subscribe("ard1/discover");
 }
 
 
@@ -157,7 +158,16 @@ void realizarAccion(JsonHashTable hashTable){
   if(destino == "sensores"){
     accionesSensores(info);
   }
+  if(destino == "climatizacion"){
+    accionesClimatizador(info);
+  }
   
+}
+void accionesClimatizador(JsonHashTable hashTable){
+  int pin = hashTable.getLong("id");
+  String estado = hashTable.getString("estado");
+  String sensor = hashTable.getString("sensor");
+  int grados = hashTable.getLong("grados");
 }
 void accionesIluminacion(JsonHashTable hashTable){
   int pin = hashTable.getLong("id");
@@ -222,10 +232,10 @@ void exponerServicios(String servicio){
     json= "{\"suscripto\": \"ard1\",\"tipos\": [{\"nombre\":\"luz\"},{\"nombre\": \"sensor\"}]}";
   }
   if(servicio == "luz"){
-    json="{\"luz\": \[{\"id\": 22},{\"id\": 23}]}";
+    json="{\"luz\": \[{\"nombre\": \"Entrada\",\"topico\": 22},{\"nombre\": \"Showroom\",\"topico\": 23}]}";
   }
   if(servicio == "sensor"){
-    json="{\"sensor\": [{\"nombre\": \"ambiente-temp\",\"topico\": \"ard1/ambiente/temp\",\"tipo\": \"numero\"}]}";
+    json="{\"sensor\": [{\"nombre\": \"ambiente\",\"topico\": \"ard1/ambiente/temp\",\"tipo\": \"numero\"}]}";
   }
     client.publish("resp/discover", json); 
 }
