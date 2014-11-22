@@ -64,9 +64,10 @@ angular.module('climatizacions').controller('CrearClimatizacionController', ['$s
                 controlador: this.dispositivo,
                 topico: this.topico
             });
-
+            $scope.climatizacion = climatizacion;
             // Redirect after save
             climatizacion.$save(function(response) {
+                $scope.publicarClimatizacion();
                 $scope.cambiarPagina($scope.urlList);
             }, function(errorResponse) {
                 $scope.error = errorResponse.data.message;
@@ -76,6 +77,22 @@ angular.module('climatizacions').controller('CrearClimatizacionController', ['$s
             this.nombre = '';
             this.temperatura = '';
             this.forma = '';
+        };
+        $scope.publicarClimatizacion= function(){
+            var topico = $scope.climatizacion.controlador.controlador;
+            var sensor = $scope.climatizacion.topico;
+            var grados = $scope.climatizacion.temperatura;
+            var estado = $scope.climatizacion.forma;
+            var datos2 = '{sensor: '+sensor+' , grados: ' + grados +' , estado: ' + estado+'}';
+            var mensaje = {
+                topic: topico,
+                payload:{
+                    comando: 'accion',
+                    destino: 'climatizacion',
+                    datos: datos2
+                }
+            };
+            socket.emit('controlador' , JSON.stringify(mensaje));
         };
         $scope.$on("$destroy", function() {
             socket.removeAllListeners('resp/discover');
