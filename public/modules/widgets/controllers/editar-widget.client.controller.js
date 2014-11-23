@@ -7,7 +7,7 @@ angular.module('widgets').controller('EditarWidgetController', ['$scope', '$http
         // Update existing Widget
         $scope.update = function() {
             var widget = $scope.widget;
-            if (this.topico.nombre.indexOf('Seleccione')<0){
+            if (this.topico && this.topico.nombre.indexOf('Seleccione')<0){
                 widget.attrs.nombre = this.topico.nombre;
                 widget.attrs.topico = this.topico.topico;
             }
