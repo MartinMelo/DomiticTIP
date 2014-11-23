@@ -13,10 +13,11 @@ angular.module('widgets').controller('EditarWidgetController', ['$scope', '$http
             }
             widget.attrs.value = widget.title.replace(/\s+/g, '_');
             widget.attrs.controlador = this.dispositivo.controlador;
+            widget.attrs.dispositivo = this.dispositivo._id;
             if(this.name) {
                 widget.name = this.name;
             }
-            widget.seccion = this.seccion.nombre;
+            widget.seccion = this.seccion._id;
 
             widget.$update(function() {
                 $scope.idView = widget._id;

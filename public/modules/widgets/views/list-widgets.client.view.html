@@ -7,7 +7,8 @@
             <img ng-src="modules/widgets/img/{{widget.name}}.png" class="imgDeWidgetPequenia">
             <h4 class="list-group-item-heading" data-ng-bind="widget.title"></h4>
             <h5 class="list-group-item-heading" data-ng-bind="widget.name"></h5>
-            <h5 class="list-group-item-heading" data-ng-bind="widget.seccion"></h5>
+            <h5 class="list-group-item-heading" data-ng-bind="widget.seccion.nombre"></h5>
+            <h5 class="list-group-item-heading" data-ng-bind="widget.attrs.dispositivo.nombre"></h5>
             <small class="list-group-item-text">
 				Fecha de creacion
 				<span data-ng-bind="widget.created | date:'medium'"></span>

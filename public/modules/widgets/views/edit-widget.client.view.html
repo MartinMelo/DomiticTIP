@@ -14,12 +14,12 @@
                     <select data-ng-model="seccion" ng-options="seccion.nombre for seccion in secciones" id="seccion" required
                             class="form-control" placeholder="Seccion" title="Seccion">
                     </select>
-                    <span> Seccion Actual: <h4>{{widget.seccion}}</h4></span>
+                    <span> Seccion Actual: <h4>{{widget.seccion.nombre}}</h4></span>
                     <label class="control-label" for="dispositivo">Dispositivo</label>
-                    <select data-ng-model="dispositivo" ng-options="dispositivo.controlador for dispositivos in dispositivos" id="dispositivo" required
+                    <select data-ng-model="dispositivo" ng-options="dispositivo.nombre for dispositivos in dispositivos" id="dispositivo" required
                             class="form-control" ng-init="widget.dispositivo">
                     </select>
-                    <span> Dispositivo Actual: <h4>{{widget.attrs.controlador}}</h4></span>
+                    <span> Dispositivo Actual: <h4>{{widget.attrs.dispositivo.nombre}}</h4></span>
                     <label class="tipoWidget">Tipo De Widget</label>
                     <div class="row separadoArriba text-center">
                         <div class="col-md-4">

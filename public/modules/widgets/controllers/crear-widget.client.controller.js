@@ -10,12 +10,13 @@ angular.module('widgets').controller('CrearWidgetController', ['$scope', '$http'
             var widget = new Widgets ({
                 name: this.name,
                 title: this.title,
-                seccion: this.seccion.nombre,
+                seccion: this.seccion._id,
                 attrs:{
                     value: this.title.replace(/\s+/g, '_'),
                     nombre: this.topico.nombre,
                     topico: this.topico.topico,
-                    controlador: this.dispositivo.controlador
+                    controlador: this.dispositivo.controlador,
+                    dispositivo: this.dispositivo._id
                 }
 
             });

@@ -95,7 +95,7 @@ exports.delete = function(req, res) {
 /**
  * List of Widgets
  */
-exports.list = function(req, res) { Widget.find().sort('-created').populate('user', 'displayName').exec(function(err, widgets) {
+exports.list = function(req, res) { Widget.find().sort('-created').populate('user attrs.dispositivo seccion').exec(function(err, widgets) {
 		if (err) {
 			return res.send(400, {
 				message: getErrorMessage(err)
@@ -109,7 +109,7 @@ exports.list = function(req, res) { Widget.find().sort('-created').populate('use
 /**
  * Widget middleware
  */
-exports.widgetByID = function(req, res, next, id) { Widget.findById(id).populate('user', 'displayName').exec(function(err, widget) {
+exports.widgetByID = function(req, res, next, id) { Widget.findById(id).populate('user attrs.dispositivo seccion').exec(function(err, widget) {
 		if (err) return next(err);
 		if (! widget) return next(new Error('Failed to load Widget ' + id));
 		req.widget = widget ;
@@ -117,7 +117,8 @@ exports.widgetByID = function(req, res, next, id) { Widget.findById(id).populate
 	});
 };
 exports.widgetBySeccion = function(req, res, next, seccion) {
-    Widget.find({'seccion': seccion}).populate('user', 'displayName').exec(function(err, widget) {
+	console.log(secccion);
+    Widget.find({'seccion': seccion}).populate('user attrs.dispositivo seccion').exec(function(err, widget) {
 		if (err) return next(err);
 		if (! widget) return next(new Error('Failed to load Widget ' + seccion));
 		req.widget = widget ;
@@ -125,7 +126,7 @@ exports.widgetBySeccion = function(req, res, next, seccion) {
 	});
 };
 exports.widgetByUser = function(req, res, next, usuario) {
-    Widget.find({'user': usuario}).populate('user', 'displayName').exec(function(err, widget) {
+    Widget.find({'user': usuario}).populate('user attrs.dispositivo seccion').exec(function(err, widget) {
 		if (err) return next(err);
 		if (! widget) return next(new Error('Failed to load Widget for ' + usuario));
 		req.widget = widget ;
@@ -134,7 +135,7 @@ exports.widgetByUser = function(req, res, next, usuario) {
 };
 exports.widgetByQuery = function(req, res, next, parametros) {
     var json = JSON.parse(parametros);
-    Widget.find(json).populate('user', 'displayName').exec(function(err, widget) {
+    Widget.find(json).populate('user attrs.dispositivo seccion').exec(function(err, widget) {
         if (err) return next(err);
         if (! widget) return next(new Error('Failed to load Widget for: ' + json));
         req.widget = widget ;

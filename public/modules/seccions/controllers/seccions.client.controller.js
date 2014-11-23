@@ -32,9 +32,7 @@ angular.module('seccions').controller('SeccionsController', ['$scope', '$statePa
 
 		// Remove existing Seccion
 		$scope.remove = function( seccion ) {
-            var nombre = $scope.seccion.nombre;
             new Seccions($scope.seccion).$remove(function() {
-                $scope.actualizarWidgets(nombre, 'Sin Seccion');
                 $scope.cambiarPagina($scope.urlList);
             });
 
@@ -42,10 +40,8 @@ angular.module('seccions').controller('SeccionsController', ['$scope', '$statePa
 
 		// Update existing Seccion
 		$scope.update = function() {
-            var nombreAnterior = $scope.nombreAnterior;
 			var seccion = new Seccions($scope.seccion);
 			seccion.$update(function() {
-                $scope.actualizarWidgets(nombreAnterior, seccion.nombre);
                 $scope.cambiarPagina($scope.urlList);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
@@ -74,22 +70,5 @@ angular.module('seccions').controller('SeccionsController', ['$scope', '$statePa
             });
 
 		};
-        /**
-         * Actualiza todos los widgets con el nombre de seccion actual al nuevo
-         */
-        $scope.actualizarWidgets = function (seccionActual,seccionNueva){
-            var parametros = '{"seccion":"'+ seccionActual +'", "user": "'+ $scope.authentication.user._id+'"}';
-            $http.get('/widgets/query/' + parametros).success(function(data){
-                for(var i=0; i<data.length;i++){
-                    var wigetta= new Widgets(data[i]);
-                    wigetta.seccion = seccionNueva;
-                    wigetta.$update(function(response) {
-                    }, function(errorResponse) {
-                        $scope.error = errorResponse.data.message;
-                    });
-
-                }
-            });
-        }
 	}
 ]);

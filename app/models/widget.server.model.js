@@ -23,10 +23,8 @@ var WidgetSchema = new Schema({
         trim: true
     },
     seccion: {
-		type: String,
-		default: 'inicio',
-		required: 'Por favor seleccione una seccion',
-		trim: true
+        type: Schema.ObjectId,
+        ref: 'Seccion'
 	},
     attrs: {
         value: {
@@ -46,8 +44,12 @@ var WidgetSchema = new Schema({
         },
         controlador: {
             type: String,
-            required: 'Por favor seleccione el controlador',
+            required: 'No se esta guardando el nombre del controlador',
             trim: true
+        },
+        dispositivo: {
+            type: Schema.ObjectId,
+            ref: 'Dispositivo'
         }
     },
 	created: {

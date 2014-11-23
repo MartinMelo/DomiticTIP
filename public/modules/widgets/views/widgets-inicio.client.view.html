@@ -5,8 +5,8 @@
     <div class="row" ng-hide="noHaySecciones">
         <div>
             <ul class="nav nav-tabs" role="tablist">
-                <li ng-repeat="sec in secciones" ng-class="{ active:wgtCrtrl.isSelected('{{sec.nombre}}')}">
-                    <a href data-ng-click="cambiarSeccion('{{sec.nombre}}')" id="a_ '{{sec.nombre}}'">{{sec.nombre}}</a>
+                <li ng-repeat="sec in secciones" ng-class="{ active:wgtCrtrl.isSelected('{{sec._id}}')}">
+                    <a href data-ng-click="cambiarSeccion('{{sec._id}}')" id="a_ '{{sec.nombre}}'">{{sec.nombre}}</a>
                 </li>
             </ul>
         </div>

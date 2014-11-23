@@ -82,7 +82,8 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http,$roo
                 value: 'temperatura',
                 nombre: 'nombre',
                 topico: 'topico',
-                controlador: 'ard#'
+                controlador: 'ard#',
+                dispositivo: {}
             },
             style: {
                 width: '32%'
@@ -95,7 +96,8 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http,$roo
                 value: 'sensor',
                 nombre: 'nombre',
                 topico: 'topico',
-                controlador: 'ard#'
+                controlador: 'ard#',
+                dispositivo: {}
             },
             style: {
                 width: '32%'
@@ -108,7 +110,8 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http,$roo
                 value: 'sensor',
                 nombre: 'nombre',
                 topico: 'topico',
-                controlador: 'ard#'
+                controlador: 'ard#',
+                dispositivo: {}
             },
             style: {
                 width: '32%'
@@ -148,9 +151,9 @@ app.controller('WidgetsInicioController',function ($scope, $interval, $http,$roo
         $http.get('/seccions/query/' + querySecciones).success(function(data) {
             if (data.length >0) {
                 $scope.noHaySecciones = false;
-                $scope.seccion = data[0].nombre;
+                $scope.seccion = data[0]._id;
                 $scope.secciones = data;
-                $scope.cambiarSeccion(data[0].nombre);
+                $scope.cambiarSeccion(data[0]._id);
             }else{
                 $scope.noHaySecciones = true;
             }
