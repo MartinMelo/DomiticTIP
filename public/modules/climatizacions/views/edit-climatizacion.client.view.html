@@ -1,6 +1,6 @@
 <section data-ng-controller="EditarClimatizacionController" data-ng-init="cargarUno()">
     <div class="page-header">
-        <h1>Edit Climatizacion</h1>
+        <h1>Editar Configuración de Climatizacion</h1>
     </div>
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="update()" novalidate>
@@ -17,11 +17,10 @@
                             <option value="<">Menor A</option>
                         </select>
                         <label class="control-label" for="dispositivo">Dispositivo</label>
-                        <select data-ng-model="dispositivo" id="dispositivo" required
-                                class="form-control" ng-change="controladorSelecionado()">
-                            <option value="Seleccione Un Dispositivo">Seleccione Un Dispositivo</option>
+                        <select data-ng-model="dispositivo" ng-options="dispositivo.nombre for dispositivo in dispositivos" id="dispositivo" required
+                                class="form-control">
                         </select>
-                        <span> Dispositivo Actual: <h4>{{climatizacion.controlador}}</h4></span>
+                        <span> Dispositivo Actual: <h4>{{climatizacion.dispositivo.nombre}}</h4></span>
                         <label class="control-label" for="topico">Sensor<span id="sens"></span></label>
                         <select data-ng-model="topico" id="topico" required class="form-control" title="Sensor">
                             <option value="Seleccione Un Sensor">Seleccione Un Sensor</option>

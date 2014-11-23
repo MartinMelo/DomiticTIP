@@ -26,11 +26,9 @@ var ClimatizacionSchema = new Schema({
 		default: '>',
 		required: 'Por Favor ingrese la Forma'
 	},
-    controlador: {
-        type: String,
-        default: '',
-        required: 'Por favor selecciona un controlador',
-        trim: true
+    dispositivo: {
+		type: Schema.ObjectId,
+		ref: 'Dispositivo'
     },
     topico: {
         type: String,

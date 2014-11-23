@@ -8,19 +8,19 @@ angular.module('climatizacions').controller('CrearClimatizacionController', ['$s
 
 
         //Agrego los dispositivos
-        $scope.dispositivo = 'Seleccione Un Dispositivo';
+        $scope.dispositivos = [];
         $http.get('/dispositivos').success(function(data){
-            for(var i in data){
-                $('#dispositivo').append(new Option(data[i].nombre, data[i].controlador));
-            }
+            $scope.dispositivos = data;
+            $scope.dispositivo = data[0];
+            $scope.controladorSelecionado();
         });
+
 
         //Pedir servicios para el tipo de Widget seleccionado.
         $scope.topico= {'nombre': 'seleccione un Sensor' , 'topico': 'untopico'};
         $scope.controladorSelecionado = function(){
             $('#topico').empty();
             $('#sens').addClass('fa fa-refresh fa-lg fa-spin');
-            $('#dispositivo option[value="Seleccione Un Dispositivo"]').remove();
             $scope.pedirExponerServiciosDe('sensor');
         };
         var socket = $rootScope.socket;
@@ -40,7 +40,7 @@ angular.module('climatizacions').controller('CrearClimatizacionController', ['$s
             $('#sens').removeClass('fa fa-refresh fa-lg fa-spin');
         };
         $scope.pedirExponerServiciosDe = function(tipo){
-            var topico = $scope.dispositivo+ '/discover';
+            var topico = $scope.dispositivo.controlador+ '/discover';
             var mensaje = {
                 topic: topico,
                 payload:{
@@ -61,7 +61,7 @@ angular.module('climatizacions').controller('CrearClimatizacionController', ['$s
                 nombre: this.nombre,
                 temperatura: this.temperatura,
                 forma: this.forma,
-                controlador: this.dispositivo,
+                dispositivo: this.dispositivo._id,
                 topico: this.topico
             });
             $scope.climatizacion = climatizacion;
@@ -79,7 +79,7 @@ angular.module('climatizacions').controller('CrearClimatizacionController', ['$s
             this.forma = '';
         };
         $scope.publicarClimatizacion= function(){
-            var topico = $scope.climatizacion.controlador.controlador;
+            var topico = $scope.dispositivo.controlador;
             var sensor = $scope.climatizacion.topico;
             var grados = $scope.climatizacion.temperatura;
             var estado = $scope.climatizacion.forma;

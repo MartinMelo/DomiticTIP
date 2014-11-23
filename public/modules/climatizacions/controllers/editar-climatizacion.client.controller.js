@@ -8,19 +8,19 @@ angular.module('climatizacions').controller('EditarClimatizacionController', ['$
 
 
         //Agrego los dispositivos
-        $scope.dispositivo = 'Seleccione Un Dispositivo';
+        $scope.dispositivos = [];
         $http.get('/dispositivos').success(function(data){
-            for(var i in data){
-                $('#dispositivo').append(new Option(data[i].controlador, data[i].controlador));
-            }
+            $scope.dispositivos = data;
+            $scope.dispositivo = data[0];
+            $scope.controladorSelecionado();
         });
+
 
         //Pedir servicios para el tipo de Widget seleccionado.
         $scope.topico= 'Seleccione Un Sensor';
         $scope.controladorSelecionado = function(){
             $('#topico').empty();
             $('#sens').addClass('fa fa-refresh fa-lg fa-spin');
-            $('#dispositivo option[value="Seleccione Un Dispositivo"]').remove();
             $scope.pedirExponerServiciosDe('sensor');
         };
         var socket = $rootScope.socket;
@@ -40,7 +40,7 @@ angular.module('climatizacions').controller('EditarClimatizacionController', ['$
             $('#sens').removeClass('fa fa-refresh fa-lg fa-spin');
         };
         $scope.pedirExponerServiciosDe = function(tipo){
-            var topico = $scope.dispositivo+ '/discover';
+            var topico = $scope.dispositivo.controlador+ '/discover';
             var mensaje = {
                 topic: topico,
                 payload:{

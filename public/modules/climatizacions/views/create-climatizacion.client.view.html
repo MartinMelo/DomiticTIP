@@ -17,9 +17,8 @@
                             <option value="<">Menor A</option>
                         </select>
                         <label class="control-label" for="dispositivo">Dispositivo</label>
-                        <select data-ng-model="dispositivo" id="dispositivo" required
-                                class="form-control" ng-change="controladorSelecionado()">
-                            <option value="Seleccione Un Dispositivo">Seleccione Un Dispositivo</option>
+                        <select data-ng-model="dispositivo" ng-options="dispositivo.nombre for dispositivo in dispositivos" id="dispositivo" required
+                                class="form-control">
                         </select>
                         <label class="control-label" for="topico">Sensor<span id="sens"></span></label>
                         <select data-ng-model="topico" id="topico" required class="form-control" title="Sensor">

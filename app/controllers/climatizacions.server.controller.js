@@ -95,7 +95,7 @@ exports.delete = function(req, res) {
 /**
  * List of Climatizacions
  */
-exports.list = function(req, res) { Climatizacion.find().sort('-created').populate('user', 'displayName').exec(function(err, climatizacions) {
+exports.list = function(req, res) { Climatizacion.find().sort('-created').populate('user dispositivo').exec(function(err, climatizacions) {
 		if (err) {
 			return res.send(400, {
 				message: getErrorMessage(err)
@@ -109,7 +109,7 @@ exports.list = function(req, res) { Climatizacion.find().sort('-created').popula
 /**
  * Climatizacion middleware
  */
-exports.climatizacionByID = function(req, res, next, id) { Climatizacion.findById(id).populate('user', 'displayName').exec(function(err, climatizacion) {
+exports.climatizacionByID = function(req, res, next, id) { Climatizacion.findById(id).populate('user dispositivo').exec(function(err, climatizacion) {
 		if (err) return next(err);
 		if (! climatizacion) return next(new Error('Failed to load Climatizacion ' + id));
 		req.climatizacion = climatizacion ;
