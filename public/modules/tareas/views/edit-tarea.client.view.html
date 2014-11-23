@@ -10,11 +10,10 @@
                         <label class="control-label" for="nombre">Nombre</label>
                         <input type="text" data-ng-model="tarea.nombre" id="nombre" class="form-control" placeholder="Nombre" required>
                         <label class="control-label" for="dispositivo">Dispositivo</label>
-                        <select data-ng-model="dispositivo" id="dispositivo" required
-                                class="form-control" ng-change="cargarAcciones()">
-                            <option value="Seleccione un Dispositivo">Seleccione Un Dispositivo</option>
+                        <select data-ng-model="dispositivo" ng-options="dispositivo.nombre for dispositivos in dispositivos" id="dispositivo" required
+                                class="form-control" ng-init="tarea.dispositivo">
                         </select>
-                        <span> Dispositivo Actual: <h4>{{tarea.datos.controlador}}</h4></span>
+                        <span> Dispositivo Actual: <h4>{{tarea.datos.dispositivo.nombre}}</h4></span>
                         <label class="control-label" for="tipo">Tipo de tarea</label>
                         <select ng-model="tipo" ng-options="tipo for tipo in tipos" id="tipo" required
                                 class="form-control"  title="Tipo" ng-change="cargarAcciones()">
@@ -43,7 +42,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Update" class="btn btn-default">
+                    <input type="submit" value="Actualizar" class="btn btn-default">
                 </div>
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>

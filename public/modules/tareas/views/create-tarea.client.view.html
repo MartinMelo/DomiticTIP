@@ -15,8 +15,8 @@
                             <option value="Seleccione">Seleccion un tipo de tarea</option>
                         </select>
                         <label class="control-label" for="dispositivo">Dispositivo</label>
-                        <select data-ng-model="dispositivo" ng-options="dispositivo.controlador for dispositivo in dispositivos" id="dispositivo" required
-                                class="form-control" ng-init="dispositivo = dispositivos[0]">
+                        <select data-ng-model="dispositivo" ng-options="dispositivo.nombre for dispositivos in dispositivos" id="dispositivo" required
+                                class="form-control">
                         </select>
                         <label class="control-label" for="topico">Sensor<span id="sens"></span></label>
                         <select data-ng-model="topico" id="topico" required class="form-control" title="Sensor"

@@ -87,12 +87,13 @@ angular.module('tareas').controller('CrearTareaController', ['$scope', 'Authenti
                     calendario: fechaSeleccionada,
                     informacion: this.accion,
                     topico: this.topico,
-                    controlador: this.dispositivo.controlador
+                    dispositivo: this.dispositivo._id
                 }
             });
 
             // Redirect after save
             tarea.$save(function(response) {
+                tarea.datos.dispositivo = $scope.dispositivo;
                 $scope.publicarTarea(tarea);
                 $scope.cambiarPagina($scope.urlList);
             }, function(errorResponse) {

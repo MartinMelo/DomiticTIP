@@ -95,7 +95,7 @@ exports.delete = function(req, res) {
 /**
  * List of Tareas
  */
-exports.list = function(req, res) { Tarea.find().sort('-created').populate('user', 'displayName').exec(function(err, tareas) {
+exports.list = function(req, res) { Tarea.find().sort('-created').populate('user datos.dispositivo').exec(function(err, tareas) {
 		if (err) {
 			return res.send(400, {
 				message: getErrorMessage(err)
@@ -109,7 +109,7 @@ exports.list = function(req, res) { Tarea.find().sort('-created').populate('user
 /**
  * Tarea middleware
  */
-exports.tareaByID = function(req, res, next, id) { Tarea.findById(id).populate('user', 'displayName').exec(function(err, tarea) {
+exports.tareaByID = function(req, res, next, id) { Tarea.findById(id).populate('user datos.dispositivo').exec(function(err, tarea) {
 		if (err) return next(err);
 		if (! tarea) return next(new Error('Failed to load Tarea ' + id));
 		req.tarea = tarea ;

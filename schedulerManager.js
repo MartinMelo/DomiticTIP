@@ -17,6 +17,35 @@ var Schema = mongoose.Schema;
 /**
  * Tarea Schema
  */
+var DispositivoSchema = new Schema({
+    nombre: {
+        type: String,
+        default: '',
+        required: 'Please fill Dispositivo nombre',
+        trim: true
+    },
+    descripcion: {
+        type: String,
+        default: '',
+        required: 'Please fill Dispositivo descripcion',
+        trim: true
+    },
+    controlador: {
+        type: String,
+        default: '',
+        required: 'Por favor seleccione un controlador',
+        trim: true
+    },
+    created: {
+        type: Date,
+        default: Date.now
+    },
+    user: {
+        type: Schema.ObjectId,
+        ref: 'User'
+    }
+});
+var Dispositivo = mongoose.model('Dispositivo', DispositivoSchema);
 var TareaSchema = new Schema({
     nombre: {
         type: String,
@@ -49,11 +78,9 @@ var TareaSchema = new Schema({
             required: 'No se generaron los datos de la tarea.',
             trim: false
         },
-        controlador:{
-            type: Object,
-            default: {},
-            required: 'No se generaron los datos de la tarea.',
-            trim: false
+        dispositivo:{
+            type: Schema.ObjectId,
+            ref: 'Dispositivo'
         }
     },
     usada:{
@@ -80,7 +107,7 @@ var schedule = require('node-schedule');
  */
 function cargarTareasQueEstanEnDB(){
     console.info('Cargando Tareas Guardadas en DB');
-    var tareas = Tarea.find({usada: false});
+    var tareas = Tarea.find({usada: false}).populate('datos.dispositivo');
     tareas.exec(cargaron);
 }
 /**
@@ -124,7 +151,7 @@ socket.on('eliminarTarea', function (data) {
 function crearTask(json){
     var fecha = json.datos.calendario;
     var j = schedule.scheduleJob(fecha, function(){
-        var topico = json.datos.controlador;
+        var topico = json.datos.dispositivo.controlador;
         var luz = json.datos.topico.topico;
         var estado = json.datos.informacion;
         console.log('Ejecutando Tarea: ' + json.nombre);

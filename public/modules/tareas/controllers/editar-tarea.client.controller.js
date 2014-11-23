@@ -13,11 +13,10 @@ angular.module('tareas').controller('EditarTareaController', ['$scope', 'Authent
         //Sensor
         $scope.topico = 'Seleccione Un Sensor';
         //Agrego los dispositivos
-        $scope.dispositivo = 'Seleccione un Dispositivo';
+        $scope.dispositivos = [];
         $http.get('/dispositivos').success(function(data){
-            for(var i in data) {
-                $('#dispositivo').append(new Option(data[i].controlador, data[i].controlador));
-            }
+            $scope.dispositivos = data;
+            $scope.dispositivo = data[0];
         });
         //Traer la tarea de db.
         $scope.cargarUna = function() {
@@ -33,7 +32,7 @@ angular.module('tareas').controller('EditarTareaController', ['$scope', 'Authent
         $scope.accion = 'Seleccione una accion';
         $scope.acciones=['Seleccione una accion'];
         $scope.cargarAcciones = function(){
-            if($scope.tipo === 'Iluminacion' && $scope.dispositivo.indexOf('Seleccione un')<0){
+            if($scope.tipo === 'Iluminacion' && $scope.dispositivo){
                 $scope.acciones = ['Encender', 'Apagar'];
                 $scope.accion = $scope.acciones[0];
                 $scope.iluminacionSelect();
@@ -68,7 +67,7 @@ angular.module('tareas').controller('EditarTareaController', ['$scope', 'Authent
             $('#sens').removeClass('fa fa-refresh fa-lg fa-spin');
         };
         $scope.pedirExponerServiciosDe = function(tipo){
-            var topico = $scope.dispositivo+ '/discover';
+            var topico = $scope.dispositivo.controlador+ '/discover';
             var mensaje = {
                 topic: topico,
                 payload:{
@@ -97,8 +96,8 @@ angular.module('tareas').controller('EditarTareaController', ['$scope', 'Authent
             if($scope.accion.indexOf('Seleccione')<0){
                 tarea.datos.informacion = $scope.accion;
             }
-            if($scope.dispositivo.indexOf('Seleccione')<0){
-                tarea.datos.controlador = $scope.dispositivo;
+            if($scope.dispositivo){
+                tarea.datos.dispositivo = $scope.dispositivo._id;
             }
             if($scope.tipo.indexOf('Seleccione')<0){
                 tarea.datos.tipo = $scope.tipo;
