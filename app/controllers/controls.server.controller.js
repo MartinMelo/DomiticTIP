@@ -95,7 +95,33 @@ exports.delete = function(req, res) {
 /**
  * List of Controls
  */
-exports.list = function(req, res) { Control.find().sort('-horario').populate('empleado', {apellido:'apellido',nombre:'nombre',documento:'documento',huella:'huella'}).exec(function(err, controls) {
+exports.list = function(req, res) { Control.find().sort('-horario').populate('empleado').exec(function(err, controls) {
+		if (err) {
+			return res.send(400, {
+				message: getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(controls);
+		}
+	});
+};
+/**
+ * Partidas
+ */
+exports.partidas = function(req, res) { Control.find({tipo: 'partida'}).sort('-horario').populate('empleado').exec(function(err, controls) {
+		if (err) {
+			return res.send(400, {
+				message: getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(controls);
+		}
+	});
+};
+/**
+ * Llegadas
+ */
+exports.llegadas = function(req, res) { Control.find({tipo: 'llegada'}).sort('-horario').populate('empleado').exec(function(err, controls) {
 		if (err) {
 			return res.send(400, {
 				message: getErrorMessage(err)
@@ -109,7 +135,7 @@ exports.list = function(req, res) { Control.find().sort('-horario').populate('em
 /**
  * Control middleware
  */
-exports.controlByID = function(req, res, next, id) { Control.findById(id).populate('empleado', {apellido:'apellido',nombre:'nombre',documento:'documento',huella:'huella'}).exec(function(err, control) {
+exports.controlByID = function(req, res, next, id) { Control.findById(id).populate('empleado').exec(function(err, control) {
 		if (err) return next(err);
 		if (! control) return next(new Error('Failed to load Control ' + id));
 		req.control = control ;

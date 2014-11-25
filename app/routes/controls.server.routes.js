@@ -10,10 +10,10 @@ module.exports = function(app) {
 		.post(users.requiresLogin, controls.create);
 
     app.route('/controls/llegadas')
-		.get(controls.list)
+		.get(controls.llegadas)
 		.post(users.requiresLogin, controls.create);
     app.route('/controls/partidas')
-		.get(controls.list)
+		.get(controls.partidas)
 		.post(users.requiresLogin, controls.create);
 
 	app.route('/controls/:controlId')
