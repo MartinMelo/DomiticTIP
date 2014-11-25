@@ -6,7 +6,7 @@
         <a data-ng-repeat="empleado in empleados" data-ng-href="#!/empleados/{{empleado._id}}" class="list-group-item">
             <h3 class="list-group-item-heading" data-ng-bind="empleado.apellido"></h3>
             <h4 class="list-group-item-heading" data-ng-bind="empleado.nombre"></h4>
-            <h4 class="list-group-item-heading" data-ng-bind="empleado.dni"></h4>
+            <h4 class="list-group-item-heading" data-ng-bind="empleado.documento"></h4>
             <small class="list-group-item-text">
                 Fecha en que fue agregado:
                 <span data-ng-bind="empleado.created | date:'medium'"></span>
