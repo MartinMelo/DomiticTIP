@@ -108,6 +108,14 @@ io.sockets.on('connection', function (socket) {
             }
         );
     });
+    socket.on('actualizarTarea', function (data) {
+        var json = JSON.parse(data);
+        io.sockets.emit('actualizarTarea',
+            {'topic': json.topic,
+                'payload': json.payload
+            }
+        );
+    });
 });
 
 

@@ -105,10 +105,25 @@ angular.module('tareas').controller('EditarTareaController', ['$scope', 'Authent
 
 
             tarea.$update(function() {
+                tarea.datos.dispositivo = $scope.dispositivo;
+                tarea.user= tarea.user._id;
+                $scope.publicarTarea(tarea);
                 $scope.cambiarPagina($scope.urlList);
             }, function(errorResponse) {
                 $scope.error = errorResponse.data.message;
             });
         };
+
+        //Publico la tarea editada.
+        $scope.publicarTarea = function(tarea){
+            var mensaje = {
+                topic: 'actualizaTarea',
+                payload: tarea
+            };
+            socket.emit('actualizarTarea' , JSON.stringify(mensaje));
+        };
+        $scope.$on("$destroy", function() {
+            socket.removeAllListeners('resp/discover');
+        });
 	}
 ]);

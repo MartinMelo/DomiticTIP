@@ -134,6 +134,7 @@ cargarTareasQueEstanEnDB();
 var tareasACorrer = [];
 socket.emit('subscribe', {topic : 'schedulear'});
 socket.emit('subscribe', {topic : 'eliminarTarea'});
+socket.emit('subscribe', {topic : 'actualizarTarea'});
 socket.on('schedulear', function (data) {
     crearTask(data.payload);
     console.log('Task Created');
@@ -147,6 +148,17 @@ socket.on('eliminarTarea', function (data) {
         }
     }
     console.log('Tarea Cancelada');
+});
+socket.on('actualizarTarea', function (data) {
+    var id = data.payload.id;
+    for(var i=0; i<tareasACorrer.length;i++){
+        if(tareasACorrer[i].id === id){
+            tareasACorrer[i].tarea.cancel();
+            delete tareasACorrer[i];
+        }
+    }
+    crearTask(data.payload);
+    console.log('Tarea Actualizada');
 });
 function crearTask(json){
     var fecha = json.datos.calendario;
