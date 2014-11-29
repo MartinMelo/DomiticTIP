@@ -56,8 +56,9 @@ Tambien sera necesario copiar el archivo initstat.txt y serve.txt, que se encuen
 Sera necesario ejecutar en distintas terminales las siguientes lineas por separado:
 
 ```
-grunt
-node schedulerManager.js
-node fingerprintDetector.js
+forever start server.js
+forever start broker.js
+forever start schedulerManager.js
+forever start fingerprintDetector.js
 ```
 
