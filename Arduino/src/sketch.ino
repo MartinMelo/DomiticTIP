@@ -236,7 +236,7 @@ void exponerServicios(String servicio){
     json="{\"luz\": \[{\"nombre\": \"Entrada\",\"topico\": 22},{\"nombre\": \"Showroom\",\"topico\": 23}]}";
   }
   if(servicio == "sensor"){
-    json="{\"sensor\": [{\"nombre\": \"ambiente\",\"topico\": \"ard1/ambiente/temp\",\"tipo\": \"numero\"}]}";
+    json="{\"sensor\": [{\"nombre\": \"ambiente\",\"topico\": \"ard1/ambiente/temp\",\"tipo\": \"numero\"},{\"nombre\": \"patio\",\"topico\": \"ard1/patio\",\"tipo\": \"bool\"}]}";
   }
     client.publish("resp/discover", json); 
 }
