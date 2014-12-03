@@ -49,8 +49,6 @@ angular.module('widgets').directive('widgetApertura', ['$interval','$rootScope',
 
                 update();
 
-                var promise = $interval(update, 2000);
-
                 scope.$on('$destroy', function () {
                     socket.removeAllListeners('resp/'+attr.topico);
                     $interval.cancel(promise);

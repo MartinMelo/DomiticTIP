@@ -8,6 +8,11 @@
 byte mac[]    = {  0xDE, 0xED, 0xBA, 0xFE, 0xFE, 0xED };
 byte server[] = { 192, 168, 2, 1 };//IP del broker MQTT
 byte ip[]     = { 192, 168, 2, 20 };
+//Estados de las puertas
+boolean patio;
+boolean entrada;
+boolean showroom;
+boolean garage;
 //Para parsear el json recibido o para enviar
 char message_buff[100];
 JsonParser<32> parser;
@@ -119,6 +124,15 @@ void configurarPlaca(){
   //Sensores
   pinMode(A15 , INPUT); //LM35DZ
   //Fin Sensores
+  
+  //cargo el estado inicial de los sensores
+  estadosDePuertaInicial();
+}
+void estadosDePuertaInicial(){
+  entrada =digitalRead(38);
+  showroom =digitalRead(39);
+  patio =digitalRead(40);
+  garage =digitalRead(41);
 }
 void loop()
 {
@@ -127,6 +141,7 @@ void loop()
     client.connect("ard1");
     suscribirse();
   }
+  chequearPuertas();
 }
 //Envio todo el estado completo del microcontrolador.
 void refresh(){
@@ -200,11 +215,26 @@ void publicarEstadoPuerta(String posicion){
     }
   
   }
+  if(posicion == "showroom"){
+    if(digitalRead(39) == HIGH){
+        client.publish("resp/ard1/showroom", "true");
+    }else{
+        client.publish("resp/ard1/showroom", "false");
+    }
+  
+  }
   if(posicion == "patio"){
     if(digitalRead(40) == HIGH){
        client.publish("resp/ard1/patio", "true");
     }else{
        client.publish("resp/ard1/patio", "false");
+    }
+  }
+  if(posicion == "garage"){
+    if(digitalRead(41) == HIGH){
+       client.publish("resp/ard1/garage", "true");
+    }else{
+       client.publish("resp/ard1/garage", "false");
     }
   }
 }
@@ -239,4 +269,42 @@ void exponerServicios(String servicio){
     json="{\"sensor\": [{\"nombre\": \"ambiente\",\"topico\": \"ard1/ambiente/temp\",\"tipo\": \"numero\"},{\"nombre\": \"patio\",\"topico\": \"ard1/patio\",\"tipo\": \"bool\"}]}";
   }
     client.publish("resp/discover", json); 
+}
+void chequearPuertas(){
+  boolean estadoEntrada = digitalRead(38) == HIGH;
+  if(estadoEntrada != entrada){
+     entrada= digitalRead(38) == HIGH;
+     if(entrada){
+        client.publish("resp/ard1/entrada", "true");
+    }else{
+        client.publish("resp/ard1/entrada", "false");
+    }
+  }
+   boolean estadoShowroom = digitalRead(39) == HIGH;
+   if(estadoShowroom != showroom){
+     showroom = digitalRead(39) == HIGH;
+     if(showroom){
+        client.publish("resp/ard1/showroom", "true");
+    }else{
+        client.publish("resp/ard1/showroom", "false");
+    }
+  }
+   boolean estadoPatio = digitalRead(40) == HIGH;
+   if(estadoPatio != patio){
+     patio = digitalRead(40) == HIGH;
+     if(patio){
+        client.publish("resp/ard1/patio", "true");
+    }else{
+        client.publish("resp/ard1/patio", "false");
+    }
+  }
+   boolean estadoGarage =digitalRead(41) == HIGH;
+   if(estadoGarage != garage){
+     garage= digitalRead(41) == HIGH;
+     if(garage){
+        client.publish("resp/ard1/garage", "true");
+    }else{
+        client.publish("resp/ard1/garage", "false");
+    }
+  }
 }
