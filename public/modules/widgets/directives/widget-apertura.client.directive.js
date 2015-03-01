@@ -51,7 +51,6 @@ angular.module('widgets').directive('widgetApertura', ['$interval','$rootScope',
 
                 scope.$on('$destroy', function () {
                     socket.removeAllListeners('resp/'+attr.topico);
-                    $interval.cancel(promise);
                 });
             }
         };
