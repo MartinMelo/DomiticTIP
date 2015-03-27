@@ -27,7 +27,7 @@ module.exports = {
 			js: [
                 'public/lib/jquery/jquery.js',
                 'public/lib/jquery-ui/jquery-ui.js',
-                'public/lib/lodash/dist/lodash.js',
+                'public/lib/lodash/lodash.js',
 				'public/lib/angular/angular.js',
 				'public/lib/socket.io-client/socket.io.js',
 				'public/lib/angular-resource/angular-resource.js',
@@ -43,17 +43,13 @@ module.exports = {
                 'public/lib/d3/d3.js',
                 'public/lib/nvd3/nv.d3.js',
 				'public/lib/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js',
-                'public/lib/ng-grid/ng-grid-2.0.11.min.js',
 				'public/lib/angular-ui-sortable/sortable.js',
+				'public/lib/angular-bootstrap/ui-bootstrap.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
                 'public/lib/malhar-angular-dashboard/dist/angular-ui-dashboard.js',
                 'public/lib/malhar-angular-widgets/dist/malhar-angular-widgets.js',
 				'public/lib/malhar-angular-table/dist/mlhr-table.js',
-                'public/lib/ngDialog/js/ngDialog.js',
-                'public/lib/later/later.js',
-                'public/lib/schedule/schedule.js',
-                'public/config_env.js',
-                'public/lib/angular-bootstrap/ui-bootstrap-tpls.js'
+                'public/lib/ngDialog/js/ngDialog.js'
 
 			]
 		},
