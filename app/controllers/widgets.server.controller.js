@@ -117,7 +117,6 @@ exports.widgetByID = function(req, res, next, id) { Widget.findById(id).populate
 	});
 };
 exports.widgetBySeccion = function(req, res, next, seccion) {
-	console.log(secccion);
     Widget.find({'seccion': seccion}).populate('user attrs.dispositivo seccion').exec(function(err, widget) {
 		if (err) return next(err);
 		if (! widget) return next(new Error('Failed to load Widget ' + seccion));
